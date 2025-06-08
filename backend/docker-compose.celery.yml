@@ -1,0 +1,394 @@
+version: '3.8'
+
+services:
+  # Redis - Message broker and result backend
+  redis:
+    image: redis:7-alpine
+    container_name: manufacturing_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes --maxmemory 512mb --maxmemory-policy allkeys-lru
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+    networks:
+      - manufacturing_network
+
+  # PostgreSQL Database (if not already running)
+  postgres:
+    image: postgres:15-alpine
+    container_name: manufacturing_postgres
+    environment:
+      POSTGRES_DB: manufacturing_platform
+      POSTGRES_USER: manufacturing_user
+      POSTGRES_PASSWORD: manufacturing_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./migrations:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U manufacturing_user -d manufacturing_platform"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+    networks:
+      - manufacturing_network
+
+  # Critical Priority Workers
+  celery_critical:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: manufacturing_celery_critical
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+      - DATABASE_URL=postgresql://manufacturing_user:manufacturing_password@postgres:5432/manufacturing_platform
+      - REDIS_URL=redis://redis:6379/0
+    command: >
+      celery -A app.core.celery_config worker
+      --queues=payment.critical,order.critical,monitoring.critical
+      --concurrency=4
+      --prefetch-multiplier=1
+      --max-tasks-per-child=50
+      --hostname=critical_worker@%h
+      --loglevel=INFO
+      --time-limit=1800
+      --soft-time-limit=1200
+      --optimization=fair
+      --pool=prefork
+      --without-gossip
+      --without-mingle
+    volumes:
+      - .:/app
+      - /tmp:/tmp
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - manufacturing_network
+    healthcheck:
+      test: ["CMD", "celery", "-A", "app.core.celery_config", "inspect", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Normal Priority Workers (2 instances for load balancing)
+  celery_normal_1:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: manufacturing_celery_normal_1
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+      - DATABASE_URL=postgresql://manufacturing_user:manufacturing_password@postgres:5432/manufacturing_platform
+      - REDIS_URL=redis://redis:6379/0
+    command: >
+      celery -A app.core.celery_config worker
+      --queues=email.normal,order.normal,payment.normal,sync.normal,monitoring.normal
+      --concurrency=8
+      --prefetch-multiplier=2
+      --max-tasks-per-child=100
+      --hostname=normal_worker_1@%h
+      --loglevel=INFO
+      --time-limit=1800
+      --soft-time-limit=1200
+      --optimization=fair
+      --pool=prefork
+      --without-gossip
+      --without-mingle
+    volumes:
+      - .:/app
+      - /tmp:/tmp
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - manufacturing_network
+
+  celery_normal_2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: manufacturing_celery_normal_2
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+      - DATABASE_URL=postgresql://manufacturing_user:manufacturing_password@postgres:5432/manufacturing_platform
+      - REDIS_URL=redis://redis:6379/0
+    command: >
+      celery -A app.core.celery_config worker
+      --queues=email.normal,order.normal,payment.normal,sync.normal,monitoring.normal
+      --concurrency=8
+      --prefetch-multiplier=2
+      --max-tasks-per-child=100
+      --hostname=normal_worker_2@%h
+      --loglevel=INFO
+      --time-limit=1800
+      --soft-time-limit=1200
+      --optimization=fair
+      --pool=prefork
+      --without-gossip
+      --without-mingle
+    volumes:
+      - .:/app
+      - /tmp:/tmp
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - manufacturing_network
+
+  # Bulk Processing Workers
+  celery_bulk:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: manufacturing_celery_bulk
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+      - DATABASE_URL=postgresql://manufacturing_user:manufacturing_password@postgres:5432/manufacturing_platform
+      - REDIS_URL=redis://redis:6379/0
+    command: >
+      celery -A app.core.celery_config worker
+      --queues=email.bulk,analytics.batch,payment.batch
+      --concurrency=4
+      --prefetch-multiplier=4
+      --max-tasks-per-child=200
+      --hostname=bulk_worker@%h
+      --loglevel=INFO
+      --time-limit=3600
+      --soft-time-limit=3000
+      --optimization=fair
+      --pool=prefork
+      --without-gossip
+      --without-mingle
+    volumes:
+      - .:/app
+      - /tmp:/tmp
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - manufacturing_network
+
+  # Analytics Workers
+  celery_analytics:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: manufacturing_celery_analytics
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+      - DATABASE_URL=postgresql://manufacturing_user:manufacturing_password@postgres:5432/manufacturing_platform
+      - REDIS_URL=redis://redis:6379/0
+    command: >
+      celery -A app.core.celery_config worker
+      --queues=analytics.realtime,analytics.normal
+      --concurrency=6
+      --prefetch-multiplier=2
+      --max-tasks-per-child=150
+      --hostname=analytics_worker@%h
+      --loglevel=INFO
+      --time-limit=2400
+      --soft-time-limit=1800
+      --optimization=fair
+      --pool=prefork
+      --without-gossip
+      --without-mingle
+    volumes:
+      - .:/app
+      - /tmp:/tmp
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - manufacturing_network
+
+  # Maintenance Workers
+  celery_maintenance:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: manufacturing_celery_maintenance
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+      - DATABASE_URL=postgresql://manufacturing_user:manufacturing_password@postgres:5432/manufacturing_platform
+      - REDIS_URL=redis://redis:6379/0
+    command: >
+      celery -A app.core.celery_config worker
+      --queues=sync.maintenance,sync.backup
+      --concurrency=2
+      --prefetch-multiplier=1
+      --max-tasks-per-child=10
+      --hostname=maintenance_worker@%h
+      --loglevel=INFO
+      --time-limit=7200
+      --soft-time-limit=6000
+      --optimization=fair
+      --pool=prefork
+      --without-gossip
+      --without-mingle
+    volumes:
+      - .:/app
+      - /tmp:/tmp
+      - backup_data:/app/backups
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - manufacturing_network
+
+  # Celery Beat Scheduler
+  celery_beat:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: manufacturing_celery_beat
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+      - DATABASE_URL=postgresql://manufacturing_user:manufacturing_password@postgres:5432/manufacturing_platform
+      - REDIS_URL=redis://redis:6379/0
+    command: >
+      celery -A app.core.celery_config beat
+      --loglevel=INFO
+      --schedule-filename=/tmp/celerybeat-schedule
+      --pidfile=/tmp/celerybeat.pid
+    volumes:
+      - .:/app
+      - /tmp:/tmp
+      - beat_schedule:/app/schedule
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - manufacturing_network
+
+  # Flower Monitoring Dashboard
+  flower:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: manufacturing_flower
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+    command: >
+      celery -A app.core.celery_config flower
+      --port=5555
+      --basic_auth=admin:manufacturing2024
+      --url_prefix=flower
+      --persistent=True
+      --db=/tmp/flower.db
+      --max_tasks=10000
+    ports:
+      - "5555:5555"
+    volumes:
+      - .:/app
+      - /tmp:/tmp
+      - flower_data:/app/flower
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - manufacturing_network
+
+  # Redis Insight for Redis monitoring
+  redis_insight:
+    image: redislabs/redisinsight:latest
+    container_name: manufacturing_redis_insight
+    ports:
+      - "8001:8001"
+    volumes:
+      - redis_insight_data:/db
+    depends_on:
+      - redis
+    restart: unless-stopped
+    networks:
+      - manufacturing_network
+
+  # Prometheus for metrics collection
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: manufacturing_prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=200h'
+      - '--web.enable-lifecycle'
+    restart: unless-stopped
+    networks:
+      - manufacturing_network
+
+  # Grafana for metrics visualization
+  grafana:
+    image: grafana/grafana:latest
+    container_name: manufacturing_grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=manufacturing2024
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./monitoring/grafana/dashboards:/etc/grafana/provisioning/dashboards
+      - ./monitoring/grafana/datasources:/etc/grafana/provisioning/datasources
+    depends_on:
+      - prometheus
+    restart: unless-stopped
+    networks:
+      - manufacturing_network
+
+volumes:
+  redis_data:
+  postgres_data:
+  backup_data:
+  beat_schedule:
+  flower_data:
+  redis_insight_data:
+  prometheus_data:
+  grafana_data:
+
+networks:
+  manufacturing_network:
+    driver: bridge 

@@ -1,0 +1,918 @@
+import React, { useState, useMemo } from 'react';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { motion, AnimatePresence } from 'framer-motion';
+import {
+  Bell,
+  Package,
+  DollarSign,
+  TrendingUp,
+  Clock,
+  CheckCircle,
+  AlertTriangle,
+  Users,
+  Calendar,
+  BarChart3,
+  PieChart,
+  Filter,
+  Search,
+  Plus,
+  Edit,
+  Trash2,
+  Send,
+  Calculator,
+  FileText,
+  Download,
+  RefreshCw,
+  Settings,
+  Eye,
+  MessageSquare,
+  Star,
+  Award,
+  Target,
+  Activity
+} from 'lucide-react';
+import { format, subDays, startOfWeek, endOfWeek, startOfMonth, endOfMonth } from 'date-fns';
+import toast from 'react-hot-toast';
+
+import { 
+  manufacturersApi, 
+  ordersApi, 
+  quotesApi, 
+  analyticsApi 
+} from '../../lib/api';
+import { 
+  Order, 
+  OrderStatus, 
+  Quote, 
+  QuoteStatus, 
+  ManufacturerStats,
+  ProductionCapacity 
+} from '../../types';
+import Button from '../ui/Button';
+import Input from '../ui/Input';
+import Select from '../ui/Select';
+import LoadingSpinner from '../ui/LoadingSpinner';
+import { formatCurrency, cn, getStatusColor } from '../../lib/utils';
+import { useAuth } from '../../hooks/useAuth';
+
+interface ManufacturerDashboardProps {
+  className?: string;
+}
+
+const ManufacturerDashboard: React.FC<ManufacturerDashboardProps> = ({ className }) => {
+  const { user } = useAuth();
+  const [activeTab, setActiveTab] = useState<'overview' | 'orders' | 'quotes' | 'analytics' | 'calendar'>('overview');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [statusFilter, setStatusFilter] = useState<OrderStatus | 'all'>('all');
+  const [dateRange, setDateRange] = useState<'week' | 'month' | 'quarter'>('month');
+  const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
+  const [showQuoteBuilder, setShowQuoteBuilder] = useState(false);
+  const [selectedOrders, setSelectedOrders] = useState<string[]>([]);
+  
+  const queryClient = useQueryClient();
+
+  // Fetch manufacturer stats
+  const { data: stats, isLoading: statsLoading } = useQuery({
+    queryKey: ['manufacturer-stats', dateRange],
+    queryFn: () => analyticsApi.getManufacturerStats(dateRange),
+    refetchInterval: 30000,
+  });
+
+  // Fetch incoming orders
+  const { data: incomingOrders = [], isLoading: ordersLoading } = useQuery({
+    queryKey: ['manufacturer-orders', { search: searchTerm, status: statusFilter }],
+    queryFn: () => ordersApi.getManufacturerOrders({ 
+      search: searchTerm, 
+      status: statusFilter === 'all' ? undefined : statusFilter 
+    }),
+    refetchInterval: 15000,
+  });
+
+  // Fetch active quotes
+  const { data: activeQuotes = [] } = useQuery({
+    queryKey: ['manufacturer-quotes'],
+    queryFn: () => quotesApi.getManufacturerQuotes(),
+    refetchInterval: 30000,
+  });
+
+  // Fetch production capacity
+  const { data: capacity } = useQuery({
+    queryKey: ['production-capacity'],
+    queryFn: () => manufacturersApi.getProductionCapacity(),
+  });
+
+  // Create quote mutation
+  const createQuoteMutation = useMutation({
+    mutationFn: quotesApi.createQuote,
+    onSuccess: () => {
+      toast.success('Quote created successfully!');
+      queryClient.invalidateQueries({ queryKey: ['manufacturer-quotes'] });
+      queryClient.invalidateQueries({ queryKey: ['manufacturer-orders'] });
+      setShowQuoteBuilder(false);
+      setSelectedOrder(null);
+    },
+    onError: () => {
+      toast.error('Failed to create quote');
+    },
+  });
+
+  // Bulk operations mutation
+  const bulkOperationMutation = useMutation({
+    mutationFn: ({ operation, orderIds }: { operation: string; orderIds: string[] }) =>
+      ordersApi.bulkOperation(operation, orderIds),
+    onSuccess: (data, variables) => {
+      toast.success(`${variables.operation} completed for ${variables.orderIds.length} orders`);
+      queryClient.invalidateQueries({ queryKey: ['manufacturer-orders'] });
+      setSelectedOrders([]);
+    },
+    onError: () => {
+      toast.error('Bulk operation failed');
+    },
+  });
+
+  const filteredOrders = useMemo(() => {
+    return incomingOrders.filter(order => {
+      const matchesSearch = order.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                          order.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                          order.client?.companyName?.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesStatus = statusFilter === 'all' || order.status === statusFilter;
+      return matchesSearch && matchesStatus;
+    });
+  }, [incomingOrders, searchTerm, statusFilter]);
+
+  const handleOrderSelection = (orderId: string, checked: boolean) => {
+    if (checked) {
+      setSelectedOrders(prev => [...prev, orderId]);
+    } else {
+      setSelectedOrders(prev => prev.filter(id => id !== orderId));
+    }
+  };
+
+  const handleBulkOperation = (operation: string) => {
+    if (selectedOrders.length === 0) {
+      toast.error('Please select orders first');
+      return;
+    }
+    
+    bulkOperationMutation.mutate({ operation, orderIds: selectedOrders });
+  };
+
+  const renderOverviewTab = () => (
+    <div className="space-y-6">
+      {/* Stats Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm border border-gray-200 dark:border-gray-700"
+        >
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                Active Orders
+              </p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">
+                {stats?.activeOrders || 0}
+              </p>
+            </div>
+            <div className="p-3 bg-primary-100 dark:bg-primary-900 rounded-full">
+              <Package className="w-6 h-6 text-primary-600 dark:text-primary-400" />
+            </div>
+          </div>
+          <div className="mt-4 flex items-center">
+            <TrendingUp className="w-4 h-4 text-success-500 mr-1" />
+            <span className="text-sm text-success-600 dark:text-success-400">
+              +{stats?.ordersGrowth || 0}% from last period
+            </span>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm border border-gray-200 dark:border-gray-700"
+        >
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                Revenue This Month
+              </p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">
+                {formatCurrency(stats?.monthlyRevenue || 0)}
+              </p>
+            </div>
+            <div className="p-3 bg-success-100 dark:bg-success-900 rounded-full">
+              <DollarSign className="w-6 h-6 text-success-600 dark:text-success-400" />
+            </div>
+          </div>
+          <div className="mt-4 flex items-center">
+            <TrendingUp className="w-4 h-4 text-success-500 mr-1" />
+            <span className="text-sm text-success-600 dark:text-success-400">
+              +{stats?.revenueGrowth || 0}% from last month
+            </span>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm border border-gray-200 dark:border-gray-700"
+        >
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                Avg Response Time
+              </p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">
+                {stats?.avgResponseTime || 0}h
+              </p>
+            </div>
+            <div className="p-3 bg-warning-100 dark:bg-warning-900 rounded-full">
+              <Clock className="w-6 h-6 text-warning-600 dark:text-warning-400" />
+            </div>
+          </div>
+          <div className="mt-4 flex items-center">
+            <TrendingUp className="w-4 h-4 text-success-500 mr-1" />
+            <span className="text-sm text-success-600 dark:text-success-400">
+              Improved by {stats?.responseTimeImprovement || 0}%
+            </span>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm border border-gray-200 dark:border-gray-700"
+        >
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                Customer Rating
+              </p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">
+                {stats?.averageRating || 0}/5
+              </p>
+            </div>
+            <div className="p-3 bg-warning-100 dark:bg-warning-900 rounded-full">
+              <Star className="w-6 h-6 text-warning-600 dark:text-warning-400" />
+            </div>
+          </div>
+          <div className="mt-4 flex items-center">
+            <Star className="w-4 h-4 text-warning-500 mr-1" />
+            <span className="text-sm text-warning-600 dark:text-warning-400">
+              From {stats?.totalReviews || 0} reviews
+            </span>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Recent Activity */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Recent Orders */}
+        <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm border border-gray-200 dark:border-gray-700">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+              Recent Orders
+            </h3>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setActiveTab('orders')}
+            >
+              View All
+            </Button>
+          </div>
+          <div className="space-y-3">
+            {filteredOrders.slice(0, 5).map((order) => (
+              <div
+                key={order.id}
+                className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg"
+              >
+                <div className="flex-1">
+                  <p className="text-sm font-medium text-gray-900 dark:text-white">
+                    {order.title}
+                  </p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">
+                    {order.client?.companyName} • {format(new Date(order.createdAt), 'MMM dd')}
+                  </p>
+                </div>
+                <div className={cn(
+                  'px-2 py-1 rounded-full text-xs font-medium',
+                  getStatusColor(order.status)
+                )}>
+                  {order.status.replace('_', ' ')}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Active Quotes */}
+        <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm border border-gray-200 dark:border-gray-700">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+              Active Quotes
+            </h3>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setActiveTab('quotes')}
+            >
+              View All
+            </Button>
+          </div>
+          <div className="space-y-3">
+            {activeQuotes.slice(0, 5).map((quote) => (
+              <div
+                key={quote.id}
+                className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg"
+              >
+                <div className="flex-1">
+                  <p className="text-sm font-medium text-gray-900 dark:text-white">
+                    Quote #{quote.id}
+                  </p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">
+                    {formatCurrency(quote.totalAmount, quote.currency)} • {quote.deliveryTime} days
+                  </p>
+                </div>
+                <div className={cn(
+                  'px-2 py-1 rounded-full text-xs font-medium',
+                  quote.status === QuoteStatus.PENDING ? 'bg-warning-100 text-warning-800 dark:bg-warning-900 dark:text-warning-300' :
+                  quote.status === QuoteStatus.APPROVED ? 'bg-success-100 text-success-800 dark:bg-success-900 dark:text-success-300' :
+                  'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-300'
+                )}>
+                  {quote.status}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Production Capacity */}
+      {capacity && (
+        <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm border border-gray-200 dark:border-gray-700">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+            Production Capacity
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {capacity.capabilities.map((capability) => (
+              <div key={capability.category} className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                    {capability.category.replace('_', ' ')}
+                  </span>
+                  <span className="text-sm text-gray-500 dark:text-gray-400">
+                    {capability.currentUtilization}% / {capability.maxCapacity}
+                  </span>
+                </div>
+                <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                  <div
+                    className={cn(
+                      'h-2 rounded-full transition-all duration-300',
+                      capability.currentUtilization > 90 ? 'bg-error-500' :
+                      capability.currentUtilization > 70 ? 'bg-warning-500' :
+                      'bg-success-500'
+                    )}
+                    style={{ width: `${capability.currentUtilization}%` }}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+
+  const renderOrdersTab = () => (
+    <div className="space-y-6">
+      {/* Filters and Actions */}
+      <div className="flex flex-col sm:flex-row gap-4">
+        <div className="flex-1">
+          <Input
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            placeholder="Search orders by title, ID, or client..."
+            leftIcon={<Search className="w-4 h-4" />}
+          />
+        </div>
+        <Select
+          value={statusFilter}
+          onChange={(e) => setStatusFilter(e.target.value as OrderStatus | 'all')}
+          options={[
+            { value: 'all', label: 'All Orders' },
+            { value: OrderStatus.PENDING, label: 'Pending' },
+            { value: OrderStatus.QUOTED, label: 'Quoted' },
+            { value: OrderStatus.CONFIRMED, label: 'Confirmed' },
+            { value: OrderStatus.IN_PRODUCTION, label: 'In Production' },
+          ]}
+        />
+        
+        {selectedOrders.length > 0 && (
+          <div className="flex items-center space-x-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => handleBulkOperation('accept')}
+              loading={bulkOperationMutation.isPending}
+            >
+              Accept Selected ({selectedOrders.length})
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => handleBulkOperation('reject')}
+              loading={bulkOperationMutation.isPending}
+            >
+              Reject Selected
+            </Button>
+          </div>
+        )}
+      </div>
+
+      {/* Orders Table */}
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden">
+        <div className="overflow-x-auto">
+          <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+            <thead className="bg-gray-50 dark:bg-gray-900">
+              <tr>
+                <th className="px-6 py-3 text-left">
+                  <input
+                    type="checkbox"
+                    className="form-checkbox"
+                    onChange={(e) => {
+                      if (e.target.checked) {
+                        setSelectedOrders(filteredOrders.map(o => o.id));
+                      } else {
+                        setSelectedOrders([]);
+                      }
+                    }}
+                    checked={selectedOrders.length === filteredOrders.length && filteredOrders.length > 0}
+                  />
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                  Order Details
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                  Client
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                  Status
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                  Delivery Date
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                  Actions
+                </th>
+              </tr>
+            </thead>
+            <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+              {filteredOrders.map((order) => (
+                <tr key={order.id} className="hover:bg-gray-50 dark:hover:bg-gray-700">
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <input
+                      type="checkbox"
+                      className="form-checkbox"
+                      checked={selectedOrders.includes(order.id)}
+                      onChange={(e) => handleOrderSelection(order.id, e.target.checked)}
+                    />
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div>
+                      <div className="text-sm font-medium text-gray-900 dark:text-white">
+                        {order.title}
+                      </div>
+                      <div className="text-sm text-gray-500 dark:text-gray-400">
+                        #{order.id} • Qty: {order.quantity}
+                      </div>
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-sm text-gray-900 dark:text-white">
+                      {order.client?.companyName || 'Unknown'}
+                    </div>
+                    <div className="text-sm text-gray-500 dark:text-gray-400">
+                      {order.client?.contactName}
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className={cn(
+                      'inline-flex items-center px-2 py-1 rounded-full text-xs font-medium',
+                      getStatusColor(order.status)
+                    )}>
+                      {order.status.replace('_', ' ')}
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
+                    {format(new Date(order.deliveryDate), 'MMM dd, yyyy')}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                    <div className="flex items-center space-x-2">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => setSelectedOrder(order)}
+                      >
+                        <Eye className="w-4 h-4" />
+                      </Button>
+                      {order.status === OrderStatus.PENDING && (
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => {
+                            setSelectedOrder(order);
+                            setShowQuoteBuilder(true);
+                          }}
+                        >
+                          <Calculator className="w-4 h-4" />
+                        </Button>
+                      )}
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                      >
+                        <MessageSquare className="w-4 h-4" />
+                      </Button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
+
+  const renderQuoteBuilder = () => {
+    if (!selectedOrder) return null;
+
+    return (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50"
+        onClick={() => setShowQuoteBuilder(false)}
+      >
+        <motion.div
+          initial={{ scale: 0.95, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0.95, opacity: 0 }}
+          className="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className="p-6">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                Create Quote for Order #{selectedOrder.id}
+              </h2>
+              <Button
+                variant="ghost"
+                onClick={() => setShowQuoteBuilder(false)}
+              >
+                ×
+              </Button>
+            </div>
+
+            {/* Quote Builder Form */}
+            <QuoteBuilderForm
+              order={selectedOrder}
+              onSubmit={(quoteData) => {
+                createQuoteMutation.mutate({
+                  ...quoteData,
+                  orderId: selectedOrder.id,
+                });
+              }}
+              onCancel={() => setShowQuoteBuilder(false)}
+              isLoading={createQuoteMutation.isPending}
+            />
+          </div>
+        </motion.div>
+      </motion.div>
+    );
+  };
+
+  const tabs = [
+    { id: 'overview', label: 'Overview', icon: Activity },
+    { id: 'orders', label: 'Orders', icon: Package },
+    { id: 'quotes', label: 'Quotes', icon: FileText },
+    { id: 'analytics', label: 'Analytics', icon: BarChart3 },
+    { id: 'calendar', label: 'Calendar', icon: Calendar },
+  ];
+
+  if (statsLoading || ordersLoading) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <LoadingSpinner size="lg" />
+      </div>
+    );
+  }
+
+  return (
+    <div className={cn('space-y-6', className)}>
+      {/* Header */}
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+            Manufacturer Dashboard
+          </h1>
+          <p className="text-gray-600 dark:text-gray-400">
+            Manage your orders, quotes, and production capacity
+          </p>
+        </div>
+        <div className="flex items-center space-x-3">
+          <Select
+            value={dateRange}
+            onChange={(e) => setDateRange(e.target.value as 'week' | 'month' | 'quarter')}
+            options={[
+              { value: 'week', label: 'This Week' },
+              { value: 'month', label: 'This Month' },
+              { value: 'quarter', label: 'This Quarter' },
+            ]}
+          />
+          <Button variant="outline" leftIcon={<Bell className="w-4 h-4" />}>
+            Notifications
+          </Button>
+        </div>
+      </div>
+
+      {/* Navigation Tabs */}
+      <div className="border-b border-gray-200 dark:border-gray-700">
+        <nav className="-mb-px flex space-x-8">
+          {tabs.map((tab) => {
+            const Icon = tab.icon;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id as any)}
+                className={cn(
+                  'whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm flex items-center space-x-2',
+                  activeTab === tab.id
+                    ? 'border-primary-500 text-primary-600 dark:text-primary-400'
+                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300'
+                )}
+              >
+                <Icon className="w-4 h-4" />
+                <span>{tab.label}</span>
+              </button>
+            );
+          })}
+        </nav>
+      </div>
+
+      {/* Tab Content */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={activeTab}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          transition={{ duration: 0.2 }}
+        >
+          {activeTab === 'overview' && renderOverviewTab()}
+          {activeTab === 'orders' && renderOrdersTab()}
+          {activeTab === 'quotes' && <div>Quotes content coming soon...</div>}
+          {activeTab === 'analytics' && <div>Analytics content coming soon...</div>}
+          {activeTab === 'calendar' && <div>Calendar content coming soon...</div>}
+        </motion.div>
+      </AnimatePresence>
+
+      {/* Quote Builder Modal */}
+      <AnimatePresence>
+        {showQuoteBuilder && renderQuoteBuilder()}
+      </AnimatePresence>
+    </div>
+  );
+};
+
+// Quote Builder Form Component
+interface QuoteBuilderFormProps {
+  order: Order;
+  onSubmit: (data: any) => void;
+  onCancel: () => void;
+  isLoading: boolean;
+}
+
+const QuoteBuilderForm: React.FC<QuoteBuilderFormProps> = ({
+  order,
+  onSubmit,
+  onCancel,
+  isLoading
+}) => {
+  const [lineItems, setLineItems] = useState([
+    { description: '', quantity: 1, unitPrice: 0, totalPrice: 0 }
+  ]);
+  const [deliveryTime, setDeliveryTime] = useState('');
+  const [notes, setNotes] = useState('');
+  const [validUntil, setValidUntil] = useState('');
+
+  const addLineItem = () => {
+    setLineItems([...lineItems, { description: '', quantity: 1, unitPrice: 0, totalPrice: 0 }]);
+  };
+
+  const updateLineItem = (index: number, field: string, value: any) => {
+    const updatedItems = [...lineItems];
+    updatedItems[index] = { ...updatedItems[index], [field]: value };
+    
+    if (field === 'quantity' || field === 'unitPrice') {
+      updatedItems[index].totalPrice = updatedItems[index].quantity * updatedItems[index].unitPrice;
+    }
+    
+    setLineItems(updatedItems);
+  };
+
+  const removeLineItem = (index: number) => {
+    setLineItems(lineItems.filter((_, i) => i !== index));
+  };
+
+  const totalAmount = lineItems.reduce((sum, item) => sum + item.totalPrice, 0);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    onSubmit({
+      lineItems,
+      totalAmount,
+      deliveryTime: parseInt(deliveryTime),
+      notes,
+      validUntil: new Date(validUntil),
+      currency: 'USD',
+    });
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-6">
+      {/* Order Summary */}
+      <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+        <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+          Order Details
+        </h3>
+        <div className="grid grid-cols-2 gap-4 text-sm">
+          <div>
+            <span className="text-gray-500 dark:text-gray-400">Title:</span>
+            <span className="ml-2 font-medium">{order.title}</span>
+          </div>
+          <div>
+            <span className="text-gray-500 dark:text-gray-400">Quantity:</span>
+            <span className="ml-2 font-medium">{order.quantity}</span>
+          </div>
+          <div>
+            <span className="text-gray-500 dark:text-gray-400">Category:</span>
+            <span className="ml-2 font-medium">{order.category}</span>
+          </div>
+          <div>
+            <span className="text-gray-500 dark:text-gray-400">Delivery Date:</span>
+            <span className="ml-2 font-medium">
+              {format(new Date(order.deliveryDate), 'MMM dd, yyyy')}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* Line Items */}
+      <div>
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="text-lg font-medium text-gray-900 dark:text-white">
+            Quote Items
+          </h3>
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            onClick={addLineItem}
+            leftIcon={<Plus className="w-4 h-4" />}
+          >
+            Add Item
+          </Button>
+        </div>
+
+        <div className="space-y-3">
+          {lineItems.map((item, index) => (
+            <div key={index} className="grid grid-cols-12 gap-3 items-end">
+              <div className="col-span-5">
+                <Input
+                  label={index === 0 ? 'Description' : ''}
+                  value={item.description}
+                  onChange={(e) => updateLineItem(index, 'description', e.target.value)}
+                  placeholder="Item description"
+                  required
+                />
+              </div>
+              <div className="col-span-2">
+                <Input
+                  label={index === 0 ? 'Quantity' : ''}
+                  type="number"
+                  value={item.quantity}
+                  onChange={(e) => updateLineItem(index, 'quantity', parseInt(e.target.value))}
+                  min="1"
+                  required
+                />
+              </div>
+              <div className="col-span-2">
+                <Input
+                  label={index === 0 ? 'Unit Price' : ''}
+                  type="number"
+                  step="0.01"
+                  value={item.unitPrice}
+                  onChange={(e) => updateLineItem(index, 'unitPrice', parseFloat(e.target.value))}
+                  min="0"
+                  required
+                />
+              </div>
+              <div className="col-span-2">
+                <Input
+                  label={index === 0 ? 'Total' : ''}
+                  value={formatCurrency(item.totalPrice)}
+                  disabled
+                />
+              </div>
+              <div className="col-span-1">
+                {lineItems.length > 1 && (
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => removeLineItem(index)}
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </Button>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Total */}
+        <div className="mt-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+          <div className="flex justify-between items-center">
+            <span className="text-lg font-medium text-gray-900 dark:text-white">
+              Total Amount:
+            </span>
+            <span className="text-xl font-bold text-primary-600 dark:text-primary-400">
+              {formatCurrency(totalAmount)}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* Additional Details */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <Input
+          label="Delivery Time (days)"
+          type="number"
+          value={deliveryTime}
+          onChange={(e) => setDeliveryTime(e.target.value)}
+          placeholder="e.g., 14"
+          required
+        />
+        <Input
+          label="Valid Until"
+          type="date"
+          value={validUntil}
+          onChange={(e) => setValidUntil(e.target.value)}
+          required
+        />
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          Notes (Optional)
+        </label>
+        <textarea
+          value={notes}
+          onChange={(e) => setNotes(e.target.value)}
+          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white"
+          rows={3}
+          placeholder="Additional notes or terms..."
+        />
+      </div>
+
+      {/* Actions */}
+      <div className="flex items-center justify-end space-x-3 pt-4 border-t border-gray-200 dark:border-gray-700">
+        <Button
+          type="button"
+          variant="outline"
+          onClick={onCancel}
+          disabled={isLoading}
+        >
+          Cancel
+        </Button>
+        <Button
+          type="submit"
+          loading={isLoading}
+          leftIcon={<Send className="w-4 h-4" />}
+        >
+          Send Quote
+        </Button>
+      </div>
+    </form>
+  );
+};
+
+export default ManufacturerDashboard; 

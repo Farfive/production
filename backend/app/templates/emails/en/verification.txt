@@ -1,0 +1,32 @@
+VERIFY YOUR ACCOUNT - {{ platform_name }}
+
+Hello {{ first_name }},
+
+Thank you for joining {{ platform_name }}, the premier platform connecting manufacturing clients with skilled producers. We're excited to have you on board!
+
+VERIFY YOUR EMAIL ADDRESS
+
+To complete your registration and activate your account, please click the link below or copy and paste it into your browser:
+
+{{ verification_link }}
+
+What you can do with {{ platform_name }}:
+• Connect with Manufacturers: Find and work with verified manufacturing partners
+• Manage Orders: Track your manufacturing projects from quote to delivery  
+• Secure Payments: Safe and secure payment processing with escrow protection
+• Real-time Tracking: Monitor production progress and delivery status
+
+SECURITY NOTICE
+This verification link will expire in 24 hours for security reasons. If you didn't create an account with {{ platform_name }}, please ignore this email.
+
+---
+{{ platform_name }}
+{{ company_address }}
+
+Need help? Contact us at {{ support_email }}
+
+To unsubscribe: {{ unsubscribe_url }}
+Privacy Policy: https://manufacturingplatform.com/privacy
+Terms of Service: https://manufacturingplatform.com/terms
+
+© {{ current_year }} {{ platform_name }}. All rights reserved. 
