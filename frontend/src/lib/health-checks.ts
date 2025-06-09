@@ -1,3 +1,4 @@
+import React from 'react';
 import { ApiClient } from './api-client';
 
 // Types for health checks

@@ -404,7 +404,7 @@ describe('ApiClient', () => {
 
   describe('request context', () => {
     it('should add request context to all requests', async () => {
-      mockAxiosInstance.request.mockImplementation((config) => {
+      mockAxiosInstance.request.mockImplementation((config: any) => {
         expect(config.metadata?.context).toEqual(
           expect.objectContaining({
             id: expect.stringMatching(/^req_\d+_\w+$/),
@@ -500,7 +500,7 @@ describe('ApiClient', () => {
     it('should support request cancellation', async () => {
       const controller = new AbortController();
       
-      mockAxiosInstance.request.mockImplementation((config) => {
+      mockAxiosInstance.request.mockImplementation((config: any) => {
         // Simulate request being cancelled
         if (config.signal?.aborted) {
           const error = new Error('Request was cancelled');

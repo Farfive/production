@@ -33,7 +33,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { format, differenceInDays } from 'date-fns';
 import toast from 'react-hot-toast';
 
-import { quotesApi, ordersApi, analyticsApi } from '../../lib/api';
+import { quotesApi, ordersApi } from '../../lib/api';
 import { Quote, Order, QuoteStatus, Manufacturer } from '../../types';
 import Button from '../ui/Button';
 import Input from '../ui/Input';
@@ -117,7 +117,7 @@ const QuoteComparison: React.FC<QuoteComparisonProps> = ({
   // Fetch order and quotes
   const { data: order } = useQuery({
     queryKey: ['order', orderId],
-    queryFn: () => ordersApi.getOrder(orderId),
+    queryFn: () => ordersApi.getOrder(parseInt(orderId!)),
   });
 
   const { data: quotes = [], isLoading: quotesLoading } = useQuery({
@@ -127,7 +127,7 @@ const QuoteComparison: React.FC<QuoteComparisonProps> = ({
   });
 
   // Fetch evaluations
-  const { data: evaluations = [], mutate: updateEvaluation } = useQuery({
+  const { data: evaluations = [] } = useQuery({
     queryKey: ['quote-evaluations', orderId],
     queryFn: () => quotesApi.getQuoteEvaluations(orderId),
   });
@@ -140,7 +140,7 @@ const QuoteComparison: React.FC<QuoteComparisonProps> = ({
 
     socket.on('quote-updated', (data) => {
       queryClient.invalidateQueries({ queryKey: ['quotes', orderId] });
-      toast.info('Quote updated in real-time');
+      toast('Quote updated in real-time');
     });
 
     socket.on('new-quote', (data) => {
@@ -282,10 +282,11 @@ const QuoteComparison: React.FC<QuoteComparisonProps> = ({
     favoriteQuoteMutation.mutate({ quoteId, favorited });
   };
 
-  const getRecommendedQuote = () => {
-    return processedQuotes.reduce((best, current) => 
+    const getRecommendedQuote = () => {
+    if (processedQuotes.length === 0) return null;
+    return processedQuotes.reduce((best, current) =>
       current.score > (best?.score || 0) ? current : best
-    , null);
+    );
   };
 
   const getRiskColor = (risk: string) => {
@@ -517,7 +518,7 @@ const QuoteComparison: React.FC<QuoteComparisonProps> = ({
                       </Button>
                     </div>
                   </td>
-                </tr>
+                </motion.tr>
               );
             })}
           </tbody>

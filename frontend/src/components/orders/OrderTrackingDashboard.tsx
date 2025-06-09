@@ -3,36 +3,28 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Search,
-  Filter,
   Download,
-  MessageSquare,
-  Calendar,
   Package,
   Truck,
   CheckCircle,
   Clock,
   AlertTriangle,
   Eye,
-  ChevronDown,
   RefreshCw,
-  Bell,
   FileText,
-  MapPin,
   DollarSign,
-  User,
   Paperclip,
   Send,
   ChevronRight,
-  MoreHorizontal,
   Star,
-  TrendingUp,
-  Activity
+  Activity,
+  X
 } from 'lucide-react';
 import { format, formatDistanceToNow } from 'date-fns';
 import toast from 'react-hot-toast';
 
-import { ordersApi, notificationsApi } from '../../lib/api';
-import { Order, OrderStatus, Quote, Message, OrderUpdate } from '../../types';
+import { ordersApi } from '../../lib/api';
+import { Order, OrderStatus, Message, OrderUpdate } from '../../types';
 import Button from '../ui/Button';
 import Input from '../ui/Input';
 import Select from '../ui/Select';
@@ -57,7 +49,7 @@ const useOrderWebSocket = (orderId?: string) => {
     socket.on('order-updated', (update: OrderUpdate) => {
       setUpdates(prev => [update, ...prev]);
       queryClient.invalidateQueries({ queryKey: ['order', orderId] });
-      toast.success(`Order ${orderId} updated: ${update.message}`);
+      toast.success(`Order ${orderId} updated: ${update.payload.message}`);
     });
 
     // Listen for new messages
@@ -95,12 +87,11 @@ const OrderTrackingDashboard: React.FC<OrderTrackingDashboardProps> = ({
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState<OrderStatus | 'all'>('all');
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
-  const [showFilters, setShowFilters] = useState(false);
   const [messageText, setMessageText] = useState('');
   const [attachments, setAttachments] = useState<File[]>([]);
   
   const queryClient = useQueryClient();
-  const { updates, isConnected } = useOrderWebSocket(selectedOrder?.id);
+  const { isConnected } = useOrderWebSocket(selectedOrder?.id);
 
   // Fetch orders
   const { 
@@ -114,9 +105,9 @@ const OrderTrackingDashboard: React.FC<OrderTrackingDashboardProps> = ({
   });
 
   // Fetch single order if orderId is provided
-  const { data: singleOrder } = useQuery({
+  useQuery({
     queryKey: ['order', orderId],
-    queryFn: () => ordersApi.getOrder(orderId!),
+    queryFn: () => ordersApi.getOrder(parseInt(orderId!)),
     enabled: !!orderId,
     refetchInterval: 10000, // Refetch every 10 seconds for active tracking
   });
@@ -163,9 +154,10 @@ const OrderTrackingDashboard: React.FC<OrderTrackingDashboardProps> = ({
   });
 
   const filteredOrders = useMemo(() => {
-    return orders.filter(order => {
+    if (!Array.isArray(orders)) return [];
+    return orders.filter((order: Order) => {
       const matchesSearch = order.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                          order.id.toLowerCase().includes(searchTerm.toLowerCase());
+                          order.id.toString().toLowerCase().includes(searchTerm.toLowerCase());
       const matchesStatus = statusFilter === 'all' || order.status === statusFilter;
       return matchesSearch && matchesStatus;
     });
@@ -364,12 +356,12 @@ const OrderTrackingDashboard: React.FC<OrderTrackingDashboardProps> = ({
               animate={{ opacity: 1, y: 0 }}
               className={cn(
                 'flex',
-                message.senderId === user?.id ? 'justify-end' : 'justify-start'
+                message.senderId === user?.id.toString() ? 'justify-end' : 'justify-start'
               )}
             >
               <div className={cn(
                 'max-w-xs lg:max-w-md px-4 py-2 rounded-lg',
-                message.senderId === user?.id
+                message.senderId === user?.id.toString()
                   ? 'bg-primary-500 text-white'
                   : 'bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white'
               )}>
@@ -530,7 +522,7 @@ const OrderTrackingDashboard: React.FC<OrderTrackingDashboardProps> = ({
             </tr>
           </thead>
           <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-            {filteredOrders.map((order) => (
+            {filteredOrders.map((order: Order) => (
               <motion.tr
                 key={order.id}
                 initial={{ opacity: 0 }}
@@ -609,7 +601,7 @@ const OrderTrackingDashboard: React.FC<OrderTrackingDashboardProps> = ({
           </Button>
           <Button
             variant="outline"
-            onClick={() => exportOrdersMutation.mutate()}
+            onClick={() => exportOrdersMutation.mutate({})}
             loading={exportOrdersMutation.isPending}
             leftIcon={<Download className="w-4 h-4" />}
           >

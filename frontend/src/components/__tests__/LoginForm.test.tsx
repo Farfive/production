@@ -3,8 +3,8 @@
  */
 import React from 'react';
 import { screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { customRender, fillForm, submitForm, checkAccessibility } from '../../test-utils/test-utils';
-import LoginForm from '../auth/LoginForm';
 
 // Mock the LoginForm component for testing
 const MockLoginForm: React.FC<{
@@ -76,7 +76,8 @@ describe('LoginForm', () => {
   });
 
   it('allows user to enter email and password', async () => {
-    const { user } = customRender(<MockLoginForm onSubmit={mockOnSubmit} />);
+    const user = userEvent.setup();
+    customRender(<MockLoginForm onSubmit={mockOnSubmit} />);
 
     const emailInput = screen.getByLabelText(/email/i);
     const passwordInput = screen.getByLabelText(/password/i);
@@ -89,14 +90,16 @@ describe('LoginForm', () => {
   });
 
   it('submits form with correct data', async () => {
-    const { user } = customRender(<MockLoginForm onSubmit={mockOnSubmit} />);
+    const user = userEvent.setup();
+    customRender(<MockLoginForm onSubmit={mockOnSubmit} />);
 
-    await fillForm(user, {
+    const form = screen.getByTestId('login-form') as HTMLFormElement;
+    await fillForm(form, {
       email: 'test@example.com',
       password: 'password123',
     });
 
-    await submitForm(user);
+    await submitForm(form);
 
     await waitFor(() => {
       expect(mockOnSubmit).toHaveBeenCalledWith({
@@ -124,7 +127,8 @@ describe('LoginForm', () => {
   });
 
   it('validates required fields', async () => {
-    const { user } = customRender(<MockLoginForm onSubmit={mockOnSubmit} />);
+    const user = userEvent.setup();
+    customRender(<MockLoginForm onSubmit={mockOnSubmit} />);
 
     const submitButton = screen.getByRole('button', { name: /sign in/i });
     await user.click(submitButton);
@@ -138,7 +142,8 @@ describe('LoginForm', () => {
   });
 
   it('validates email format', async () => {
-    const { user } = customRender(<MockLoginForm onSubmit={mockOnSubmit} />);
+    const user = userEvent.setup();
+    customRender(<MockLoginForm onSubmit={mockOnSubmit} />);
 
     const emailInput = screen.getByLabelText(/email/i);
     await user.type(emailInput, 'invalid-email');
@@ -152,14 +157,16 @@ describe('LoginForm', () => {
 
   it('handles form submission errors gracefully', async () => {
     const mockOnSubmitWithError = jest.fn().mockRejectedValue(new Error('Network error'));
-    const { user } = customRender(<MockLoginForm onSubmit={mockOnSubmitWithError} />);
+    const user = userEvent.setup();
+    customRender(<MockLoginForm onSubmit={mockOnSubmitWithError} />);
 
-    await fillForm(user, {
+    const form = screen.getByTestId('login-form') as HTMLFormElement;
+    await fillForm(form, {
       email: 'test@example.com',
       password: 'password123',
     });
 
-    await submitForm(user);
+    await submitForm(form);
 
     await waitFor(() => {
       expect(mockOnSubmitWithError).toHaveBeenCalled();
@@ -167,7 +174,8 @@ describe('LoginForm', () => {
   });
 
   it('clears form when reset', async () => {
-    const { user } = customRender(<MockLoginForm onSubmit={mockOnSubmit} />);
+    const user = userEvent.setup();
+    customRender(<MockLoginForm onSubmit={mockOnSubmit} />);
 
     const emailInput = screen.getByLabelText(/email/i);
     const passwordInput = screen.getByLabelText(/password/i);
@@ -191,7 +199,8 @@ describe('LoginForm', () => {
   });
 
   it('allows navigation between fields using Tab key', async () => {
-    const { user } = customRender(<MockLoginForm onSubmit={mockOnSubmit} />);
+    const user = userEvent.setup();
+    customRender(<MockLoginForm onSubmit={mockOnSubmit} />);
 
     const emailInput = screen.getByLabelText(/email/i);
     const passwordInput = screen.getByLabelText(/password/i);
@@ -208,9 +217,11 @@ describe('LoginForm', () => {
   });
 
   it('submits form when Enter key is pressed', async () => {
-    const { user } = customRender(<MockLoginForm onSubmit={mockOnSubmit} />);
+    const user = userEvent.setup();
+    customRender(<MockLoginForm onSubmit={mockOnSubmit} />);
 
-    await fillForm(user, {
+    const form = screen.getByTestId('login-form') as HTMLFormElement;
+    await fillForm(form, {
       email: 'test@example.com',
       password: 'password123',
     });
@@ -246,7 +257,8 @@ describe('LoginForm', () => {
 
   it('handles password visibility toggle', async () => {
     // This would test a password visibility toggle if implemented
-    const { user } = customRender(<MockLoginForm onSubmit={mockOnSubmit} />);
+    const user = userEvent.setup();
+    customRender(<MockLoginForm onSubmit={mockOnSubmit} />);
 
     const passwordInput = screen.getByLabelText(/password/i);
     expect(passwordInput).toHaveAttribute('type', 'password');
@@ -261,9 +273,11 @@ describe('LoginForm', () => {
     const slowOnSubmit = jest.fn().mockImplementation(
       () => new Promise(resolve => setTimeout(resolve, 1000))
     );
-    const { user } = customRender(<MockLoginForm onSubmit={slowOnSubmit} />);
+    const user = userEvent.setup();
+    customRender(<MockLoginForm onSubmit={slowOnSubmit} />);
 
-    await fillForm(user, {
+    const form = screen.getByTestId('login-form') as HTMLFormElement;
+    await fillForm(form, {
       email: 'test@example.com',
       password: 'password123',
     });
@@ -280,9 +294,11 @@ describe('LoginForm', () => {
   });
 
   it('remembers form data on component re-render', async () => {
-    const { user, rerender } = customRender(<MockLoginForm onSubmit={mockOnSubmit} />);
+    const user = userEvent.setup();
+    const { rerender } = customRender(<MockLoginForm onSubmit={mockOnSubmit} />);
 
-    await fillForm(user, {
+    const form = screen.getByTestId('login-form') as HTMLFormElement;
+    await fillForm(form, {
       email: 'test@example.com',
       password: 'password123',
     });

@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, Lock, ArrowRight, AlertCircle, Sparkles, Shield, Zap } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Mail, Lock, ArrowRight, AlertCircle, Sparkles } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
-import { LoginCredentials } from '../../types';
+
 import Button from '../../components/ui/Button';
 import Input from '../../components/ui/Input';
-import { cn } from '../../lib/utils';
+
 
 const loginSchema = yup.object({
   email: yup
@@ -27,10 +27,6 @@ type LoginFormData = yup.InferType<typeof loginSchema>;
 
 const LoginPage: React.FC = () => {
   const { login, isLoading, error } = useAuth();
-  const navigate = useNavigate();
-  const location = useLocation();
-  
-  const from = location.state?.from?.pathname || '/dashboard';
   
   const {
     register,

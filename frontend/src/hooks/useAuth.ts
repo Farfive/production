@@ -3,6 +3,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { authApi, queryKeys, tokenManager } from '../lib/api';
+import { environment } from '../config/environment';
 import { 
   User, 
   LoginCredentials, 
@@ -52,27 +53,28 @@ export const useAuth = (): AuthState & AuthActions => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  // TEMPORARY: Return mock user for testing
-  const user = MOCK_CLIENT_USER;
-  const isAuthenticated = true;
-  const isLoading = false;
-  const error = null;
+  // Check if we're using mock authentication
+  const useMockAuth = environment.useMockAuth;
 
-  // Get user profile query - DISABLED FOR TESTING
-  // const {
-  //   data: user,
-  //   isLoading,
-  //   error,
-  //   refetch: refresh,
-  // } = useQuery({
-  //   queryKey: queryKeys.auth.profile,
-  //   queryFn: authApi.getProfile,
-  //   enabled: !!tokenManager.getAccessToken(),
-  //   retry: false,
-  //   staleTime: 5 * 60 * 1000, // 5 minutes
-  // });
+  // Get user profile query with real API integration
+  const {
+    data: userData,
+    isLoading: queryLoading,
+    error: queryError,
+    refetch: refreshProfile,
+  } = useQuery({
+    queryKey: queryKeys.auth.profile,
+    queryFn: authApi.getProfile,
+    enabled: !!tokenManager.getAccessToken() && !useMockAuth,
+    retry: false,
+    staleTime: 5 * 60 * 1000, // 5 minutes
+  });
 
-  // const isAuthenticated = !!user && !!tokenManager.getAccessToken();
+  // Use mock user in development if specified
+  const user = useMockAuth ? MOCK_CLIENT_USER : (userData || null);
+  const isAuthenticated = useMockAuth ? true : (!!userData && !!tokenManager.getAccessToken());
+  const isLoading = useMockAuth ? false : queryLoading;
+  const error = useMockAuth ? null : (queryError?.message || null);
 
   // Login mutation
   const loginMutation = useMutation({
@@ -287,8 +289,11 @@ export const useAuth = (): AuthState & AuthActions => {
   };
 
   const refresh = () => {
-    // MOCK: Do nothing for testing
-    console.log('Mock refresh called');
+    if (useMockAuth) {
+      console.log('Mock refresh called');
+      return;
+    }
+    refreshProfile();
   };
 
   return {

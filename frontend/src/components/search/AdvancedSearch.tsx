@@ -18,7 +18,7 @@ import {
   Check,
   Sliders
 } from 'lucide-react';
-import { format, subDays, startOfMonth, endOfMonth } from 'date-fns';
+import { format, subDays } from 'date-fns';
 
 import Button from '../ui/Button';
 import Input from '../ui/Input';
@@ -360,7 +360,7 @@ const AdvancedSearch: React.FC<AdvancedSearchProps> = ({
                   const min = e.target.value ? parseFloat(e.target.value) : undefined;
                   handleFilterChange(group.id, { ...value, min });
                 }}
-                size="sm"
+                className="text-sm"
               />
               <Input
                 type="number"
@@ -370,7 +370,7 @@ const AdvancedSearch: React.FC<AdvancedSearchProps> = ({
                   const max = e.target.value ? parseFloat(e.target.value) : undefined;
                   handleFilterChange(group.id, { ...value, max });
                 }}
-                size="sm"
+                className="text-sm"
               />
             </div>
           </div>
@@ -389,7 +389,7 @@ const AdvancedSearch: React.FC<AdvancedSearchProps> = ({
                 onChange={(e) => {
                   handleFilterChange(group.id, { ...value, start: e.target.value });
                 }}
-                size="sm"
+                className="text-sm"
               />
               <Input
                 type="date"
@@ -397,7 +397,7 @@ const AdvancedSearch: React.FC<AdvancedSearchProps> = ({
                 onChange={(e) => {
                   handleFilterChange(group.id, { ...value, end: e.target.value });
                 }}
-                size="sm"
+                className="text-sm"
               />
             </div>
           </div>

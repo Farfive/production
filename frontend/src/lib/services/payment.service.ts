@@ -205,11 +205,18 @@ export class PaymentService {
     }
 
     try {
-      const result = await this.stripe.confirmPayment({
-        elements,
-        confirmParams: returnUrl ? { return_url: returnUrl } : undefined,
-        redirect: returnUrl ? 'if_required' : 'never',
-      });
+      let result;
+      if (returnUrl) {
+        result = await this.stripe.confirmPayment({
+          elements,
+          confirmParams: { return_url: returnUrl },
+        });
+      } else {
+        result = await (this.stripe as any).confirmPayment({
+          elements,
+          redirect: 'never',
+        });
+      }
 
       if (result.error) {
         this.handlePaymentError('confirm_payment', result.error, { clientSecret });
@@ -403,7 +410,7 @@ export class PaymentService {
     }
 
     try {
-      const result = await this.stripe.confirmSetup({
+      const result = await (this.stripe as any).confirmSetup({
         elements,
         redirect: 'never',
       });

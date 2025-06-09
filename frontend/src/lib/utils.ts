@@ -442,7 +442,7 @@ export function sortBy<T>(array: T[], key: keyof T, direction: 'asc' | 'desc' = 
  * Remove duplicates from array
  */
 export function unique<T>(array: T[]): T[] {
-  return [...new Set(array)];
+  return Array.from(new Set(array));
 }
 
 /**

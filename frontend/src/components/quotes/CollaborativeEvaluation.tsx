@@ -16,7 +16,8 @@ import {
   UserCheck,
   Edit,
   Save,
-  Cancel
+  XCircle as Cancel,
+  BarChart3
 } from 'lucide-react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { format, formatDistanceToNow } from 'date-fns';
@@ -129,12 +130,12 @@ const CollaborativeEvaluation: React.FC<CollaborativeEvaluationProps> = ({
 
     socket.on('evaluation-updated', (data) => {
       queryClient.invalidateQueries({ queryKey: ['collaborative-session', orderId] });
-      toast.info(`${data.user.name} updated their evaluation`);
+      toast(`${data.user.name} updated their evaluation`);
     });
 
     socket.on('new-discussion', (data) => {
       queryClient.invalidateQueries({ queryKey: ['collaborative-session', orderId] });
-      toast.info(`New comment from ${data.user.name}`);
+      toast(`New comment from ${data.user.name}`);
     });
 
     socket.on('user-joined', (data) => {
@@ -142,7 +143,7 @@ const CollaborativeEvaluation: React.FC<CollaborativeEvaluationProps> = ({
     });
 
     socket.on('user-left', (data) => {
-      toast.info(`${data.user.name} left the evaluation`);
+      toast(`${data.user.name} left the evaluation`);
     });
 
     return () => {
@@ -331,7 +332,7 @@ const CollaborativeEvaluation: React.FC<CollaborativeEvaluationProps> = ({
 
     const quote = quotes.find(q => q.id === selectedQuoteId);
     const existingEvaluation = session?.evaluations.find(
-      e => e.quoteId === selectedQuoteId && e.userId === user?.id
+      e => e.quoteId === selectedQuoteId && e.userId === user?.id.toString()
     );
 
     return (
@@ -615,7 +616,7 @@ const CollaborativeEvaluation: React.FC<CollaborativeEvaluationProps> = ({
                         {discussion.user.name}
                       </span>
                       <span className="text-xs text-gray-500 dark:text-gray-400">
-                        {formatDistanceToNow(discussion.timestamp, { addSuffix: true })}
+                        {formatDistanceToNow(new Date(discussion.timestamp), { addSuffix: true })}
                       </span>
                     </div>
                     <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">

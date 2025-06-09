@@ -53,7 +53,8 @@ export const LazyImage: React.FC<LazyImageProps> = ({
   
   // Combine refs
   const setRefs = (element: HTMLImageElement | null) => {
-    imgRef.current = element;
+    // Use type assertion to bypass readonly restriction
+    (imgRef as React.MutableRefObject<HTMLImageElement | null>).current = element;
     inViewRef(element);
   };
   

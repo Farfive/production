@@ -31,22 +31,19 @@ import {
   Target,
   Activity
 } from 'lucide-react';
-import { format, subDays, startOfWeek, endOfWeek, startOfMonth, endOfMonth } from 'date-fns';
+import { format, subDays, startOfWeek, endOfWeek } from 'date-fns';
 import toast from 'react-hot-toast';
 
 import { 
   manufacturersApi, 
   ordersApi, 
   quotesApi, 
-  analyticsApi 
+  dashboardApi 
 } from '../../lib/api';
 import { 
   Order, 
   OrderStatus, 
-  Quote, 
-  QuoteStatus, 
-  ManufacturerStats,
-  ProductionCapacity 
+  QuoteStatus
 } from '../../types';
 import Button from '../ui/Button';
 import Input from '../ui/Input';
@@ -60,7 +57,6 @@ interface ManufacturerDashboardProps {
 }
 
 const ManufacturerDashboard: React.FC<ManufacturerDashboardProps> = ({ className }) => {
-  const { user } = useAuth();
   const [activeTab, setActiveTab] = useState<'overview' | 'orders' | 'quotes' | 'analytics' | 'calendar'>('overview');
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState<OrderStatus | 'all'>('all');
@@ -74,7 +70,7 @@ const ManufacturerDashboard: React.FC<ManufacturerDashboardProps> = ({ className
   // Fetch manufacturer stats
   const { data: stats, isLoading: statsLoading } = useQuery({
     queryKey: ['manufacturer-stats', dateRange],
-    queryFn: () => analyticsApi.getManufacturerStats(dateRange),
+    queryFn: () => dashboardApi.getManufacturerStats(),
     refetchInterval: 30000,
   });
 
@@ -131,9 +127,12 @@ const ManufacturerDashboard: React.FC<ManufacturerDashboardProps> = ({ className
   });
 
   const filteredOrders = useMemo(() => {
-    return incomingOrders.filter(order => {
+    // Handle both array and paginated response formats
+    const ordersArray = Array.isArray(incomingOrders) ? incomingOrders : (incomingOrders?.data || []);
+    
+    return ordersArray.filter((order: Order) => {
       const matchesSearch = order.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                          order.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                          order.id.toString().toLowerCase().includes(searchTerm.toLowerCase()) ||
                           order.client?.companyName?.toLowerCase().includes(searchTerm.toLowerCase());
       const matchesStatus = statusFilter === 'all' || order.status === statusFilter;
       return matchesSearch && matchesStatus;
@@ -497,7 +496,7 @@ const ManufacturerDashboard: React.FC<ManufacturerDashboardProps> = ({ className
                       {order.client?.companyName || 'Unknown'}
                     </div>
                     <div className="text-sm text-gray-500 dark:text-gray-400">
-                      {order.client?.contactName}
+                      {order.client?.firstName} {order.client?.lastName}
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">

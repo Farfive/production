@@ -321,6 +321,8 @@ export class EmailService {
         id: template.id,
         name: template.name,
         subject,
+        content: htmlContent,
+        variables: [],
         versions: [version],
         createdAt: template.created_at,
         updatedAt: template.updated_at,

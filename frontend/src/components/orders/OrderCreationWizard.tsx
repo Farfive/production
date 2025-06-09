@@ -11,13 +11,11 @@ import {
   Upload,
   FileText,
   X,
-  AlertCircle,
   CheckCircle,
   Calendar,
   MapPin,
   Package,
-  DollarSign,
-  Clock
+  DollarSign
 } from 'lucide-react';
 import { useDropzone } from 'react-dropzone';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -83,37 +81,39 @@ const getCategoryFields = (category: CapabilityCategory) => {
   }
 };
 
-const stepSchema = {
-  1: yup.object({
-    title: yup.string().required('Order title is required').min(3, 'Title must be at least 3 characters'),
-    description: yup.string().required('Description is required').min(10, 'Description must be at least 10 characters'),
-    category: yup.string().required('Category is required'),
-    urgency: yup.string().required('Urgency level is required'),
-  }),
-  2: yup.object({
-    specifications: yup.array().of(
-      yup.object({
-        name: yup.string().required('Specification name is required'),
-        value: yup.string().required('Specification value is required'),
-      })
-    ).min(1, 'At least one specification is required'),
-  }),
-  3: yup.object({
-    quantity: yup.number().required('Quantity is required').min(1, 'Quantity must be at least 1'),
-    deliveryDate: yup.string().required('Delivery date is required'),
-    targetPrice: yup.number().optional().min(0, 'Price must be positive'),
-    targetPriceMax: yup.number().optional().min(0, 'Maximum price must be positive'),
-  }),
-  4: yup.object({
-    deliveryAddress: yup.object({
-      street: yup.string().required('Street address is required'),
-      city: yup.string().required('City is required'),
-      state: yup.string().required('State is required'),
-      postalCode: yup.string().required('Postal code is required'),
-      country: yup.string().required('Country is required'),
-    }),
-  }),
-};
+// Create a unified schema for the full form that matches CreateOrderForm
+const createOrderSchema: yup.ObjectSchema<CreateOrderForm> = yup.object({
+  title: yup.string().required('Order title is required').min(3, 'Title must be at least 3 characters'),
+  description: yup.string().required('Description is required').min(10, 'Description must be at least 10 characters'),
+  category: yup.mixed<CapabilityCategory>().required('Category is required'),
+  urgency: yup.mixed<UrgencyLevel>().required('Urgency level is required'),
+  specifications: yup.array().of(
+    yup.object({
+      name: yup.string().required('Specification name is required'),
+      value: yup.string().required('Specification value is required'),
+      unit: yup.string().optional(),
+      tolerance: yup.string().optional(),
+      isRequired: yup.boolean().default(true),
+      description: yup.string().optional(),
+    })
+  ).required().min(1, 'At least one specification is required'),
+  files: yup.array().of(yup.mixed<File>().required()).required().default([]),
+  targetPrice: yup.number().optional().min(0, 'Price must be positive'),
+  targetPriceMax: yup.number().optional().min(0, 'Maximum price must be positive'),
+  currency: yup.string().required('Currency is required'),
+  quantity: yup.number().required('Quantity is required').min(1, 'Quantity must be at least 1'),
+  deliveryDate: yup.string().required('Delivery date is required'),
+  deliveryAddress: yup.object({
+    street: yup.string().required('Street address is required'),
+    city: yup.string().required('City is required'),
+    state: yup.string().required('State is required'),
+    postalCode: yup.string().required('Postal code is required'),
+    country: yup.string().required('Country is required'),
+    latitude: yup.number().optional(),
+    longitude: yup.number().optional(),
+  }).required(),
+  isPublic: yup.boolean().required(),
+});
 
 interface OrderCreationWizardProps {
   onComplete: (order: any) => void;
@@ -142,14 +142,15 @@ const OrderCreationWizard: React.FC<OrderCreationWizardProps> = ({
     setValue,
     getValues,
     trigger,
-    reset,
   } = useForm<CreateOrderForm>({
-    resolver: yupResolver(stepSchema[currentStep as keyof typeof stepSchema]),
+    resolver: yupResolver(createOrderSchema),
     mode: 'onChange',
     defaultValues: {
       ...initialData,
       specifications: initialData?.specifications || [],
       deliveryAddress: initialData?.deliveryAddress || {},
+      currency: initialData?.currency || 'USD',
+      isPublic: initialData?.isPublic ?? true,
     },
   });
 
@@ -225,7 +226,24 @@ const OrderCreationWizard: React.FC<OrderCreationWizardProps> = ({
   });
 
   const handleNext = async () => {
-    const isStepValid = await trigger();
+    let fieldsToValidate: (keyof CreateOrderForm)[] = [];
+    
+    switch (currentStep) {
+      case 1:
+        fieldsToValidate = ['title', 'description', 'category', 'urgency'];
+        break;
+      case 2:
+        fieldsToValidate = ['specifications'];
+        break;
+      case 3:
+        fieldsToValidate = ['quantity', 'deliveryDate'];
+        break;
+      case 4:
+        fieldsToValidate = ['deliveryAddress'];
+        break;
+    }
+    
+    const isStepValid = await trigger(fieldsToValidate);
     if (isStepValid && currentStep < totalSteps) {
       setCurrentStep(prev => prev + 1);
     }
@@ -247,11 +265,23 @@ const OrderCreationWizard: React.FC<OrderCreationWizardProps> = ({
   };
 
   const handleFinalSubmit = handleSubmit((data) => {
-    submitOrderMutation.mutate({
-      ...data,
+    const formData: CreateOrderForm = {
+      title: data.title,
+      description: data.description,
+      category: data.category as CapabilityCategory,
+      urgency: data.urgency as UrgencyLevel,
+      specifications: data.specifications || [],
       files: uploadedFiles,
+      targetPrice: data.targetPrice,
+      targetPriceMax: data.targetPriceMax,
+      currency: data.currency,
+      quantity: data.quantity,
+      deliveryDate: data.deliveryDate,
+      deliveryAddress: data.deliveryAddress,
       isPublic: !isDraft,
-    });
+    };
+    
+    submitOrderMutation.mutate(formData);
   });
 
   const renderProgressIndicator = () => (

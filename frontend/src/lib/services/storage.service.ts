@@ -680,7 +680,7 @@ export const storageHelpers = {
       options: {
         folder: `profiles/${userId}`,
         isPublic: true,
-        acl: 'public-read',
+        acl: 'public-read' as const,
         cacheControl: 'max-age=31536000', // 1 year
       },
     });
@@ -695,7 +695,7 @@ export const storageHelpers = {
       options: {
         folder: `products/${productId}`,
         isPublic: true,
-        acl: 'public-read',
+        acl: 'public-read' as const,
         cacheControl: 'max-age=31536000',
       },
     }));

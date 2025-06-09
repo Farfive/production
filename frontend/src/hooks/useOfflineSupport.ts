@@ -104,7 +104,7 @@ export const useOfflineSupport = (options: UseOfflineSupportOptions = {}) => {
     if (state.isOnline && state.pendingActions.length > 0) {
       syncPendingActions();
     }
-  }, [state.isOnline]);
+  }, [state.isOnline, state.pendingActions.length]); // syncPendingActions will be defined below
 
   // Periodic sync
   useEffect(() => {
@@ -121,7 +121,7 @@ export const useOfflineSupport = (options: UseOfflineSupportOptions = {}) => {
         }
       };
     }
-  }, [state.isOnline, syncInterval]);
+  }, [state.isOnline, state.pendingActions.length, syncInterval]); // syncPendingActions will be defined below
 
   const generateActionId = () => {
     return `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
@@ -365,7 +365,7 @@ export const useOfflineSupport = (options: UseOfflineSupportOptions = {}) => {
   // Manual sync trigger
   const forcSync = useCallback(() => {
     if (state.pendingActions.length === 0) {
-      toast.info('No pending actions to sync');
+      toast('No pending actions to sync');
       return;
     }
     

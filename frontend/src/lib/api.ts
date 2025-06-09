@@ -1,6 +1,7 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { QueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
+import { environment, features } from '../config/environment';
 import { 
   ApiResponse, 
   PaginatedResponse, 
@@ -39,12 +40,35 @@ import {
   CapabilityCategory,
   OrderStatus,
   UrgencyLevel,
-  QuoteStatus
+  QuoteStatus,
+  Message,
+  ProductionCapacity,
+  ExtendedDashboardStats,
+  ManufacturingCapability
 } from '../types';
 
+// Extend the AxiosRequestConfig to include metadata
+declare module 'axios' {
+  interface InternalAxiosRequestConfig {
+    metadata?: {
+      startTime?: Date;
+      retryCount?: number;
+    };
+  }
+}
+
+// Extend window to include performance monitor
+declare global {
+  interface Window {
+    performanceMonitor?: {
+      measureApiCall: (endpoint: string, startTime: number) => void;
+    };
+  }
+}
+
 // API Configuration
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000/api/v1';
-const API_TIMEOUT = 30000; // 30 seconds
+const API_BASE_URL = environment.apiUrl;
+const API_TIMEOUT = environment.timeout;
 
 // Create axios instance
 const apiClient: AxiosInstance = axios.create({
@@ -78,7 +102,7 @@ const tokenManager = {
   },
 };
 
-// Request interceptor for authentication
+// Request interceptor for authentication and performance tracking
 apiClient.interceptors.request.use(
   (config) => {
     const token = tokenManager.getAccessToken();
@@ -86,8 +110,13 @@ apiClient.interceptors.request.use(
       config.headers.Authorization = `Bearer ${token}`;
     }
     
-    // Add request timestamp for debugging
+    // Add request timestamp for performance monitoring
     config.metadata = { startTime: new Date() };
+    
+    // Add retry configuration
+    if (!config.metadata.retryCount) {
+      config.metadata.retryCount = 0;
+    }
     
     return config;
   },
@@ -96,19 +125,31 @@ apiClient.interceptors.request.use(
   }
 );
 
-// Response interceptor for token refresh and error handling
+// Response interceptor for token refresh, error handling, and performance monitoring
 apiClient.interceptors.response.use(
   (response: AxiosResponse) => {
-    // Log response time in development
-    if (process.env.NODE_ENV === 'development') {
-      const duration = new Date().getTime() - response.config.metadata?.startTime?.getTime();
-      console.log(`API ${response.config.method?.toUpperCase()} ${response.config.url} - ${duration}ms`);
+    // Log response time and trigger performance monitoring
+    if (response.config.metadata?.startTime) {
+      const duration = new Date().getTime() - response.config.metadata.startTime.getTime();
+      
+      if (features.apiLogging) {
+        console.log(`API ${response.config.method?.toUpperCase()} ${response.config.url} - ${duration}ms`);
+      }
+      
+      // Send performance data to monitoring (if available)
+      if (window.performanceMonitor) {
+        window.performanceMonitor.measureApiCall(
+          response.config.url || 'unknown',
+          response.config.metadata.startTime.getTime()
+        );
+      }
     }
     
     return response;
   },
   async (error) => {
     const originalRequest = error.config;
+    const retryCount = originalRequest.metadata?.retryCount || 0;
 
     // Handle 401 Unauthorized
     if (error.response?.status === 401 && !originalRequest._retry) {
@@ -134,6 +175,26 @@ apiClient.interceptors.response.use(
         window.location.href = '/login';
         return Promise.reject(refreshError);
       }
+    }
+
+    // Handle retryable errors (network errors, 5xx errors, 429 rate limiting)
+    const isRetryable = !error.response || 
+                       error.response.status >= 500 || 
+                       error.response.status === 429;
+    
+    if (isRetryable && retryCount < environment.maxRetries && !originalRequest._retry) {
+      originalRequest.metadata = originalRequest.metadata || {};
+      originalRequest.metadata.retryCount = retryCount + 1;
+      
+      // Calculate retry delay (exponential backoff)
+      const delay = Math.min(1000 * Math.pow(2, retryCount), 10000);
+      
+      if (features.apiLogging) {
+        console.log(`Retrying API call (${retryCount + 1}/${environment.maxRetries}) after ${delay}ms`);
+      }
+      
+      await new Promise(resolve => setTimeout(resolve, delay));
+      return apiClient(originalRequest);
     }
 
     // Handle network errors
@@ -197,38 +258,47 @@ const api = {
 
 // Authentication API
 export const authApi = {
-  login: (credentials: LoginCredentials): Promise<AuthResponse> =>
+  login: (credentials: LoginCredentials): Promise<AuthResponse> => 
     api.post('/auth/login', credentials),
-
-  register: (data: RegisterData): Promise<AuthResponse> =>
+  
+  register: (data: RegisterData): Promise<AuthResponse> => 
     api.post('/auth/register', data),
+  
+  logout: (): Promise<void> => 
+    api.post('/auth/logout', {}),
+  
+  refreshToken: (): Promise<AuthResponse> => 
+    api.post('/auth/refresh', {}),
+  
+  getCurrentUser: (): Promise<User> => 
+    api.get('/auth/me'),
+  
+  updateProfile: (data: Partial<User>): Promise<User> => 
+    api.put('/auth/profile', data),
+  
+  changePassword: (currentPassword: string, newPassword: string): Promise<void> => 
+    api.put('/auth/change-password', { currentPassword, newPassword }),
 
-  logout: (): Promise<void> =>
-    api.post('/auth/logout'),
-
-  refreshToken: (refreshToken: string): Promise<AuthResponse> =>
-    api.post('/auth/refresh', { refreshToken }),
-
-  verifyEmail: (token: string): Promise<void> =>
-    api.post('/auth/verify-email', { token }),
-
-  resendVerification: (): Promise<void> =>
-    api.post('/auth/resend-verification'),
-
-  forgotPassword: (email: string): Promise<void> =>
+  forgotPassword: (email: string): Promise<void> => 
     api.post('/auth/forgot-password', { email }),
 
-  resetPassword: (token: string, password: string): Promise<void> =>
+  resetPassword: (token: string, password: string): Promise<void> => 
     api.post('/auth/reset-password', { token, password }),
 
-  changePassword: (currentPassword: string, newPassword: string): Promise<void> =>
-    api.post('/auth/change-password', { currentPassword, newPassword }),
+  verifyResetToken: (token: string): Promise<{ valid: boolean }> => 
+    api.get(`/auth/verify-reset-token?token=${token}`),
+
+  verifyEmail: (token: string): Promise<void> => 
+    api.post('/auth/verify-email', { token }),
+
+  resendVerificationEmail: (email: string): Promise<void> => 
+    api.post('/auth/resend-verification', { email }),
+
+  deleteAccount: (): Promise<void> => 
+    api.delete('/auth/account'),
 
   getProfile: (): Promise<User> =>
     api.get('/auth/profile'),
-
-  updateProfile: (data: Partial<User>): Promise<User> =>
-    api.patch('/auth/profile', data),
 };
 
 // Orders API
@@ -248,6 +318,9 @@ export const ordersApi = {
     }
     return api.getPaginated(`/orders?${params.toString()}`);
   },
+
+  getById: (id: number): Promise<Order> =>
+    api.get(`/orders/${id}`),
 
   getOrder: (id: number): Promise<Order> =>
     api.get(`/orders/${id}`),
@@ -280,6 +353,35 @@ export const ordersApi = {
 
   deleteFile: (orderId: number, fileId: number): Promise<void> =>
     api.delete(`/orders/${orderId}/files/${fileId}`),
+
+  // Missing methods for OrderTrackingDashboard
+  getOrderMessages: (orderId: string): Promise<Message[]> =>
+    api.get(`/orders/${orderId}/messages`),
+
+  sendMessage: (orderId: number, message: string, recipientType: 'manufacturer' | 'client'): Promise<any> =>
+    api.post(`/orders/${orderId}/messages`, { message, recipientType }),
+
+  exportOrders: (filters?: { orderIds?: string[]; format?: string }): Promise<Blob> =>
+    api.get('/orders/export', { 
+      params: filters,
+      responseType: 'blob' as const,
+    }),
+
+  // Manufacturer-specific endpoints
+  getManufacturerOrders: (filters?: SearchFilters): Promise<PaginatedResponse<Order>> => {
+    const params = new URLSearchParams();
+    if (filters) {
+      Object.entries(filters).forEach(([key, value]) => {
+        if (value !== undefined && value !== null) {
+          params.append(key, String(value));
+        }
+      });
+    }
+    return api.getPaginated(`/manufacturer/orders?${params.toString()}`);
+  },
+
+  bulkOperation: (operation: string, orderIds: string[]): Promise<void> =>
+    api.post('/orders/bulk-operation', { operation, orderIds }),
 };
 
 // Quotes API
@@ -296,8 +398,26 @@ export const quotesApi = {
     return api.getPaginated(`/quotes?${params.toString()}`);
   },
 
+  getById: (id: number): Promise<Quote> =>
+    api.get(`/quotes/${id}`),
+
   getQuote: (id: number): Promise<Quote> =>
     api.get(`/quotes/${id}`),
+
+  create: (data: any): Promise<Quote> =>
+    api.post('/quotes', data),
+
+  acceptQuote: (id: number): Promise<Quote> =>
+    api.post(`/quotes/${id}/accept`),
+
+  rejectQuote: (id: number, reason?: string): Promise<Quote> =>
+    api.post(`/quotes/${id}/reject`, { reason }),
+
+  requestNegotiation: (id: number, message: string): Promise<Quote> =>
+    api.post(`/quotes/${id}/negotiate`, { message }),
+
+  getByOrderId: (orderId: number): Promise<{ quotes: Quote[] }> =>
+    api.get(`/quotes/order/${orderId}`),
 
   createQuote: (data: CreateQuoteForm): Promise<Quote> =>
     api.post('/quotes', data),
@@ -342,6 +462,10 @@ export const quotesApi = {
 
   favoriteQuote: async (quoteId: string, favorited: boolean): Promise<void> => {
     return api.post(`/quotes/${quoteId}/favorite`, { favorited });
+  },
+
+  toggleFavorite: async (quoteId: string): Promise<void> => {
+    return api.post(`/quotes/${quoteId}/toggle-favorite`);
   },
 
   // Q&A system
@@ -445,6 +569,11 @@ export const quotesApi = {
     return api.post(`/orders/${orderId}/recommendations`, criteria);
   },
 
+  // Manufacturer-specific endpoints
+  getManufacturerQuotes: async (): Promise<Quote[]> => {
+    return api.get('/manufacturer/quotes');
+  },
+
   // Procurement workflow
   getProcurementWorkflow: async (orderId: string): Promise<ProcurementWorkflow> => {
     return api.get(`/orders/${orderId}/procurement-workflow`);
@@ -465,26 +594,39 @@ export const quotesApi = {
 
 // Manufacturers API
 export const manufacturersApi = {
-  getManufacturers: (filters?: SearchFilters): Promise<PaginatedResponse<Manufacturer>> => {
+  getAll: (filters?: SearchFilters): Promise<PaginatedResponse<Manufacturer>> => {
     const params = new URLSearchParams();
     if (filters) {
       Object.entries(filters).forEach(([key, value]) => {
         if (value !== undefined && value !== null) {
-          params.append(key, String(value));
+          if (Array.isArray(value)) {
+            params.append(key, value.join(','));
+          } else {
+            params.append(key, String(value));
+          }
         }
       });
     }
     return api.getPaginated(`/manufacturers?${params.toString()}`);
   },
 
-  getManufacturer: (id: number): Promise<Manufacturer> =>
+  getById: (id: string): Promise<Manufacturer> =>
     api.get(`/manufacturers/${id}`),
 
-  updateProfile: (data: ManufacturerProfileForm): Promise<Manufacturer> =>
-    api.patch('/manufacturers/profile', data),
+  createProfile: (data: any): Promise<Manufacturer> =>
+    api.post('/manufacturers/profile', data),
 
-  getProfile: (): Promise<Manufacturer> =>
-    api.get('/manufacturers/profile'),
+  updateProfile: (id: string, data: Partial<Manufacturer>): Promise<Manufacturer> =>
+    api.put(`/manufacturers/${id}`, data),
+
+  getCapabilities: (): Promise<ManufacturingCapability[]> =>
+    api.get('/manufacturers/capabilities'),
+
+  getReviews: (id: string): Promise<any[]> =>
+    api.get(`/manufacturers/${id}/reviews`),
+
+  createReview: (id: string, review: any): Promise<any> =>
+    api.post(`/manufacturers/${id}/reviews`, review),
 
   uploadDocuments: (files: File[]): Promise<void> => {
     const formData = new FormData();
@@ -496,6 +638,9 @@ export const manufacturersApi = {
 
   submitForVerification: (): Promise<Manufacturer> =>
     api.post('/manufacturers/submit-verification'),
+  
+  getProductionCapacity: (): Promise<ProductionCapacity> =>
+    api.get('/manufacturers/capacity'),
 };
 
 // Payments API
@@ -560,6 +705,9 @@ export const paymentsApi = {
 export const dashboardApi = {
   getStats: (): Promise<DashboardStats> =>
     api.get('/dashboard/stats'),
+  
+  getManufacturerStats: (): Promise<ExtendedDashboardStats> =>
+    api.get('/dashboard/manufacturer-stats'),
 
   getClientStats: (): Promise<DashboardStats> => {
     // MOCK DATA FOR TESTING - REMOVE IN PRODUCTION
@@ -786,9 +934,6 @@ export const dashboardApi = {
     });
   },
 
-  getManufacturerStats: (): Promise<DashboardStats> =>
-    api.get('/dashboard/manufacturer/stats'),
-
   getAnalytics: (period: string = '30d'): Promise<any> =>
     api.get(`/dashboard/analytics?period=${period}`),
 };
@@ -826,27 +971,13 @@ export const uploadFile = async (file: File, onProgress?: (progress: number) => 
   return response.data.data;
 };
 
-// Query client configuration
-export const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 5 * 60 * 1000, // 5 minutes
-      gcTime: 10 * 60 * 1000, // 10 minutes (previously cacheTime)
-      retry: (failureCount, error: any) => {
-        // Don't retry on 4xx errors except 429 (rate limit)
-        if (error?.response?.status >= 400 && error?.response?.status < 500 && error?.response?.status !== 429) {
-          return false;
-        }
-        return failureCount < 3;
-      },
-      refetchOnWindowFocus: false,
-      refetchOnReconnect: true,
-    },
-    mutations: {
-      retry: 1,
-    },
-  },
-});
+// Query client configuration with performance optimizations
+import { createOptimizedQueryClient, getCacheManager } from './cache';
+
+export const queryClient = createOptimizedQueryClient();
+
+// Initialize cache manager for performance optimization
+export const cacheManager = getCacheManager(queryClient);
 
 // Query keys
 export const queryKeys = {
@@ -893,4 +1024,32 @@ export const queryKeys = {
 export { tokenManager };
 
 // Export the configured api client
-export default api; 
+export default api;
+
+// Transactions API
+export const transactionsApi = {
+  getAll: (filters?: SearchFilters): Promise<PaginatedResponse<Transaction>> => {
+    const params = new URLSearchParams();
+    if (filters) {
+      Object.entries(filters).forEach(([key, value]) => {
+        if (value !== undefined && value !== null) {
+          if (Array.isArray(value)) {
+            params.append(key, value.join(','));
+          } else {
+            params.append(key, String(value));
+          }
+        }
+      });
+    }
+    return api.getPaginated(`/transactions?${params.toString()}`);
+  },
+
+  getById: (id: string): Promise<Transaction> =>
+    api.get(`/transactions/${id}`),
+
+  createPayment: (data: any): Promise<Transaction> =>
+    api.post('/transactions/payment', data),
+
+  refund: (id: string, amount?: number): Promise<Transaction> =>
+    api.post(`/transactions/${id}/refund`, { amount }),
+}; 

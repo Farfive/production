@@ -11,6 +11,7 @@ export interface User {
   phone?: string;
   country?: string;
   timezone?: string;
+  companyName?: string;
   createdAt: string;
   updatedAt: string;
   manufacturer?: Manufacturer;
@@ -100,6 +101,7 @@ export interface Manufacturer {
   id: string;
   userId: string;
   companyName: string;
+  businessName?: string;
   description?: string;
   website?: string;
   logoUrl?: string;
@@ -224,6 +226,7 @@ export interface Order {
   currency: string;
   quantity: number;
   deliveryDate: string;
+  deliveryDeadline?: string;
   deliveryAddress: Address;
   status: OrderStatus;
   urgency: UrgencyLevel;
@@ -231,6 +234,10 @@ export interface Order {
   quotesCount: number;
   selectedQuoteId?: number;
   totalAmount?: number;
+  budgetPln?: number;
+  material?: string;
+  preferredLocation?: string;
+  attachments?: OrderFile[];
   createdAt: string;
   updatedAt: string;
   quotedAt?: string;
@@ -324,7 +331,7 @@ export interface Quote {
     shipping: number;
     taxes: number;
     total: number;
-    currency: string;
+    currency?: string;
   };
   
   // Additional fields for comparison
@@ -354,7 +361,11 @@ export interface QuoteAttachment {
 
 export enum QuoteStatus {
   DRAFT = 'draft',
+  PENDING = 'pending',
   SUBMITTED = 'submitted',
+  APPROVED = 'approved',
+  ACCEPTED = 'accepted',
+  NEGOTIATING = 'negotiating',
   SELECTED = 'selected',
   REJECTED = 'rejected',
   EXPIRED = 'expired',
@@ -693,6 +704,7 @@ export interface UploadedFile {
 
 // Search and Filter Types
 export interface SearchFilters {
+  search?: string;
   query?: string;
   category?: CapabilityCategory;
   location?: string;
@@ -751,7 +763,7 @@ export interface OrderUpdate extends WebSocketMessage {
   payload: {
     orderId: number;
     status: OrderStatus;
-    message?: string;
+    message: string;
   };
 }
 
@@ -830,6 +842,18 @@ export interface ManufacturerStats {
   responseTimeImprovement: number; // percentage
   capacityUtilization: number; // percentage
   onTimeDeliveryRate: number; // percentage
+}
+
+// Extended DashboardStats with manufacturer-specific properties
+export interface ExtendedDashboardStats extends DashboardStats {
+  activeOrders?: number;
+  monthlyRevenue?: number;
+  avgResponseTime?: number;
+  averageRating?: number;
+  totalReviews?: number;
+  ordersGrowth?: number;
+  revenueGrowth?: number;
+  responseTimeImprovement?: number;
 }
 
 export interface ProductionCapacity {
@@ -1144,4 +1168,55 @@ export interface WorkflowStep {
   completedBy?: string;
   notes?: string;
   requirements?: string[];
+}
+
+// Add after Quote interface
+export interface QuoteCreate {
+  orderId: number;
+  material: string;
+  process: string;
+  finish: string;
+  tolerance: string;
+  quantity: number;
+  deliveryTime: number;
+  totalAmount: number;
+  currency: string;
+  notes?: string;
+  breakdown?: {
+    materials: number;
+    labor: number;
+    overhead: number;
+    shipping: number;
+    taxes: number;
+    total: number;
+  };
+  paymentTerms: string;
+  shippingMethod: string;
+  warranty: string;
+  validUntil: string;
+}
+
+// Settings Types
+export interface UserSettings {
+  notifications: {
+    email: boolean;
+    push: boolean;
+    sms: boolean;
+    orderUpdates: boolean;
+    quoteReceived: boolean;
+    paymentConfirmation: boolean;
+    marketing: boolean;
+  };
+  privacy: {
+    profileVisibility: 'public' | 'private' | 'contacts';
+    showEmail: boolean;
+    showPhone: boolean;
+    allowMessaging: boolean;
+  };
+  preferences: {
+    language: string;
+    timezone: string;
+    currency: string;
+    theme: 'light' | 'dark' | 'auto';
+  };
 } 

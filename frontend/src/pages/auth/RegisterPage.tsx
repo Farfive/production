@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, Lock, User, Phone, MapPin, Building2, ArrowRight, AlertCircle, Sparkles, Factory, Package } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Mail, Lock, User, Phone, MapPin, Building2, ArrowRight, AlertCircle, Sparkles } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
-import { RegisterData, UserRole } from '../../types';
+import { UserRole } from '../../types';
 import Button from '../../components/ui/Button';
 import Input from '../../components/ui/Input';
 
@@ -50,7 +50,6 @@ type RegisterFormData = yup.InferType<typeof registerSchema>;
 
 const RegisterPage: React.FC = () => {
   const { register: registerUser, isLoading, error } = useAuth();
-  const navigate = useNavigate();
   
   const {
     register,
@@ -58,7 +57,7 @@ const RegisterPage: React.FC = () => {
     formState: { errors, isSubmitting },
     setError,
     watch,
-  } = useForm<RegisterFormData>({
+  } = useForm({
     resolver: yupResolver(registerSchema),
     defaultValues: {
       firstName: '',

@@ -423,16 +423,16 @@ const ClientDashboardEnhanced: React.FC = () => {
                         </div>
                         <div className="ml-3 flex-1 min-w-0">
                           <h4 className="text-sm font-medium text-gray-900 dark:text-white truncate group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
-                            {quote.manufacturer.businessName}
+                                                         {quote.manufacturer?.businessName || quote.manufacturer?.companyName || 'Unknown'}
                           </h4>
                           <p className="text-xs text-gray-500 dark:text-gray-400">
-                            {formatRelativeTime(quote.createdAt)} • {quote.leadTime} days
+                                                         {formatRelativeTime(quote.createdAt)} • {quote.deliveryTime} days
                           </p>
                         </div>
                       </div>
                       <div className="text-right ml-4">
                         <p className="text-sm font-semibold text-gray-900 dark:text-white">
-                          {formatCurrency(quote.price, quote.currency)}
+                                                     {formatCurrency(quote.totalAmount, quote.currency)}
                         </p>
                         <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${getStatusColor(quote.status)}`}>
                           {quote.status}

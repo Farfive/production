@@ -1,6 +1,16 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
 import * as Sentry from '@sentry/react';
 
+// Extend AxiosRequestConfig to include metadata
+declare module 'axios' {
+  interface AxiosRequestConfig {
+    metadata?: {
+      context: RequestContext;
+      startTime: Date;
+    };
+  }
+}
+
 // Types for API client configuration
 export interface ApiClientConfig {
   baseURL: string;
@@ -183,7 +193,7 @@ export class ApiClient {
           retryCount: 0,
         };
 
-        config.metadata = { context };
+        (config as any).metadata = { context, startTime: new Date() };
 
         if (this.config.enableLogging) {
           console.log(`[API] ${context.method} ${context.endpoint} - Request ID: ${requestId}`);
@@ -210,7 +220,7 @@ export class ApiClient {
   }
 
   private handleSuccessResponse(response: AxiosResponse): void {
-    const context = response.config.metadata?.context as RequestContext;
+    const context = (response.config as any).metadata?.context as RequestContext;
     if (!context) return;
 
     const responseTime = Date.now() - context.startTime;
@@ -231,7 +241,7 @@ export class ApiClient {
   }
 
   private async handleErrorResponse(error: AxiosError): Promise<never> {
-    const context = error.config?.metadata?.context as RequestContext;
+    const context = (error.config as any)?.metadata?.context as RequestContext;
     const responseTime = context ? Date.now() - context.startTime : 0;
 
     this.updateMetrics(false, responseTime);
@@ -278,7 +288,7 @@ export class ApiClient {
   private convertToApiError(error: AxiosError): ApiError {
     const status = error.response?.status || 0;
     const code = error.code || 'UNKNOWN_ERROR';
-    const message = error.response?.data?.message || error.message;
+    const message = (error.response?.data as any)?.message || error.message;
     const details = error.response?.data;
     const retryable = isRetryableError(error);
 
@@ -427,7 +437,7 @@ export class ApiClient {
       retryCount: 0,
     };
 
-    return this.retryRequest(() => this.axiosInstance.request({ ...config, metadata: { context } }), context);
+    return this.retryRequest(() => this.axiosInstance.request({ ...config, metadata: { context, startTime: new Date() } } as any), context);
   }
 
   public async get<T = any>(url: string, config?: AxiosRequestConfig): Promise<T> {

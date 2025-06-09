@@ -691,7 +691,7 @@ export const smsHelpers = {
     phoneNumbers: string[],
     message: string,
     campaignId?: string
-  ): Promise<SendSmsResponse> => {
+  ): Promise<BulkSmsResponse> => {
     const messageWithOptOut = `${message}\n\nReply STOP to opt out.`;
     
     return smsService.sendBulkSms({

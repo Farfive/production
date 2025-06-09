@@ -296,7 +296,7 @@ const QuoteDetailModal: React.FC<QuoteDetailModalProps> = ({
       <ManufacturerQuickPreview
         manufacturer={quote.manufacturer!}
         onViewDetails={() => setShowManufacturerModal(true)}
-        onContact={() => toast.info('Contact manufacturer feature coming soon')}
+        onContact={() => toast('Contact manufacturer feature coming soon')}
       />
 
       {/* Quote Details */}
@@ -453,7 +453,7 @@ const QuoteDetailModal: React.FC<QuoteDetailModalProps> = ({
                       </span>
                     </div>
                     <span className="text-xs text-gray-500 dark:text-gray-400">
-                      {formatDistanceToNow(question.timestamp, { addSuffix: true })}
+                      {formatDistanceToNow(new Date(question.timestamp), { addSuffix: true })}
                     </span>
                   </div>
                 </div>
@@ -491,7 +491,7 @@ const QuoteDetailModal: React.FC<QuoteDetailModalProps> = ({
                       {question.answer.user.name}
                     </span>
                     <span className="text-xs text-gray-500 dark:text-gray-400">
-                      {formatDistanceToNow(question.answer.timestamp, { addSuffix: true })}
+                      {formatDistanceToNow(new Date(question.answer.timestamp), { addSuffix: true })}
                     </span>
                   </div>
                   <p className="text-sm text-gray-600 dark:text-gray-400">
@@ -533,7 +533,7 @@ const QuoteDetailModal: React.FC<QuoteDetailModalProps> = ({
                     {document.name}
                   </p>
                   <p className="text-xs text-gray-500 dark:text-gray-400">
-                    {formatFileSize(document.size)} • {format(document.uploadedAt, 'MMM dd, yyyy')}
+                    {formatFileSize(document.size)} • {format(new Date(document.uploadedAt), 'MMM dd, yyyy')}
                   </p>
                   {document.description && (
                     <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">

@@ -150,7 +150,7 @@ const DecisionSupportPanel: React.FC<DecisionSupportPanelProps> = ({
           title: 'Financial Stability',
           description: 'Risk of supplier financial issues',
           weight: 0.25,
-          score: quote.manufacturer?.reviewCount < 10 ? 70 : 30,
+          score: (quote.manufacturer?.reviewCount || 0) < 10 ? 70 : 30,
           category: 'financial'
         },
         {

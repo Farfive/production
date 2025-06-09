@@ -47,6 +47,8 @@ export interface ButtonProps
   loadingText?: string;
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
+  as?: React.ComponentType<any> | string;
+  to?: string;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -63,15 +65,41 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       rightIcon,
       children,
       disabled,
+      as: Component = 'button',
+      to,
       ...props
     },
     ref
   ) => {
     const isDisabled = disabled || loading;
     
-    if (asChild) {
-      // This would typically use Slot from @radix-ui/react-slot
-      // For now, we'll just render as a regular button
+    // If we have an 'as' prop or 'to' prop, render as the specified component
+    if (Component !== 'button' || to) {
+      const ComponentToRender = Component as any;
+      return (
+        <ComponentToRender
+          className={cn(buttonVariants({ variant, size, fullWidth, className }))}
+          ref={ref}
+          disabled={isDisabled}
+          to={to}
+          {...props}
+        >
+          {loading && (
+            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+          )}
+          {!loading && leftIcon && (
+            <span className="mr-2 flex items-center">
+              {leftIcon}
+            </span>
+          )}
+          {loading && loadingText ? loadingText : children}
+          {!loading && rightIcon && (
+            <span className="ml-2 flex items-center">
+              {rightIcon}
+            </span>
+          )}
+        </ComponentToRender>
+      );
     }
 
     return (
@@ -151,7 +179,7 @@ export const ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(
       >
         {React.Children.map(children, (child, index) => {
           if (React.isValidElement(child) && child.type === Button) {
-            return React.cloneElement(child, {
+            return React.cloneElement(child as React.ReactElement<ButtonProps>, {
               className: cn(
                 child.props.className,
                 variant === 'outline' && [

@@ -10,7 +10,7 @@ import {
   Bell,
   Wifi,
   WifiOff,
-  Sync,
+  RotateCw,
   AlertTriangle,
   CheckCircle,
   Clock,
@@ -30,15 +30,17 @@ import AdvancedSearch from '../../components/search/AdvancedSearch';
 import Button from '../../components/ui/Button';
 import LoadingSpinner from '../../components/ui/LoadingSpinner';
 import { ordersApi } from '../../lib/api';
-import { Order, OrderStatus } from '../../types';
-import { useAuth } from '../../hooks/useAuth';
+import { Order, OrderStatus, CreateOrderForm } from '../../types';
+import { useAuth, useIsManufacturer, useIsClient } from '../../hooks/useAuth';
 import useOfflineSupport from '../../hooks/useOfflineSupport';
 import { cn, formatCurrency, getStatusColor } from '../../lib/utils';
 
 type ViewMode = 'dashboard' | 'create' | 'track' | 'manufacturer' | 'analytics';
 
 const OrderManagementPage: React.FC = () => {
-  const { user, isManufacturer, isClient } = useAuth();
+  const { user } = useAuth();
+  const isManufacturer = useIsManufacturer();
+  const isClient = useIsClient();
   const [viewMode, setViewMode] = useState<ViewMode>('dashboard');
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
   const [filteredOrders, setFilteredOrders] = useState<Order[]>([]);
@@ -77,7 +79,7 @@ const OrderManagementPage: React.FC = () => {
   // Order statistics
   const orderStats = useMemo(() => {
     const stats = {
-      total: orders.length,
+      total: Array.isArray(orders) ? orders.length : orders?.data?.length || 0,
       pending: 0,
       inProgress: 0,
       completed: 0,
@@ -86,7 +88,8 @@ const OrderManagementPage: React.FC = () => {
       avgValue: 0
     };
 
-    orders.forEach(order => {
+    const orderList = Array.isArray(orders) ? orders : orders?.data || [];
+    orderList.forEach(order => {
       stats.totalValue += order.totalAmount || 0;
       
       switch (order.status) {
@@ -122,7 +125,22 @@ const OrderManagementPage: React.FC = () => {
 
   const handleOrderUpdate = async (orderId: string, updates: Partial<Order>) => {
     try {
-      await ordersApi.updateOrder(orderId, updates);
+      // Map Order fields to CreateOrderForm fields
+      const mappedUpdates: Partial<CreateOrderForm> = {
+        title: updates.title,
+        description: updates.description,
+        category: updates.category,
+        quantity: updates.quantity,
+        currency: updates.currency,
+        deliveryDate: updates.deliveryDate,
+        urgency: updates.urgency,
+        isPublic: updates.isPublic,
+        targetPrice: updates.targetPrice,
+        targetPriceMax: updates.targetPriceMax,
+        // Map other fields as needed
+      };
+
+      await ordersApi.updateOrder(Number(orderId), mappedUpdates);
       toast.success('Order updated successfully!');
       refetchOrders();
     } catch (error) {
@@ -131,10 +149,10 @@ const OrderManagementPage: React.FC = () => {
   };
 
   const handleOrderDelete = async (orderId: string) => {
-    if (!confirm('Are you sure you want to delete this order?')) return;
+    if (!window.confirm('Are you sure you want to delete this order?')) return;
     
     try {
-      await ordersApi.deleteOrder(orderId);
+      await ordersApi.deleteOrder(Number(orderId));
       toast.success('Order deleted successfully!');
       refetchOrders();
     } catch (error) {
@@ -144,15 +162,28 @@ const OrderManagementPage: React.FC = () => {
 
   const handleExportOrders = async (ordersToExport: Order[]) => {
     try {
-      const blob = await ordersApi.exportOrders({
+      // TODO: Implement when exportOrders API is available
+      const csvContent = [
+        ['ID', 'Title', 'Status', 'Total Amount', 'Created At'].join(','),
+        ...ordersToExport.map(order => [
+          order.id,
+          order.title,
+          order.status,
+          order.totalAmount || 0,
+          order.createdAt
+        ].join(','))
+      ].join('\n');
+
+      const blob = new Blob([csvContent], { type: 'text/csv' });
+      /*const blob = await ordersApi.exportOrders({
         orderIds: ordersToExport.map(o => o.id),
         format: 'xlsx'
-      });
+      });*/
       
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `orders-export-${new Date().toISOString().split('T')[0]}.xlsx`;
+      a.download = `orders-export-${new Date().toISOString().split('T')[0]}.csv`;
       document.body.appendChild(a);
       a.click();
       window.URL.revokeObjectURL(url);
@@ -179,7 +210,7 @@ const OrderManagementPage: React.FC = () => {
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
             {isOnline ? (
-              <Sync className={cn(
+              <RotateCw className={cn(
                 'w-5 h-5 text-warning-600 dark:text-warning-400',
                 isSyncing && 'animate-spin'
               )} />
@@ -212,7 +243,7 @@ const OrderManagementPage: React.FC = () => {
                 size="sm"
                 onClick={forcSync}
                 disabled={isSyncing}
-                leftIcon={<Sync className="w-4 h-4" />}
+                leftIcon={<RotateCw className="w-4 h-4" />}
               >
                 Sync Now
               </Button>
@@ -369,7 +400,7 @@ const OrderManagementPage: React.FC = () => {
             variant="outline"
             onClick={() => refetchOrders()}
             className="mt-4"
-            leftIcon={<Sync className="w-4 h-4" />}
+            leftIcon={<RotateCw className="w-4 h-4" />}
           >
             Retry
           </Button>
@@ -428,7 +459,7 @@ const OrderManagementPage: React.FC = () => {
 
             {/* Advanced Search */}
             <AdvancedSearch
-              data={orders}
+              data={Array.isArray(orders) ? orders : orders?.data || []}
               onFilteredDataChange={setFilteredOrders}
               onExport={handleExportOrders}
             />
@@ -511,9 +542,9 @@ const OrderManagementPage: React.FC = () => {
                           </div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
-                          {isManufacturer 
-                            ? order.client?.companyName || 'Unknown'
-                            : order.manufacturer?.companyName || 'Pending'
+                                                    {isManufacturer
+                            ? order.client?.fullName || 'Unknown'
+                                                         : order.manufacturer?.companyName || 'Pending'
                           }
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">

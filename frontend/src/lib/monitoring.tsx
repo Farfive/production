@@ -1,5 +1,13 @@
+import React from 'react';
 import * as Sentry from '@sentry/react';
 import { BrowserTracing } from '@sentry/tracing';
+
+// Extend the Window interface to include gtag
+declare global {
+  interface Window {
+    gtag?: (...args: any[]) => void;
+  }
+}
 
 // Types for monitoring
 export interface PerformanceMetric {
@@ -188,7 +196,7 @@ export class MonitoringService {
           for (const entry of list.getEntries()) {
             this.recordPerformanceMetric({
               name: entry.name,
-              value: entry.duration || entry.value,
+              value: entry.duration || 0,
               unit: 'ms',
               timestamp: Date.now(),
               tags: {
@@ -305,7 +313,8 @@ export class MonitoringService {
   }
 
   public captureMessage(message: string, level: 'info' | 'warning' | 'error' = 'info', context?: ErrorContext): string {
-    return Sentry.captureMessage(message, level, {
+    return Sentry.captureMessage(message, {
+      level: level as any,
       tags: context?.custom,
       extra: {
         request: context?.request,

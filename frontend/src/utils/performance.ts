@@ -417,4 +417,12 @@ if (typeof window !== 'undefined') {
       console.log('Performance Report:', report);
     }
   }, 30000); // Every 30 seconds
+}
+
+// Add measureApiCall function for compatibility with existing code
+export async function measureApiCall<T>(
+  name: string,
+  apiCall: () => Promise<T>
+): Promise<T> {
+  return trackAPICall(name, apiCall);
 } 
