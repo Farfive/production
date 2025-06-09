@@ -1,130 +1,192 @@
-# Manufacturing Platform MVP
+# ManufactureHub - B2B Manufacturing Platform
 
-A comprehensive manufacturing platform that connects clients with producers through automated matching, integrated payments, and streamlined communication.
+A modern, full-stack B2B manufacturing marketplace that connects businesses with verified manufacturers. Built with React, FastAPI, and PostgreSQL.
 
 ## 🚀 Features
 
-- **Smart Matching**: Automated producer-client matching based on technology, location, and capabilities
-- **Integrated Payments**: Secure payment processing with Stripe Connect and escrow functionality
-- **Automated Communication**: Email notifications and updates via SendGrid
-- **Multi-role Dashboard**: Separate interfaces for clients, producers, and administrators
-- **Order Management**: Complete order lifecycle from request to completion
+### For Clients
+- **Smart Manufacturer Matching**: AI-powered algorithm to find the perfect manufacturer for your needs
+- **Instant Quotes**: Get competitive quotes from multiple manufacturers quickly
+- **Order Management**: Track orders from creation to delivery with real-time updates
+- **Secure Payments**: Stripe-powered escrow system protects both parties
+- **Quality Assurance**: Built-in milestone tracking and quality checks
+
+### For Manufacturers
+- **Profile Management**: Showcase capabilities, certifications, and portfolio
+- **Quote System**: Respond to RFQs with detailed pricing and timelines
+- **Order Fulfillment**: Manage production schedules and deliveries
+- **Analytics Dashboard**: Track performance metrics and revenue
+- **Payment Protection**: Guaranteed payments through escrow system
+
+### Platform Features
+- **Modern UI/UX**: Beautiful, responsive design with dark mode support
+- **Real-time Updates**: WebSocket-powered notifications and chat
+- **Multi-language Support**: Internationalization ready
+- **GDPR Compliant**: Full data protection and user privacy
+- **API-First Design**: RESTful API with comprehensive documentation
 
 ## 🛠️ Tech Stack
 
-### Backend
-- **FastAPI**: Modern, fast web framework for building APIs
-- **PostgreSQL**: Robust relational database
-- **SQLAlchemy**: Python SQL toolkit and ORM
-- **Stripe Connect**: Payment processing and payouts
-- **SendGrid**: Email communication
-- **JWT**: Authentication and authorization
-
 ### Frontend
-- **React 18**: Modern React with hooks and functional components
-- **TypeScript**: Type-safe JavaScript
-- **Tailwind CSS**: Utility-first CSS framework
-- **React Query**: Data fetching and state management
-- **React Hook Form**: Form handling and validation
-- **React Router**: Client-side routing
+- **React 18** with TypeScript
+- **Tailwind CSS** for styling
+- **Framer Motion** for animations
+- **React Query** for data fetching
+- **React Router** for navigation
+- **Lucide React** for icons
 
-## 📁 Project Structure
+### Backend
+- **FastAPI** (Python) for high-performance API
+- **PostgreSQL** for data persistence
+- **Redis** for caching and sessions
+- **Celery** for background tasks
+- **SQLAlchemy** ORM
+- **JWT** authentication
+- **Stripe** for payments
 
-```
-manufacturing-platform/
-├── backend/
-│   ├── app/
-│   │   ├── api/           # API routes (versioned)
-│   │   ├── core/          # Configuration, security, database
-│   │   ├── models/        # SQLAlchemy models
-│   │   ├── services/      # Business logic
-│   │   ├── utils/         # Helpers and validators
-│   │   └── tests/         # Test files
-│   ├── requirements.txt
-│   ├── .env.example
-│   └── main.py
-├── frontend/
-│   ├── src/
-│   │   ├── components/    # Reusable UI components
-│   │   ├── pages/         # Main application pages
-│   │   ├── hooks/         # Custom React hooks
-│   │   ├── services/      # API calls
-│   │   ├── types/         # TypeScript interfaces
-│   │   └── utils/         # Helper functions
-│   ├── package.json
-│   └── tailwind.config.js
-├── docker-compose.yml
-└── README.md
-```
+### Infrastructure
+- **Docker** & **Docker Compose** for containerization
+- **Nginx** for reverse proxy
+- **GitHub Actions** for CI/CD
 
-## 🚦 Getting Started
+## 📋 Prerequisites
 
-### Prerequisites
-- Python 3.9+
-- Node.js 16+
-- PostgreSQL 12+
-- Docker (optional, for containerized development)
+- **Node.js** 18+ and npm
+- **Python** 3.9+
+- **Docker** and Docker Compose (optional)
+- **PostgreSQL** 14+ (if not using Docker)
+- **Redis** 6+ (if not using Docker)
 
-### Environment Setup
+## 🚀 Quick Start
 
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd manufacturing-platform
-   ```
+### Option 1: Using Docker (Recommended)
 
-2. **Backend Setup**
-   ```bash
-   cd backend
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   pip install -r requirements.txt
-   ```
-
-3. **Environment Variables**
-   ```bash
-   cp .env.example .env
-   # Edit .env with your configuration
-   ```
-
-4. **Database Setup**
-   ```bash
-   # Create PostgreSQL database
-   createdb manufacturing_platform
-   
-   # Run migrations
-   python -m alembic upgrade head
-   ```
-
-5. **Frontend Setup**
-   ```bash
-   cd frontend
-   npm install
-   ```
-
-### Running the Application
-
-#### Using Docker (Recommended)
+1. Clone the repository:
 ```bash
+git clone https://github.com/yourusername/manufacturing-platform.git
+cd manufacturing-platform
+```
+
+2. Copy environment variables:
+```bash
+cp .env.example .env
+```
+
+3. Update `.env` with your configuration (especially Stripe and SendGrid keys)
+
+4. Run with Docker Compose:
+```bash
+# Windows
+start-app.bat
+
+# Linux/Mac
 docker-compose up --build
 ```
 
-#### Manual Setup
-```bash
-# Terminal 1 - Backend
-cd backend
-uvicorn main:app --reload --host 0.0.0.0 --port 8000
+### Option 2: Manual Setup
 
-# Terminal 2 - Frontend  
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/manufacturing-platform.git
+cd manufacturing-platform
+```
+
+2. Set up the backend:
+```bash
+cd backend
+python -m venv venv
+# Windows
+venv\Scripts\activate
+# Linux/Mac
+source venv/bin/activate
+
+pip install -r requirements.txt
+```
+
+3. Set up the database:
+```bash
+# Create PostgreSQL database
+createdb manufacturing_platform
+
+# Run migrations
+alembic upgrade head
+```
+
+4. Start the backend:
+```bash
+python main.py
+```
+
+5. In a new terminal, set up the frontend:
+```bash
 cd frontend
+npm install
 npm start
 ```
 
-## 🔧 API Documentation
+### Option 3: Quick Test (Windows)
 
-Once the backend is running, visit:
-- **Swagger UI**: http://localhost:8000/docs
-- **ReDoc**: http://localhost:8000/redoc
+Simply run:
+```bash
+quick-test.bat
+```
+
+This will automatically set up and start both frontend and backend servers.
+
+## 🌐 Accessing the Application
+
+Once running, you can access:
+
+- **Frontend**: http://localhost:3000
+- **Backend API**: http://localhost:8000
+- **API Documentation**: http://localhost:8000/docs
+- **Database Admin** (if using Docker): http://localhost:8080
+- **Flower** (Celery monitoring): http://localhost:5555
+
+## 🔑 Default Credentials
+
+For testing purposes:
+
+- **Client Account**: client@example.com / password123
+- **Manufacturer Account**: manufacturer@example.com / password123
+- **Admin Account**: admin@example.com / password123
+
+## 📱 Key Features Walkthrough
+
+### 1. User Registration & Authentication
+- Multi-role registration (Client/Manufacturer)
+- Email verification
+- Secure password reset
+- JWT-based authentication
+
+### 2. Order Creation Flow
+- Detailed product specifications
+- File attachments support
+- Delivery requirements
+- Budget constraints
+
+### 3. Intelligent Matching
+- AI-powered manufacturer selection
+- Based on capabilities, location, and ratings
+- Customizable matching criteria
+
+### 4. Quote Management
+- Detailed pricing breakdowns
+- Production timelines
+- Terms and conditions
+- Quote comparison tools
+
+### 5. Payment Processing
+- Stripe Connect integration
+- Milestone-based payments
+- Escrow protection
+- Multi-currency support
+
+### 6. Communication
+- In-app messaging
+- Email notifications
+- Real-time updates
+- File sharing
 
 ## 🧪 Testing
 
@@ -140,48 +202,85 @@ cd frontend
 npm test
 ```
 
-## 🔐 Environment Variables
+### E2E Tests
+```bash
+cd frontend
+npm run test:e2e
+```
 
-See `.env.example` for all required environment variables:
+## 📚 API Documentation
 
-- `DATABASE_URL`: PostgreSQL connection string
-- `STRIPE_SECRET_KEY`: Stripe API secret key
-- `SENDGRID_API_KEY`: SendGrid API key
-- `JWT_SECRET_KEY`: JWT signing secret
-- `FRONTEND_URL`: Frontend application URL
+The API documentation is automatically generated and available at:
+- **Swagger UI**: http://localhost:8000/docs
+- **ReDoc**: http://localhost:8000/redoc
 
-## 📊 Database Schema
+## 🔧 Configuration
 
-Key entities:
-- **Users**: Authentication and role management
-- **Orders**: Manufacturing requests from clients
-- **Producers**: Manufacturing service providers
-- **Quotes**: Producer offers for orders
-- **Payments**: Payment processing and escrow
+### Environment Variables
+
+Key environment variables to configure:
+
+```env
+# Database
+DATABASE_URL=postgresql://user:pass@localhost/dbname
+
+# Authentication
+SECRET_KEY=your-secret-key
+JWT_SECRET_KEY=your-jwt-secret
+
+# Email
+SENDGRID_API_KEY=your-sendgrid-key
+SENDGRID_FROM_EMAIL=noreply@yourdomain.com
+
+# Payments
+STRIPE_SECRET_KEY=your-stripe-secret
+STRIPE_PUBLISHABLE_KEY=your-stripe-publishable
+STRIPE_WEBHOOK_SECRET=your-webhook-secret
+
+# Frontend
+REACT_APP_API_URL=http://localhost:8000/api/v1
+```
 
 ## 🚀 Deployment
 
-### Backend Deployment
-- Configure production environment variables
-- Set up PostgreSQL database
-- Deploy using Docker or cloud services (AWS, GCP, Azure)
+### Production Deployment
 
-### Frontend Deployment  
-- Build production bundle: `npm run build`
-- Deploy to CDN or static hosting (Vercel, Netlify, S3)
+1. Update environment variables for production
+2. Build frontend:
+```bash
+cd frontend
+npm run build
+```
+
+3. Use production Docker Compose:
+```bash
+docker-compose -f docker-compose.prod.yml up -d
+```
 
 ## 🤝 Contributing
 
 1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests
-5. Submit a pull request
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 ## 📄 License
 
-This project is licensed under the MIT License.
+This project is proprietary software. All rights reserved.
 
-## 📞 Support
+## 🆘 Support
 
-For questions or support, please contact the development team. 
+For support, email support@manufacturehub.com or join our Slack channel.
+
+## 🎯 Roadmap
+
+- [ ] Mobile applications (iOS/Android)
+- [ ] Advanced analytics dashboard
+- [ ] Blockchain integration for supply chain
+- [ ] AR/VR product visualization
+- [ ] IoT integration for real-time tracking
+
+---
+
+Built with ❤️ by the ManufactureHub Team 

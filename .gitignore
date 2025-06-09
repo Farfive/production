@@ -93,25 +93,63 @@ Thumbs.db
 # Python
 __pycache__/
 *.py[cod]
-*$py.class
-*.so
-.Python
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+*.log
+*.pot
+*.pyc
+*.pkl
+*.env
+.env*
+.venv/
+venv/
+
+# Node
 build/
-develop-eggs/
 dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
+*.log
+
+# JetBrains
+.idea/
+
+# VSCode
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test/coverage
+*.cover
+*.py,cover
+.hypothesis/
+
+# Frontend build
+frontend/build/
+frontend/dist/
+
+# Misc
+*.bak
+*.swp
+*.tmp
+
+# OneDrive
+~$*
+~*.tmp
+
+# Database
+*.sqlite
+*.sqlite3
+*.db
+*.bak
+
+# Local config
+config/local*
+
+# Ignore secrets
+secrets.*
 
 # PyInstaller
 *.manifest
@@ -130,10 +168,8 @@ coverage.xml
 .pytest_cache/
 
 # Virtual environments
-venv/
 ENV/
 env/
-.venv/
 .ENV/
 .env/
 
@@ -167,17 +203,6 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# React build output
-build/
-
-# Production build
-dist/
-
-# Database
-*.db
-*.sqlite
-*.sqlite3
-
 # Docker
 .docker/
 
@@ -186,18 +211,12 @@ uploads/
 */uploads/
 
 # IDE
-.vscode/
-.idea/
 *.sublime-*
 
 # Certificates
 *.pem
 *.key
 *.crt
-
-# Local configuration
-config.local.js
-config.local.json
 
 # Backup files
 *.bak

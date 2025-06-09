@@ -3,7 +3,8 @@
  */
 import { getCLS, getFID, getFCP, getLCP, getTTFB, Metric } from 'web-vitals';
 import * as Sentry from '@sentry/react';
-import Perfume from 'perfume.js';
+import React from 'react';
+// import Perfume from 'perfume.js'; // Commented out - install if needed
 
 // Performance budgets (in milliseconds)
 export const PERFORMANCE_BUDGETS = {
@@ -57,14 +58,14 @@ class PerformanceMonitor {
   }
   
   private initializePerfume() {
-    // Initialize Perfume.js for advanced metrics
-    const perfume = new Perfume({
-      analyticsTracker: (options) => {
-        this.trackCustomMetric(options.metricName, options.data);
-      },
-      isProduction: process.env.NODE_ENV === 'production',
-      maxMeasureTime: 15000,
-    });
+    // Initialize Perfume.js for advanced metrics (commented out - install perfume.js if needed)
+    // const perfume = new Perfume({
+    //   analyticsTracker: (options: any) => {
+    //     this.trackCustomMetric(options.metricName, options.data);
+    //   },
+    //   isProduction: process.env.NODE_ENV === 'production',
+    //   maxMeasureTime: 15000,
+    // });
   }
   
   private initializeCustomMetrics() {
@@ -265,8 +266,8 @@ class PerformanceMonitor {
   
   private sendToAnalytics(eventName: string, data: any) {
     // Send to your analytics service
-    if (window.gtag) {
-      window.gtag('event', eventName, data);
+    if ((window as any).gtag) {
+      (window as any).gtag('event', eventName, data);
     }
     
     // Send to custom analytics endpoint
