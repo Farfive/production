@@ -3,7 +3,7 @@ import logging
 from typing import Dict, Optional
 from collections import defaultdict, deque
 from fastapi import FastAPI, Request, Response, HTTPException, status
-from fastapi.middleware.base import BaseHTTPMiddleware
+from starlette.middleware.base import BaseHTTPMiddleware
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from fastapi.responses import JSONResponse

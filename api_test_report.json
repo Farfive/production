@@ -1,0 +1,20 @@
+{
+  "total_tests": 15,
+  "passed": 3,
+  "failed": 12,
+  "success_rate": 20.0,
+  "errors": [
+    "Root Endpoint: API root accessible",
+    "Health Check: Health endpoint accessible",
+    "Performance Health: Performance health check",
+    "Client Registration: Status: No response, Error: No response",
+    "Manufacturer Registration: Status: No response, Error: No response",
+    "Order Management: No client token available",
+    "Intelligent Matching: No orders or client token available",
+    "Email Automation: No client token available",
+    "Track Custom Metric: Status: No response",
+    "Password Reset Request: Status: No response",
+    "Invalid Endpoint: 404 returned for invalid endpoint",
+    "Unauthorized Access: 401 returned for unauthorized access"
+  ]
+}

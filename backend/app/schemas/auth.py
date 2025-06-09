@@ -1,21 +1,18 @@
-from pydantic import BaseModel, EmailStr, validator, Field
+from pydantic import BaseModel, EmailStr, field_validator, Field
 from typing import Optional, List
 from datetime import datetime
 from app.models.user import UserRole, RegistrationStatus
 
 
-class PasswordValidationMixin:
-    """Mixin for password validation."""
+def validate_password_strength(v):
+    """Validate password meets security requirements."""
+    from app.core.security import PasswordValidator
     
-    @validator('password', 'new_password', allow_reuse=True)
-    def validate_password_strength(cls, v):
-        """Validate password meets security requirements."""
-        from app.core.security import PasswordValidator
-        
+    if v:  # Only validate if password is provided
         is_valid, errors = PasswordValidator.validate_password_strength(v)
         if not is_valid:
             raise ValueError(f"Password validation failed: {'; '.join(errors)}")
-        return v
+    return v
 
 
 class UserLogin(BaseModel):
@@ -25,13 +22,18 @@ class UserLogin(BaseModel):
     remember_me: bool = Field(default=False, description="Extend token lifetime")
 
 
-class UserCreate(BaseModel, PasswordValidationMixin):
+class UserCreate(BaseModel):
     """User registration request schema."""
     email: EmailStr = Field(..., description="User email address")
     password: str = Field(..., min_length=8, description="User password")
     first_name: str = Field(..., min_length=1, max_length=100, description="First name")
     last_name: str = Field(..., min_length=1, max_length=100, description="Last name")
     role: UserRole = Field(..., description="User role")
+    
+    @field_validator('password')
+    @classmethod
+    def validate_password(cls, v):
+        return validate_password_strength(v)
     
     # Company information (optional during registration)
     company_name: Optional[str] = Field(None, max_length=255, description="Company name")
@@ -43,14 +45,16 @@ class UserCreate(BaseModel, PasswordValidationMixin):
     data_processing_consent: bool = Field(..., description="Consent to data processing")
     marketing_consent: bool = Field(default=False, description="Consent to marketing communications")
     
-    @validator('email')
+    @field_validator('email')
+    @classmethod
     def validate_email_format(cls, v):
         """Additional email validation."""
         if not v or '@' not in v:
             raise ValueError('Invalid email format')
         return v.lower()
     
-    @validator('nip')
+    @field_validator('nip')
+    @classmethod
     def validate_nip(cls, v):
         """Validate Polish NIP format."""
         if v:
@@ -81,8 +85,7 @@ class UserResponse(BaseModel):
     created_at: datetime
     last_login: Optional[datetime]
     
-    class Config:
-        from_attributes = True
+    model_config = {"from_attributes": True}
 
 
 class Token(BaseModel):
@@ -111,10 +114,15 @@ class PasswordResetRequest(BaseModel):
     email: EmailStr = Field(..., description="Email address for password reset")
 
 
-class PasswordReset(BaseModel, PasswordValidationMixin):
+class PasswordReset(BaseModel):
     """Password reset with token schema."""
     token: str = Field(..., description="Password reset token")
     new_password: str = Field(..., min_length=8, description="New password")
+    
+    @field_validator('new_password')
+    @classmethod
+    def validate_new_password(cls, v):
+        return validate_password_strength(v)
 
 
 class EmailVerification(BaseModel):
@@ -127,10 +135,15 @@ class ResendEmailVerification(BaseModel):
     email: EmailStr = Field(..., description="Email address to resend verification")
 
 
-class ChangePassword(BaseModel, PasswordValidationMixin):
+class ChangePassword(BaseModel):
     """Change password schema."""
     current_password: str = Field(..., description="Current password")
     new_password: str = Field(..., min_length=8, description="New password")
+    
+    @field_validator('new_password')
+    @classmethod
+    def validate_new_password(cls, v):
+        return validate_password_strength(v)
 
 
 class UserUpdate(BaseModel):
@@ -143,7 +156,8 @@ class UserUpdate(BaseModel):
     company_address: Optional[str] = Field(None)
     marketing_consent: Optional[bool] = Field(None)
     
-    @validator('nip')
+    @field_validator('nip')
+    @classmethod
     def validate_nip(cls, v):
         """Validate Polish NIP format."""
         if v:
@@ -170,7 +184,8 @@ class GDPRDataDeletion(BaseModel):
     password: str = Field(..., description="Current password for confirmation")
     confirmation: str = Field(..., description="Must be 'DELETE' to confirm")
     
-    @validator('confirmation')
+    @field_validator('confirmation')
+    @classmethod
     def validate_confirmation(cls, v):
         if v != "DELETE":
             raise ValueError('Must type "DELETE" to confirm account deletion')

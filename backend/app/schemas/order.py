@@ -25,7 +25,9 @@ class OrderCreate(OrderBase):
     
     @validator('delivery_deadline')
     def validate_deadline(cls, v):
-        if v <= datetime.now():
+        from datetime import timezone
+        now = datetime.now(timezone.utc) if v.tzinfo else datetime.now()
+        if v <= now:
             raise ValueError('Delivery deadline must be in the future')
         return v
 

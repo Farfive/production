@@ -126,9 +126,10 @@ class Order(Base):
     
     # Relationships
     client = relationship("User", back_populates="orders", foreign_keys=[client_id])
-    quotes = relationship("Quote", back_populates="order")
-    selected_quote = relationship("Quote", foreign_keys=[selected_quote_id])
-    payments = relationship("Payment", back_populates="order")
+    quotes = relationship("Quote", back_populates="order", foreign_keys="Quote.order_id")
+    selected_quote = relationship("Quote", foreign_keys=[selected_quote_id], post_update=True)
+    transactions = relationship("Transaction", back_populates="order")
+    invoices = relationship("Invoice", back_populates="order")
     
     def __repr__(self):
         return f"<Order(id={self.id}, title={self.title}, status={self.status})>"

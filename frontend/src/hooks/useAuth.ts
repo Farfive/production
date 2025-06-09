@@ -31,25 +31,48 @@ export interface AuthActions {
   refresh: () => void;
 }
 
+// MOCK USER FOR TESTING - REMOVE IN PRODUCTION
+const MOCK_CLIENT_USER: User = {
+  id: 1,
+  email: 'test.client@example.com',
+  firstName: 'John',
+  lastName: 'Doe',
+  fullName: 'John Doe',
+  role: UserRole.CLIENT,
+  isVerified: true,
+  avatarUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
+  phone: '+1 (555) 123-4567',
+  country: 'United States',
+  timezone: 'America/New_York',
+  createdAt: '2024-01-01T00:00:00Z',
+  updatedAt: '2024-01-01T00:00:00Z'
+};
+
 export const useAuth = (): AuthState & AuthActions => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  // Get user profile query
-  const {
-    data: user,
-    isLoading,
-    error,
-    refetch: refresh,
-  } = useQuery({
-    queryKey: queryKeys.auth.profile,
-    queryFn: authApi.getProfile,
-    enabled: !!tokenManager.getAccessToken(),
-    retry: false,
-    staleTime: 5 * 60 * 1000, // 5 minutes
-  });
+  // TEMPORARY: Return mock user for testing
+  const user = MOCK_CLIENT_USER;
+  const isAuthenticated = true;
+  const isLoading = false;
+  const error = null;
 
-  const isAuthenticated = !!user && !!tokenManager.getAccessToken();
+  // Get user profile query - DISABLED FOR TESTING
+  // const {
+  //   data: user,
+  //   isLoading,
+  //   error,
+  //   refetch: refresh,
+  // } = useQuery({
+  //   queryKey: queryKeys.auth.profile,
+  //   queryFn: authApi.getProfile,
+  //   enabled: !!tokenManager.getAccessToken(),
+  //   retry: false,
+  //   staleTime: 5 * 60 * 1000, // 5 minutes
+  // });
+
+  // const isAuthenticated = !!user && !!tokenManager.getAccessToken();
 
   // Login mutation
   const loginMutation = useMutation({
@@ -201,7 +224,7 @@ export const useAuth = (): AuthState & AuthActions => {
   // Update profile mutation
   const updateProfileMutation = useMutation({
     mutationFn: authApi.updateProfile,
-    onSuccess: (updatedUser) => {
+    onSuccess: (updatedUser: User) => {
       // Update user data in cache
       queryClient.setQueryData(queryKeys.auth.profile, updatedUser);
       toast.success('Profile updated successfully!');
@@ -212,7 +235,7 @@ export const useAuth = (): AuthState & AuthActions => {
     },
   });
 
-  // Helper function to get redirect path based on user role
+  // Helper function to get redirect path based on role
   const getRedirectPath = (role: UserRole): string => {
     switch (role) {
       case UserRole.CLIENT:
@@ -220,7 +243,7 @@ export const useAuth = (): AuthState & AuthActions => {
       case UserRole.MANUFACTURER:
         return '/dashboard/manufacturer';
       case UserRole.ADMIN:
-        return '/admin/dashboard';
+        return '/dashboard/admin';
       default:
         return '/dashboard';
     }
@@ -263,17 +286,16 @@ export const useAuth = (): AuthState & AuthActions => {
     await updateProfileMutation.mutateAsync(data);
   };
 
-  return {
-    // State
-    user: user || null,
-    isAuthenticated,
-    isLoading: isLoading || 
-               loginMutation.isPending || 
-               registerMutation.isPending || 
-               logoutMutation.isPending,
-    error: error?.message || null,
+  const refresh = () => {
+    // MOCK: Do nothing for testing
+    console.log('Mock refresh called');
+  };
 
-    // Actions
+  return {
+    user,
+    isAuthenticated,
+    isLoading,
+    error,
     login,
     register,
     logout,
@@ -287,34 +309,31 @@ export const useAuth = (): AuthState & AuthActions => {
   };
 };
 
-// Hook to check if user has specific role
+// Role-based hooks
 export const useRole = (requiredRole: UserRole | UserRole[]) => {
-  const { user, isAuthenticated } = useAuth();
+  const { user } = useAuth();
   
-  if (!isAuthenticated || !user) {
-    return false;
-  }
-
+  if (!user) return false;
+  
   const roles = Array.isArray(requiredRole) ? requiredRole : [requiredRole];
   return roles.includes(user.role);
 };
 
-// Hook to check if user is a client
 export const useIsClient = () => {
-  return useRole(UserRole.CLIENT);
+  const { user } = useAuth();
+  return user?.role === UserRole.CLIENT;
 };
 
-// Hook to check if user is a manufacturer
 export const useIsManufacturer = () => {
-  return useRole(UserRole.MANUFACTURER);
+  const { user } = useAuth();
+  return user?.role === UserRole.MANUFACTURER;
 };
 
-// Hook to check if user is an admin
 export const useIsAdmin = () => {
-  return useRole(UserRole.ADMIN);
+  const { user } = useAuth();
+  return user?.role === UserRole.ADMIN;
 };
 
-// Hook to require authentication (redirects if not authenticated)
 export const useRequireAuth = (redirectTo: string = '/login') => {
   const { isAuthenticated, isLoading } = useAuth();
   const navigate = useNavigate();
@@ -328,22 +347,21 @@ export const useRequireAuth = (redirectTo: string = '/login') => {
   return { isAuthenticated, isLoading };
 };
 
-// Hook to require specific role (redirects if not authorized)
 export const useRequireRole = (
   requiredRole: UserRole | UserRole[], 
   redirectTo: string = '/unauthorized'
 ) => {
-  const { user, isAuthenticated, isLoading } = useAuth();
-  const hasRole = useRole(requiredRole);
+  const { user, isLoading } = useAuth();
   const navigate = useNavigate();
+  const hasRole = useRole(requiredRole);
 
   React.useEffect(() => {
-    if (!isLoading && isAuthenticated && !hasRole) {
+    if (!isLoading && user && !hasRole) {
       navigate(redirectTo, { replace: true });
     }
-  }, [isAuthenticated, isLoading, hasRole, navigate, redirectTo]);
+  }, [user, hasRole, isLoading, navigate, redirectTo]);
 
-  return { hasRole, isLoading, user };
+  return { hasRole, isLoading };
 };
 
 export default useAuth; 

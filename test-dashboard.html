@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Test - Manufacturing Platform</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .animate-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .5; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // Mock data for testing
+        const mockDashboardData = {
+            orders: {
+                total: 24,
+                active: 8,
+                completed: 14,
+                cancelled: 2,
+                recentOrders: [
+                    {
+                        id: '1',
+                        title: 'Custom CNC Machined Parts',
+                        description: 'High-precision aluminum components for aerospace application',
+                        status: 'in_production',
+                        targetPrice: 15000,
+                        currency: 'USD',
+                        quantity: 100,
+                        quotesCount: 5,
+                        createdAt: '2024-01-15T10:00:00Z'
+                    },
+                    {
+                        id: '2',
+                        title: '3D Printed Prototypes',
+                        description: 'Rapid prototyping for product development',
+                        status: 'quoted',
+                        targetPrice: 2500,
+                        currency: 'USD',
+                        quantity: 10,
+                        quotesCount: 3,
+                        createdAt: '2024-01-18T09:15:00Z'
+                    },
+                    {
+                        id: '3',
+                        title: 'Sheet Metal Fabrication',
+                        description: 'Custom enclosures for electronic equipment',
+                        status: 'pending',
+                        targetPrice: 8000,
+                        currency: 'USD',
+                        quantity: 50,
+                        quotesCount: 2,
+                        createdAt: '2024-01-20T11:30:00Z'
+                    }
+                ]
+            },
+            quotes: {
+                total: 18,
+                pending: 6,
+                accepted: 8,
+                rejected: 4,
+                winRate: 44.4,
+                averageValue: 12750,
+                recentQuotes: [
+                    {
+                        id: '1',
+                        manufacturerName: 'Precision Manufacturing Co.',
+                        totalAmount: 16500,
+                        currency: 'USD',
+                        deliveryTime: 14,
+                        status: 'selected',
+                        createdAt: '2024-01-16T14:20:00Z'
+                    },
+                    {
+                        id: '2',
+                        manufacturerName: 'Rapid Prototyping Inc.',
+                        totalAmount: 2200,
+                        currency: 'USD',
+                        deliveryTime: 7,
+                        status: 'submitted',
+                        createdAt: '2024-01-19T09:30:00Z'
+                    }
+                ]
+            },
+            revenue: {
+                total: 127500,
+                thisMonth: 23800,
+                lastMonth: 19200,
+                growth: 23.96,
+                currency: 'USD'
+            },
+            performance: {
+                rating: 4.7,
+                reviewCount: 23,
+                onTimeDelivery: 91.3,
+                qualityScore: 4.6,
+                responseTime: 2.4
+            }
+        };
+
+        // Utility functions
+        const formatCurrency = (amount, currency = 'USD') => {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: currency
+            }).format(amount);
+        };
+
+        const formatRelativeTime = (dateString) => {
+            const date = new Date(dateString);
+            const now = new Date();
+            const diffInHours = Math.floor((now - date) / (1000 * 60 * 60));
+            
+            if (diffInHours < 24) {
+                return `${diffInHours} hours ago`;
+            } else {
+                const diffInDays = Math.floor(diffInHours / 24);
+                return `${diffInDays} days ago`;
+            }
+        };
+
+        const getStatusColor = (status) => {
+            const colors = {
+                'in_production': 'bg-blue-100 text-blue-800',
+                'quoted': 'bg-yellow-100 text-yellow-800',
+                'pending': 'bg-gray-100 text-gray-800',
+                'completed': 'bg-green-100 text-green-800',
+                'selected': 'bg-green-100 text-green-800',
+                'submitted': 'bg-blue-100 text-blue-800'
+            };
+            return colors[status] || 'bg-gray-100 text-gray-800';
+        };
+
+        // Loading Spinner Component
+        const LoadingSpinner = ({ text = "Loading..." }) => (
+            <div className="flex items-center justify-center p-4">
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mr-3"></div>
+                <span className="text-gray-600">{text}</span>
+            </div>
+        );
+
+        // Stats Card Component
+        const StatsCard = ({ title, value, subtitle, icon, color = "blue" }) => (
+            <div className="bg-white overflow-hidden shadow rounded-lg border border-gray-200">
+                <div className="p-5">
+                    <div className="flex items-center">
+                        <div className="flex-shrink-0">
+                            <div className={`h-6 w-6 text-${color}-600`}>{icon}</div>
+                        </div>
+                        <div className="ml-5 w-0 flex-1">
+                            <dl>
+                                <dt className="text-sm font-medium text-gray-500 truncate">
+                                    {title}
+                                </dt>
+                                <dd className="text-lg font-medium text-gray-900">
+                                    {value}
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                {subtitle && (
+                    <div className="bg-gray-50 px-5 py-3">
+                        <div className="text-sm text-gray-600">
+                            {subtitle}
+                        </div>
+                    </div>
+                )}
+            </div>
+        );
+
+        // Main Dashboard Component
+        const ClientDashboard = () => {
+            const [isLoading, setIsLoading] = useState(true);
+            const [stats, setStats] = useState(null);
+
+            useEffect(() => {
+                // Simulate API loading
+                setTimeout(() => {
+                    setStats(mockDashboardData);
+                    setIsLoading(false);
+                }, 1000);
+            }, []);
+
+            if (isLoading) {
+                return <LoadingSpinner text="Loading dashboard..." />;
+            }
+
+            return (
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                    {/* Header */}
+                    <div className="mb-8">
+                        <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
+                        <p className="mt-1 text-sm text-gray-600">
+                            Welcome back! Here's what's happening with your orders.
+                        </p>
+                    </div>
+
+                    {/* Stats Cards */}
+                    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 mb-8">
+                        <StatsCard
+                            title="Total Orders"
+                            value={stats.orders.total}
+                            subtitle={`${stats.orders.active} active, ${stats.orders.completed} completed`}
+                            icon="📦"
+                            color="blue"
+                        />
+                        <StatsCard
+                            title="Quotes Received"
+                            value={stats.quotes.total}
+                            subtitle={`${stats.quotes.pending} pending, ${stats.quotes.winRate}% win rate`}
+                            icon="📄"
+                            color="green"
+                        />
+                        <StatsCard
+                            title="Total Spent"
+                            value={formatCurrency(stats.revenue.total)}
+                            subtitle={`+${stats.revenue.growth}% vs last month`}
+                            icon="💰"
+                            color="green"
+                        />
+                        <StatsCard
+                            title="Performance"
+                            value={`${stats.performance.rating}★`}
+                            subtitle={`${stats.performance.onTimeDelivery}% on-time delivery`}
+                            icon="⭐"
+                            color="yellow"
+                        />
+                    </div>
+
+                    {/* Recent Activity */}
+                    <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+                        {/* Recent Orders */}
+                        <div className="bg-white shadow rounded-lg border border-gray-200">
+                            <div className="px-6 py-4 border-b border-gray-200">
+                                <h3 className="text-lg font-medium text-gray-900">Recent Orders</h3>
+                            </div>
+                            <div className="p-6">
+                                <div className="space-y-4">
+                                    {stats.orders.recentOrders.map((order) => (
+                                        <div key={order.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                            <div className="flex-1 min-w-0">
+                                                <div className="flex items-center">
+                                                    <h4 className="text-sm font-medium text-gray-900 truncate">
+                                                        {order.title}
+                                                    </h4>
+                                                    <span className={`ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(order.status)}`}>
+                                                        {order.status.replace('_', ' ')}
+                                                    </span>
+                                                </div>
+                                                <p className="text-sm text-gray-500">
+                                                    {formatRelativeTime(order.createdAt)} • {order.quotesCount} quotes
+                                                </p>
+                                            </div>
+                                            <div className="text-right">
+                                                <p className="text-sm font-medium text-gray-900">
+                                                    {formatCurrency(order.targetPrice, order.currency)}
+                                                </p>
+                                                <p className="text-xs text-gray-500">
+                                                    Qty: {order.quantity}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Recent Quotes */}
+                        <div className="bg-white shadow rounded-lg border border-gray-200">
+                            <div className="px-6 py-4 border-b border-gray-200">
+                                <h3 className="text-lg font-medium text-gray-900">Recent Quotes</h3>
+                            </div>
+                            <div className="p-6">
+                                <div className="space-y-4">
+                                    {stats.quotes.recentQuotes.map((quote) => (
+                                        <div key={quote.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                            <div className="flex-1 min-w-0">
+                                                <div className="flex items-center">
+                                                    <div className="flex-shrink-0 h-8 w-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                                        <span className="text-blue-600 text-sm">🏭</span>
+                                                    </div>
+                                                    <div className="ml-3">
+                                                        <h4 className="text-sm font-medium text-gray-900">
+                                                            {quote.manufacturerName}
+                                                        </h4>
+                                                        <p className="text-sm text-gray-500">
+                                                            {formatRelativeTime(quote.createdAt)} • {quote.deliveryTime} days
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="text-right">
+                                                <p className="text-sm font-medium text-gray-900">
+                                                    {formatCurrency(quote.totalAmount, quote.currency)}
+                                                </p>
+                                                <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(quote.status)}`}>
+                                                    {quote.status}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Quick Actions */}
+                    <div className="mt-8 bg-white shadow rounded-lg border border-gray-200 p-6">
+                        <h3 className="text-lg font-medium text-gray-900 mb-4">Quick Actions</h3>
+                        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                            <button className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                ➕ Create New Order
+                            </button>
+                            <button className="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                📋 View All Orders
+                            </button>
+                            <button className="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                📄 View All Quotes
+                            </button>
+                            <button className="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                💳 Payment History
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        // Render the app
+        ReactDOM.render(<ClientDashboard />, document.getElementById('root'));
+    </script>
+</body>
+</html> 

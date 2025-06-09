@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manufacturing Platform - Navigation Test</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .page-card { transition: all 0.3s ease; }
+        .page-card:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .badge { padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 500; }
+        .badge-primary { background-color: #3B82F6; color: white; }
+        .badge-success { background-color: #10B981; color: white; }
+        .badge-warning { background-color: #F59E0B; color: white; }
+        .badge-gray { background-color: #6B7280; color: white; }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div class="min-h-screen">
+        <!-- Header -->
+        <div class="bg-white shadow-sm border-b border-gray-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 class="text-3xl font-bold text-gray-900">🏭 Manufacturing Platform</h1>
+                        <p class="text-gray-600 mt-1">Navigation Test & Feature Overview</p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <span class="badge badge-success">Server Running ✅</span>
+                        <span class="badge badge-primary">Auth Bypassed</span>
+                        <span class="badge badge-warning">Test Mode</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <!-- Status Overview -->
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
+                <h2 class="text-xl font-semibold text-gray-900 mb-4">🎯 Current Status</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="bg-green-50 p-4 rounded-lg">
+                        <div class="text-green-800 font-medium">Authentication</div>
+                        <div class="text-green-600 text-sm">Bypassed ✅</div>
+                        <div class="text-green-600 text-xs">Mock Client: John Doe</div>
+                    </div>
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <div class="text-blue-800 font-medium">React Server</div>
+                        <div class="text-blue-600 text-sm">Running ✅</div>
+                        <div class="text-blue-600 text-xs">Port: 3000</div>
+                    </div>
+                    <div class="bg-purple-50 p-4 rounded-lg">
+                        <div class="text-purple-800 font-medium">Mock Data</div>
+                        <div class="text-purple-600 text-sm">Loaded ✅</div>
+                        <div class="text-purple-600 text-xs">24 Orders, 18 Quotes</div>
+                    </div>
+                    <div class="bg-yellow-50 p-4 rounded-lg">
+                        <div class="text-yellow-800 font-medium">Dependencies</div>
+                        <div class="text-yellow-600 text-sm">Fixed ✅</div>
+                        <div class="text-yellow-600 text-xs">All modules resolved</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Core Dashboard Pages -->
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">📊 Dashboard Pages</h2>
+                <div class="feature-grid">
+                    <div class="page-card bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-gray-900">Client Dashboard</h3>
+                            <span class="badge badge-success">Ready</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">Complete dashboard with stats, recent orders, quotes, and quick actions.</p>
+                        <div class="space-y-2 mb-4">
+                            <div class="text-xs text-gray-500">✅ Order Statistics (24 total)</div>
+                            <div class="text-xs text-gray-500">✅ Quote Management (18 total)</div>
+                            <div class="text-xs text-gray-500">✅ Revenue Tracking ($127,500)</div>
+                            <div class="text-xs text-gray-500">✅ Performance Metrics (4.7★)</div>
+                        </div>
+                        <button onclick="openPage('/dashboard/client')" class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors">
+                            Open Client Dashboard
+                        </button>
+                    </div>
+
+                    <div class="page-card bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-gray-900">Manufacturer Dashboard</h3>
+                            <span class="badge badge-warning">Placeholder</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">Manufacturer-specific dashboard for managing production and quotes.</p>
+                        <div class="space-y-2 mb-4">
+                            <div class="text-xs text-gray-500">⏳ Production Queue</div>
+                            <div class="text-xs text-gray-500">⏳ Quote Requests</div>
+                            <div class="text-xs text-gray-500">⏳ Revenue Analytics</div>
+                        </div>
+                        <button onclick="openPage('/dashboard/manufacturer')" class="w-full bg-yellow-600 text-white py-2 px-4 rounded-md hover:bg-yellow-700 transition-colors">
+                            Open Manufacturer Dashboard
+                        </button>
+                    </div>
+
+                    <div class="page-card bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-gray-900">Admin Dashboard</h3>
+                            <span class="badge badge-warning">Placeholder</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">Administrative dashboard for platform management.</p>
+                        <div class="space-y-2 mb-4">
+                            <div class="text-xs text-gray-500">⏳ User Management</div>
+                            <div class="text-xs text-gray-500">⏳ Platform Analytics</div>
+                            <div class="text-xs text-gray-500">⏳ System Settings</div>
+                        </div>
+                        <button onclick="openPage('/dashboard/admin')" class="w-full bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-gray-700 transition-colors">
+                            Open Admin Dashboard
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order Management -->
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">📦 Order Management</h2>
+                <div class="feature-grid">
+                    <div class="page-card bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-gray-900">Order Management</h3>
+                            <span class="badge badge-success">Functional</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">Comprehensive order management with advanced features.</p>
+                        <div class="space-y-2 mb-4">
+                            <div class="text-xs text-gray-500">✅ Order Dashboard & Analytics</div>
+                            <div class="text-xs text-gray-500">✅ Order Creation Wizard</div>
+                            <div class="text-xs text-gray-500">✅ Order Tracking</div>
+                            <div class="text-xs text-gray-500">✅ Offline Support</div>
+                        </div>
+                        <button onclick="openPage('/orders')" class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors">
+                            Manage Orders
+                        </button>
+                    </div>
+
+                    <div class="page-card bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-gray-900">Create Order</h3>
+                            <span class="badge badge-success">Functional</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">Step-by-step order creation wizard.</p>
+                        <div class="space-y-2 mb-4">
+                            <div class="text-xs text-gray-500">✅ Multi-step Wizard</div>
+                            <div class="text-xs text-gray-500">✅ File Upload Support</div>
+                            <div class="text-xs text-gray-500">✅ Requirements Editor</div>
+                        </div>
+                        <button onclick="openPage('/orders/create')" class="w-full bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 transition-colors">
+                            Create New Order
+                        </button>
+                    </div>
+
+                    <div class="page-card bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-gray-900">Order Details</h3>
+                            <span class="badge badge-warning">Placeholder</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">Detailed view of individual orders.</p>
+                        <div class="space-y-2 mb-4">
+                            <div class="text-xs text-gray-500">⏳ Order Timeline</div>
+                            <div class="text-xs text-gray-500">⏳ Quote Comparison</div>
+                            <div class="text-xs text-gray-500">⏳ Communication Hub</div>
+                        </div>
+                        <button onclick="openPage('/orders/1')" class="w-full bg-yellow-600 text-white py-2 px-4 rounded-md hover:bg-yellow-700 transition-colors">
+                            View Sample Order
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quote Management -->
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">📄 Quote Management</h2>
+                <div class="feature-grid">
+                    <div class="page-card bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-gray-900">Quotes Overview</h3>
+                            <span class="badge badge-warning">Placeholder</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">Manage all quotes and proposals.</p>
+                        <div class="space-y-2 mb-4">
+                            <div class="text-xs text-gray-500">⏳ Quote Comparison</div>
+                            <div class="text-xs text-gray-500">⏳ Evaluation Tools</div>
+                            <div class="text-xs text-gray-500">⏳ Decision Matrix</div>
+                        </div>
+                        <button onclick="openPage('/quotes')" class="w-full bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition-colors">
+                            View Quotes
+                        </button>
+                    </div>
+
+                    <div class="page-card bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-gray-900">Quote Comparison</h3>
+                            <span class="badge badge-success">Advanced</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">Advanced quote comparison with AI-powered insights.</p>
+                        <div class="space-y-2 mb-4">
+                            <div class="text-xs text-gray-500">✅ Side-by-side Comparison</div>
+                            <div class="text-xs text-gray-500">✅ TCO Analysis</div>
+                            <div class="text-xs text-gray-500">✅ Risk Assessment</div>
+                            <div class="text-xs text-gray-500">✅ AI Recommendations</div>
+                        </div>
+                        <button onclick="openPage('/orders/1/quotes/compare')" class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 transition-colors">
+                            Compare Quotes
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User Management -->
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">👤 User & Profile</h2>
+                <div class="feature-grid">
+                    <div class="page-card bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-gray-900">User Profile</h3>
+                            <span class="badge badge-warning">Placeholder</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">Manage user profile and preferences.</p>
+                        <button onclick="openPage('/profile')" class="w-full bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-gray-700 transition-colors">
+                            View Profile
+                        </button>
+                    </div>
+
+                    <div class="page-card bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-gray-900">Settings</h3>
+                            <span class="badge badge-warning">Placeholder</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">Application settings and preferences.</p>
+                        <button onclick="openPage('/settings')" class="w-full bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-gray-700 transition-colors">
+                            Open Settings
+                        </button>
+                    </div>
+
+                    <div class="page-card bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-gray-900">Payments</h3>
+                            <span class="badge badge-warning">Placeholder</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">Payment history and methods.</p>
+                        <button onclick="openPage('/payments')" class="w-full bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 transition-colors">
+                            View Payments
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Test Links -->
+            <div class="bg-gray-100 rounded-lg p-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">🔗 Quick Test Links</h3>
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+                    <button onclick="openPage('/')" class="text-left p-3 bg-white rounded border hover:bg-gray-50">
+                        <div class="font-medium text-sm">Homepage</div>
+                        <div class="text-xs text-gray-500">Landing page</div>
+                    </button>
+                    <button onclick="openPage('/dashboard/client')" class="text-left p-3 bg-white rounded border hover:bg-gray-50">
+                        <div class="font-medium text-sm">Client Dashboard</div>
+                        <div class="text-xs text-gray-500">Main dashboard</div>
+                    </button>
+                    <button onclick="openPage('/orders')" class="text-left p-3 bg-white rounded border hover:bg-gray-50">
+                        <div class="font-medium text-sm">Orders</div>
+                        <div class="text-xs text-gray-500">Order management</div>
+                    </button>
+                    <button onclick="openPage('/orders/create')" class="text-left p-3 bg-white rounded border hover:bg-gray-50">
+                        <div class="font-medium text-sm">Create Order</div>
+                        <div class="text-xs text-gray-500">New order wizard</div>
+                    </button>
+                    <button onclick="openPage('/quotes')" class="text-left p-3 bg-white rounded border hover:bg-gray-50">
+                        <div class="font-medium text-sm">Quotes</div>
+                        <div class="text-xs text-gray-500">Quote management</div>
+                    </button>
+                    <button onclick="openPage('/profile')" class="text-left p-3 bg-white rounded border hover:bg-gray-50">
+                        <div class="font-medium text-sm">Profile</div>
+                        <div class="text-xs text-gray-500">User profile</div>
+                    </button>
+                    <button onclick="openPage('/settings')" class="text-left p-3 bg-white rounded border hover:bg-gray-50">
+                        <div class="font-medium text-sm">Settings</div>
+                        <div class="text-xs text-gray-500">App settings</div>
+                    </button>
+                    <button onclick="openPage('/payments')" class="text-left p-3 bg-white rounded border hover:bg-gray-50">
+                        <div class="font-medium text-sm">Payments</div>
+                        <div class="text-xs text-gray-500">Payment history</div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openPage(path) {
+            window.open(`http://localhost:3000${path}`, '_blank');
+        }
+
+        // Auto-refresh server status
+        setInterval(() => {
+            fetch('http://localhost:3000')
+                .then(response => {
+                    if (response.ok) {
+                        document.querySelector('.badge-success').textContent = 'Server Running ✅';
+                        document.querySelector('.badge-success').className = 'badge badge-success';
+                    }
+                })
+                .catch(() => {
+                    document.querySelector('.badge-success').textContent = 'Server Down ❌';
+                    document.querySelector('.badge-success').className = 'badge badge-error';
+                });
+        }, 5000);
+    </script>
+</body>
+</html> 

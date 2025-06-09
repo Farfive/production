@@ -6,7 +6,7 @@ from sqlalchemy.orm import sessionmaker
 from unittest.mock import patch, MagicMock
 import json
 
-from app.main import app
+from main import app
 from app.core.database import get_db, Base
 from app.core.security import (
     TokenManager, PasswordValidator, get_password_hash, verify_password,

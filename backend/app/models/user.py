@@ -72,11 +72,17 @@ class User(Base):
 
     # Relationships
     orders = relationship("Order", back_populates="client", foreign_keys="Order.client_id")
-    producer_profile = relationship("Manufacturer", back_populates="user", uselist=False)
+    manufacturer_profile = relationship("Manufacturer", back_populates="user", uselist=False)
     transactions_as_client = relationship(
         "Transaction", 
         back_populates="client", 
         foreign_keys="Transaction.client_id"
+    )
+    subscriptions = relationship("Subscription", back_populates="user")
+    invoices_as_client = relationship(
+        "Invoice", 
+        back_populates="client", 
+        foreign_keys="Invoice.client_id"
     )
     
     @property

@@ -103,12 +103,19 @@ class Manufacturer(Base):
     )
     
     # Relationships
-    user = relationship("User", back_populates="producer_profile")
+    user = relationship("User", back_populates="manufacturer_profile")
     quotes = relationship("Quote", back_populates="manufacturer")
-    transactions_as_producer = relationship(
+    transactions_as_manufacturer = relationship(
         "Transaction", 
         back_populates="manufacturer", 
         foreign_keys="Transaction.manufacturer_id"
+    )
+    stripe_connect_account = relationship("StripeConnectAccount", back_populates="manufacturer", uselist=False)
+    subscriptions = relationship("Subscription", back_populates="manufacturer")
+    invoices_as_manufacturer = relationship(
+        "Invoice", 
+        back_populates="manufacturer", 
+        foreign_keys="Invoice.manufacturer_id"
     )
     
     def __repr__(self):

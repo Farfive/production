@@ -9,7 +9,7 @@ from app.core.config import get_settings
 from app.core.database import create_tables
 from app.core.middleware import setup_middleware, cleanup_rate_limits
 from app.core.exceptions import setup_exception_handlers
-from app.api.v1.api import api_router
+from app.api.v1.router import api_router
 
 # Configure logging
 logging.basicConfig(

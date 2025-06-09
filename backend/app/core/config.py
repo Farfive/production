@@ -24,7 +24,7 @@ class Settings(BaseSettings):
     PORT: int = 8000
     
     # Database
-    DATABASE_URL: str = "postgresql://user:password@localhost/manufacturing_platform"
+    DATABASE_URL: str = "sqlite:///./manufacturing_platform.db"
     DATABASE_URL_ASYNC: Optional[str] = None
     DATABASE_POOL_SIZE: int = 10
     DATABASE_MAX_OVERFLOW: int = 20
@@ -150,21 +150,22 @@ class Settings(BaseSettings):
     LOG_BACKUP_COUNT: int = 5
     
     # Redis Configuration (for caching and rate limiting)
-    REDIS_URL: str = "redis://localhost:6379/0"
+    REDIS_URL: str = os.getenv("REDIS_URL", "redis://localhost:6379/0")
     REDIS_PASSWORD: Optional[str] = None
     REDIS_DB: int = 0
-    CACHE_EXPIRE_SECONDS: int = 3600  # 1 hour
+    REDIS_CACHE_TTL: int = int(os.getenv("REDIS_CACHE_TTL", "3600"))  # 1 hour
+    REDIS_SESSION_TTL: int = int(os.getenv("REDIS_SESSION_TTL", "86400"))  # 24 hours
     
     # Celery Configuration (for background tasks)
-    CELERY_BROKER_URL: str = "redis://localhost:6379/1"
-    CELERY_RESULT_BACKEND: str = "redis://localhost:6379/1"
+    CELERY_BROKER_URL: str = os.getenv("CELERY_BROKER_URL", "redis://localhost:6379/1")
+    CELERY_RESULT_BACKEND: str = os.getenv("CELERY_RESULT_BACKEND", "redis://localhost:6379/2")
     
     # Search Configuration
     ELASTICSEARCH_URL: str = "http://localhost:9200"
     ELASTICSEARCH_INDEX_PREFIX: str = "manufacturing_platform"
     
     # Monitoring & Analytics
-    SENTRY_DSN: Optional[str] = None
+    SENTRY_DSN: Optional[str] = os.getenv("SENTRY_DSN")
     GOOGLE_ANALYTICS_ID: Optional[str] = None
     
     # External APIs
@@ -187,6 +188,33 @@ class Settings(BaseSettings):
     ENABLE_MANUFACTURER_VERIFICATION: bool = True
     ENABLE_PAYMENT_ESCROW: bool = True
     ENABLE_AI_MATCHING: bool = False
+    
+    # Performance Optimization Settings
+    DB_POOL_SIZE: int = int(os.getenv("DB_POOL_SIZE", "20"))
+    DB_MAX_OVERFLOW: int = int(os.getenv("DB_MAX_OVERFLOW", "30"))
+    DB_POOL_TIMEOUT: int = int(os.getenv("DB_POOL_TIMEOUT", "30"))
+    DB_POOL_RECYCLE: int = int(os.getenv("DB_POOL_RECYCLE", "3600"))
+    
+    # CDN Configuration
+    CDN_ENABLED: bool = os.getenv("CDN_ENABLED", "false").lower() == "true"
+    CDN_BASE_URL: str = os.getenv("CDN_BASE_URL", "")
+    AWS_S3_BUCKET: str = os.getenv("AWS_S3_BUCKET", "")
+    AWS_CLOUDFRONT_DOMAIN: str = os.getenv("AWS_CLOUDFRONT_DOMAIN", "")
+    
+    # Monitoring Configuration
+    NEW_RELIC_LICENSE_KEY: Optional[str] = os.getenv("NEW_RELIC_LICENSE_KEY")
+    PROMETHEUS_ENABLED: bool = os.getenv("PROMETHEUS_ENABLED", "true").lower() == "true"
+    STATSD_HOST: str = os.getenv("STATSD_HOST", "localhost")
+    STATSD_PORT: int = int(os.getenv("STATSD_PORT", "8125"))
+    
+    # Performance Budgets
+    API_RESPONSE_TIME_BUDGET: float = float(os.getenv("API_RESPONSE_TIME_BUDGET", "0.5"))  # 500ms
+    DB_QUERY_TIME_BUDGET: float = float(os.getenv("DB_QUERY_TIME_BUDGET", "0.1"))  # 100ms
+    CACHE_HIT_RATIO_TARGET: float = float(os.getenv("CACHE_HIT_RATIO_TARGET", "0.8"))  # 80%
+    
+    # Rate Limiting
+    RATE_LIMIT_ENABLED: bool = os.getenv("RATE_LIMIT_ENABLED", "true").lower() == "true"
+    RATE_LIMIT_PER_MINUTE: int = int(os.getenv("RATE_LIMIT_PER_MINUTE", "100"))
     
     @validator("DATABASE_URL_ASYNC", pre=True)
     def assemble_async_db_connection(cls, v: Optional[str], values: dict) -> str:

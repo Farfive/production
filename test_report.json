@@ -1,0 +1,103 @@
+{
+  "total_tests": 16,
+  "passed": 8,
+  "failed": 8,
+  "test_details": [
+    {
+      "test": "Root Endpoint",
+      "status": "PASS",
+      "details": "Status: 200",
+      "response_time": 0.05846261978149414
+    },
+    {
+      "test": "Health Check",
+      "status": "PASS",
+      "details": "Service: Manufacturing Platform API, Status: healthy",
+      "response_time": 0.0065975189208984375
+    },
+    {
+      "test": "Performance Health",
+      "status": "PASS",
+      "details": "Status: 200",
+      "response_time": 5.07159948348999
+    },
+    {
+      "test": "Client Registration",
+      "status": "FAIL",
+      "details": "Status: No response, Error: No response",
+      "response_time": 0.004538774490356445
+    },
+    {
+      "test": "Manufacturer Registration",
+      "status": "FAIL",
+      "details": "Status: No response, Error: No response",
+      "response_time": 0.017836570739746094
+    },
+    {
+      "test": "Order Management",
+      "status": "FAIL",
+      "details": "No client authentication available",
+      "response_time": 0
+    },
+    {
+      "test": "Intelligent Matching",
+      "status": "FAIL",
+      "details": "No orders or authentication available",
+      "response_time": 0
+    },
+    {
+      "test": "Email Automation",
+      "status": "FAIL",
+      "details": "No authentication available",
+      "response_time": 0
+    },
+    {
+      "test": "Cache Performance Metrics",
+      "status": "PASS",
+      "details": "Cache metrics retrieved",
+      "response_time": 4.053492307662964
+    },
+    {
+      "test": "Performance Summary",
+      "status": "PASS",
+      "details": "Performance summary for last 1 hour retrieved",
+      "response_time": 0.01297760009765625
+    },
+    {
+      "test": "Performance Budgets",
+      "status": "PASS",
+      "details": "Performance budgets retrieved",
+      "response_time": 0.011486053466796875
+    },
+    {
+      "test": "Track Custom Metric",
+      "status": "FAIL",
+      "details": "Status: No response",
+      "response_time": 0.008130073547363281
+    },
+    {
+      "test": "Unauthorized Access Protection",
+      "status": "FAIL",
+      "details": "Status: No response",
+      "response_time": 0.004435300827026367
+    },
+    {
+      "test": "Invalid Endpoint Handling",
+      "status": "PASS",
+      "details": "Correctly returned 404 for invalid endpoint",
+      "response_time": 0.0036978721618652344
+    },
+    {
+      "test": "Password Reset Request",
+      "status": "FAIL",
+      "details": "Password reset request handled (Status: 500)",
+      "response_time": 0.0069963932037353516
+    },
+    {
+      "test": "Load Test (50 requests)",
+      "status": "PASS",
+      "details": "Success rate: 100.0%, Avg response: 0.004s, RPS: 248.0",
+      "response_time": 0.20160269737243652
+    }
+  ]
+}

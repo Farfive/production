@@ -131,10 +131,11 @@ class Quote(Base):
     rejected_at = Column(DateTime(timezone=True), nullable=True)
     
     # Relationships
-    order = relationship("Order", back_populates="quotes")
-    producer = relationship("Producer", back_populates="quotes")
+    order = relationship("Order", back_populates="quotes", foreign_keys=[order_id])
+    manufacturer = relationship("Manufacturer", back_populates="quotes")
     original_quote = relationship("Quote", remote_side=[id])
     revisions = relationship("Quote", back_populates="original_quote")
+    transactions = relationship("Transaction", back_populates="quote")
     
     def __repr__(self):
         return f"<Quote(id={self.id}, order_id={self.order_id}, price_pln={self.price_pln})>"

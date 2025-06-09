@@ -202,13 +202,13 @@ class PasswordValidator:
             errors.append("Password must contain at least one special character")
         
         # Check against common passwords
-        common_passwords = {
+        common_passwords = [
             "password", "123456", "password123", "admin", "qwerty",
-            "letmein", "welcome", "monkey", "1234567890", "password1"
-        }
+            "letmein", "welcome", "monkey", "dragon", "master"
+        ]
         
         if password.lower() in common_passwords:
-            errors.append("Password is too common, please choose a more secure password")
+            errors.append("Password is too common and easily guessable")
         
         return len(errors) == 0, errors
 
@@ -355,4 +355,22 @@ def require_client_or_manufacturer():
 get_current_admin = Depends(require_admin())
 get_current_client = Depends(require_client())
 get_current_manufacturer = Depends(require_manufacturer())
-get_current_user_any_role = Depends(require_client_or_manufacturer()) 
+get_current_user_any_role = Depends(require_client_or_manufacturer())
+
+
+# Standalone functions for backward compatibility
+def create_access_token(
+    subject: Union[str, Any], 
+    expires_delta: Optional[timedelta] = None,
+    additional_claims: Optional[Dict[str, Any]] = None
+) -> str:
+    """Create a JWT access token (standalone function)."""
+    return TokenManager.create_access_token(subject, expires_delta, additional_claims)
+
+
+def create_refresh_token(
+    subject: Union[str, Any],
+    expires_delta: Optional[timedelta] = None
+) -> str:
+    """Create a JWT refresh token (standalone function)."""
+    return TokenManager.create_refresh_token(subject, expires_delta) 
