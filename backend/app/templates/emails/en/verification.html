@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Your Account - {{ platform_name }}</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #2d3748;
+            background-color: #f7fafc;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px 30px;
+        }
+        
+        .welcome-text {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: #2d3748;
+        }
+        
+        .verification-box {
+            background-color: #f8f9fa;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .verification-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            padding: 16px 32px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            margin: 20px 0;
+            transition: transform 0.2s ease;
+        }
+        
+        .verification-button:hover {
+            transform: translateY(-2px);
+        }
+        
+        .alternative-text {
+            font-size: 14px;
+            color: #718096;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .footer {
+            background-color: #f8f9fa;
+            padding: 30px;
+            text-align: center;
+            font-size: 14px;
+            color: #718096;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .features {
+            margin: 30px 0;
+        }
+        
+        .feature {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .feature-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 15px;
+            color: #667eea;
+        }
+        
+        .security-note {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .security-note h3 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+        
+        .security-note p {
+            color: #856404;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                margin: 0;
+                box-shadow: none;
+            }
+            
+            .header, .content, .footer {
+                padding: 20px 15px;
+            }
+            
+            .verification-box {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Welcome to {{ platform_name }}</h1>
+            <p>Verify your account to get started</p>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="content">
+            <div class="welcome-text">
+                <strong>Hello {{ first_name }},</strong>
+            </div>
+            
+            <p>Thank you for joining {{ platform_name }}, the premier platform connecting manufacturing clients with skilled producers. We're excited to have you on board!</p>
+            
+            <div class="verification-box">
+                <h2 style="color: #2d3748; margin-bottom: 15px;">Verify Your Email Address</h2>
+                <p style="margin-bottom: 25px;">Click the button below to verify your email address and activate your account:</p>
+                
+                <a href="{{ verification_link }}" class="verification-button">
+                    Verify Email Address
+                </a>
+                
+                <div class="alternative-text">
+                    If the button doesn't work, copy and paste this link into your browser:<br>
+                    <a href="{{ verification_link }}" style="color: #667eea; word-break: break-all;">{{ verification_link }}</a>
+                </div>
+            </div>
+            
+            <div class="features">
+                <h3 style="color: #2d3748; margin-bottom: 20px;">What you can do with {{ platform_name }}:</h3>
+                
+                <div class="feature">
+                    <div class="feature-icon">🏭</div>
+                    <div>
+                        <strong>Connect with Manufacturers:</strong> Find and work with verified manufacturing partners
+                    </div>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">📋</div>
+                    <div>
+                        <strong>Manage Orders:</strong> Track your manufacturing projects from quote to delivery
+                    </div>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">💰</div>
+                    <div>
+                        <strong>Secure Payments:</strong> Safe and secure payment processing with escrow protection
+                    </div>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">📊</div>
+                    <div>
+                        <strong>Real-time Tracking:</strong> Monitor production progress and delivery status
+                    </div>
+                </div>
+            </div>
+            
+            <div class="security-note">
+                <h3>🔒 Security Notice</h3>
+                <p>This verification link will expire in 24 hours for security reasons. If you didn't create an account with {{ platform_name }}, please ignore this email.</p>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p><strong>{{ platform_name }}</strong></p>
+            <p>{{ company_address }}</p>
+            <p style="margin-top: 15px;">
+                Need help? Contact us at <a href="mailto:{{ support_email }}">{{ support_email }}</a>
+            </p>
+            <p style="margin-top: 15px;">
+                <a href="{{ unsubscribe_url }}">Unsubscribe</a> | 
+                <a href="https://manufacturingplatform.com/privacy">Privacy Policy</a> | 
+                <a href="https://manufacturingplatform.com/terms">Terms of Service</a>
+            </p>
+            <p style="margin-top: 10px; font-size: 12px;">
+                © {{ current_year }} {{ platform_name }}. All rights reserved.
+            </p>
+        </div>
+    </div>
+</body>
+</html> 

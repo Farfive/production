@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔥 Firebase Auth Test Demo - Manufacturing Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            padding: 40px;
+        }
+        
+        .auth-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            border: 2px solid #e9ecef;
+        }
+        
+        .auth-section h2 {
+            color: #495057;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #495057;
+        }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+        
+        .btn-google {
+            background: #db4437;
+            margin-bottom: 20px;
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+        }
+        
+        .status-section {
+            grid-column: 1 / -1;
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 20px;
+        }
+        
+        .api-test {
+            background: #e8f5e8;
+            border-left: 4px solid #28a745;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        
+        .api-test h4 {
+            color: #155724;
+            margin-bottom: 10px;
+        }
+        
+        .response {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .success {
+            color: #28a745;
+            background: #d4edda;
+            border-color: #c3e6cb;
+        }
+        
+        .error {
+            color: #dc3545;
+            background: #f8d7da;
+            border-color: #f5c6cb;
+        }
+        
+        .user-info {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔥 Firebase Auth Test Demo</h1>
+            <p>Manufacturing Platform Authentication Testing Interface</p>
+        </div>
+        
+        <div class="main-content">
+            <!-- Login/Register Section -->
+            <div class="auth-section">
+                <h2>🔐 Firebase Authentication</h2>
+                
+                <div id="loginForm">
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" placeholder="user@example.com" value="test@manufacturing.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" placeholder="Enter password" value="Test123!">
+                    </div>
+                    
+                    <button class="btn btn-google" onclick="signInWithGoogle()">
+                        🔥 Sign in with Google
+                    </button>
+                    
+                    <button class="btn" onclick="signInWithEmail()">
+                        📧 Sign In with Email
+                    </button>
+                    
+                    <button class="btn btn-secondary" onclick="signUpWithEmail()">
+                        ✨ Create New Account
+                    </button>
+                </div>
+                
+                <div id="userInfo" class="user-info hidden">
+                    <h3>👤 User Information</h3>
+                    <div id="userDetails"></div>
+                    <button class="btn btn-secondary" onclick="signOut()">Sign Out</button>
+                </div>
+            </div>
+            
+            <!-- API Testing Section -->
+            <div class="auth-section">
+                <h2>🧪 API Endpoint Testing</h2>
+                
+                <div class="form-group">
+                    <label for="userRole">User Role (for testing):</label>
+                    <select id="userRole">
+                        <option value="client">Client</option>
+                        <option value="manufacturer">Manufacturer</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="firstName">First Name:</label>
+                    <input type="text" id="firstName" placeholder="John" value="John">
+                </div>
+                
+                <div class="form-group">
+                    <label for="lastName">Last Name:</label>
+                    <input type="text" id="lastName" placeholder="Doe" value="Doe">
+                </div>
+                
+                <div class="form-group">
+                    <label for="companyName">Company Name:</label>
+                    <input type="text" id="companyName" placeholder="Manufacturing Co." value="Test Manufacturing Ltd.">
+                </div>
+                
+                <button class="btn" onclick="testFirebaseSync()">
+                    🔄 Test Firebase Sync
+                </button>
+                
+                <button class="btn" onclick="testCompleteRegistration()">
+                    ✅ Test Complete Registration
+                </button>
+                
+                <button class="btn" onclick="testFirebaseStatus()">
+                    📊 Test Firebase Status
+                </button>
+            </div>
+        </div>
+        
+        <div class="status-section">
+            <h2>📡 API Response Monitor</h2>
+            <div id="responseContainer"></div>
+        </div>
+    </div>
+
+    <script>
+        // Placeholder functions until Firebase is properly configured
+        const API_BASE = 'http://localhost:8000/api/v1';
+        
+        window.signInWithEmail = () => {
+            logResponse('Firebase Sign In', { error: 'Firebase not configured yet' }, true);
+        };
+        
+        window.signUpWithEmail = () => {
+            logResponse('Firebase Sign Up', { error: 'Firebase not configured yet' }, true);
+        };
+        
+        window.signInWithGoogle = () => {
+            logResponse('Google Sign In', { error: 'Firebase not configured yet' }, true);
+        };
+        
+        window.signOut = () => {
+            logResponse('Sign Out', { error: 'Firebase not configured yet' }, true);
+        };
+        
+        window.testFirebaseSync = async () => {
+            try {
+                const response = await fetch(`${API_BASE}/auth/firebase-sync`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer demo-token'
+                    },
+                    body: JSON.stringify({
+                        custom_claims: {
+                            role: document.getElementById('userRole').value,
+                            first_name: document.getElementById('firstName').value,
+                            last_name: document.getElementById('lastName').value,
+                            company_name: document.getElementById('companyName').value
+                        }
+                    })
+                });
+
+                const data = await response.json();
+                logResponse('Firebase Sync API', data, !response.ok);
+            } catch (error) {
+                logResponse('Firebase Sync Error', { error: error.message }, true);
+            }
+        };
+        
+        window.testCompleteRegistration = async () => {
+            try {
+                const response = await fetch(`${API_BASE}/auth/firebase-complete-registration`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer demo-token'
+                    },
+                    body: JSON.stringify({
+                        first_name: document.getElementById('firstName').value,
+                        last_name: document.getElementById('lastName').value,
+                        company_name: document.getElementById('companyName').value,
+                        role: document.getElementById('userRole').value
+                    })
+                });
+
+                const data = await response.json();
+                logResponse('Complete Registration API', data, !response.ok);
+            } catch (error) {
+                logResponse('Complete Registration Error', { error: error.message }, true);
+            }
+        };
+        
+        window.testFirebaseStatus = async () => {
+            try {
+                const response = await fetch(`${API_BASE}/auth/firebase-status`);
+                const data = await response.json();
+                logResponse('Firebase Status API', data, !response.ok);
+            } catch (error) {
+                logResponse('Firebase Status Error', { error: error.message }, true);
+            }
+        };
+        
+        function logResponse(title, data, isError = false) {
+            const container = document.getElementById('responseContainer');
+            const apiTest = document.createElement('div');
+            apiTest.className = 'api-test';
+            
+            const timestamp = new Date().toLocaleTimeString();
+            apiTest.innerHTML = `
+                <h4>${title} - ${timestamp}</h4>
+                <div class="response ${isError ? 'error' : 'success'}">${JSON.stringify(data, null, 2)}</div>
+            `;
+            
+            container.insertBefore(apiTest, container.firstChild);
+            
+            // Keep only last 10 responses
+            while (container.children.length > 10) {
+                container.removeChild(container.lastChild);
+            }
+        }
+        
+        // Initialize with status check
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                window.testFirebaseStatus();
+            }, 1000);
+        });
+    </script>
+</body>
+</html> 

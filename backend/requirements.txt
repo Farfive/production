@@ -1,0 +1,7255 @@
+# FastAPI and ASGI server
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+
+# Database
+sqlalchemy==2.0.23
+psycopg2-binary==2.9.9
+asyncpg==0.29.0
+alembic==1.13.1
+
+# Authentication & Security
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+python-multipart==0.0.6
+PyJWT==2.8.0
+firebase-admin==6.4.0
+
+# Email
+sendgrid==6.10.0
+
+# Payments - Enhanced Stripe Integration
+stripe==8.5.0
+
+# Multi-currency and Forex
+forex-python==1.8
+currencyconverter==0.17.6
+
+# Tax and Compliance
+taxjar==2.2.0
+python-vat==1.0.1
+
+# Webhooks and Security
+cryptography==41.0.8
+
+# Environment & Configuration
+python-dotenv==1.0.0
+pydantic==2.5.0
+pydantic-settings==2.0.3
+
+# HTTP requests
+httpx==0.25.2
+requests==2.31.0
+
+# Data validation
+email-validator==2.1.0
+phonenumbers==8.13.26
+
+# Testing
+pytest==7.4.3
+pytest-asyncio==0.21.1
+
+# Development
+black==23.11.0
+isort==5.12.0
+flake8==6.1.0
+mypy==1.7.1
+
+# Production
+gunicorn==21.2.0
+
+# Logging
+loguru==0.7.2
+
+# Background tasks and task management
+celery==5.3.4
+redis==5.0.1
+kombu==5.3.4
+flower==2.0.1
+
+# System monitoring
+psutil==5.9.6
+prometheus-client==0.18.0
+
+# File handling
+python-slugify==8.0.1
+pillow==10.1.0
+aiofiles==23.2.1
+
+# Geospatial and ML for manufacturer discovery
+geopy==2.4.1
+scikit-learn==1.3.2
+numpy==1.24.4
+
+# Payment processing
+stripe==7.8.0
+
+# Date/Time
+python-dateutil==2.8.2
+
+# Utilities
+python-json-logger==2.0.7
+
+# Fuzzy string matching for intelligent algorithms
+fuzzywuzzy==0.18.0
+python-Levenshtein==0.23.0
+
+# Load Testing (optional for production)
+locust==2.17.0
+
+# Test Data Generation
+faker==20.1.0
+
+# Template engine (already listed but ensuring it's here)
+jinja2==3.1.2
+
+# Internationalization
+babel==2.13.1
+pytz==2023.3
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket and Real-time Communication
+websockets==15.0.1
+python-socketio==5.10.0
+python-socketio[asyncio]==5.10.0
+redis[hiredis]==5.0.1
+
+# Additional dependencies for WebSocket functionality
+pydantic-settings==2.9.1
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# Performance Optimization
+redis==5.0.1
+redis-py-cluster==2.1.3
+celery==5.3.4
+flower==2.0.1
+
+# Caching
+flask-caching==2.1.0
+cachetools==5.3.2
+
+# Database Connection Pooling
+sqlalchemy-pool==1.3.0
+psycopg2-pool==1.1
+
+# APM and Monitoring
+sentry-sdk[fastapi]==1.40.6
+prometheus-client==0.19.0
+statsd==4.0.1
+newrelic==9.4.0
+structlog==23.1.0
+
+# Security dependencies
+cryptography==41.0.7
+pyopenssl==23.3.0
+aiohttp==3.9.1
+psutil==5.9.6
+
+# CDN and Asset Management
+boto3==1.34.34
+botocore==1.34.34
+
+# Async Processing
+aioredis==2.0.1
+asyncpg==0.29.0
+
+# Performance Profiling
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Additional dependencies for system monitoring in launch preparation
+psutil==5.9.6
+
+# Additional utilities for Stripe integration
+iso-codes==1.2.1
+babel==2.13.1
+pytz==2023.3
+
+# WebSocket

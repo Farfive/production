@@ -1,0 +1,130 @@
+{
+  "test_date": "2025-06-09T09:51:02.216682",
+  "frontend_url": "http://localhost:3000",
+  "backend_url": "http://localhost:8000",
+  "total_tests": 11,
+  "passed": 9,
+  "failed": 2,
+  "success_rate": "81.8%",
+  "results": [
+    {
+      "page": "Authentication",
+      "test": "Get Auth Tokens",
+      "passed": false,
+      "error": "Failed to obtain auth tokens",
+      "details": {}
+    },
+    {
+      "page": "Homepage",
+      "test": "Page Load Test",
+      "passed": true,
+      "error": null,
+      "details": {
+        "status_code": 200,
+        "content_length": 2805,
+        "has_react_root": true
+      }
+    },
+    {
+      "page": "Login Page",
+      "test": "Page Load Test",
+      "passed": true,
+      "error": null,
+      "details": {
+        "status_code": 200,
+        "content_length": 2805,
+        "has_react_root": true
+      }
+    },
+    {
+      "page": "Registration Page",
+      "test": "Page Load Test",
+      "passed": true,
+      "error": null,
+      "details": {
+        "status_code": 200,
+        "content_length": 2805,
+        "has_react_root": true
+      }
+    },
+    {
+      "page": "About Page",
+      "test": "Page Load Test",
+      "passed": true,
+      "error": null,
+      "details": {
+        "status_code": 200,
+        "content_length": 2805,
+        "has_react_root": true
+      }
+    },
+    {
+      "page": "Contact Page",
+      "test": "Page Load Test",
+      "passed": true,
+      "error": null,
+      "details": {
+        "status_code": 200,
+        "content_length": 2805,
+        "has_react_root": true
+      }
+    },
+    {
+      "page": "Privacy Policy",
+      "test": "Page Load Test",
+      "passed": true,
+      "error": null,
+      "details": {
+        "status_code": 200,
+        "content_length": 2805,
+        "has_react_root": true
+      }
+    },
+    {
+      "page": "Terms of Service",
+      "test": "Page Load Test",
+      "passed": true,
+      "error": null,
+      "details": {
+        "status_code": 200,
+        "content_length": 2805,
+        "has_react_root": true
+      }
+    },
+    {
+      "page": "API",
+      "test": "Health Check",
+      "passed": true,
+      "error": null,
+      "details": {
+        "status": "healthy",
+        "service": "Manufacturing Platform API",
+        "version": "1.0.0",
+        "environment": "development",
+        "debug": true,
+        "timestamp": "2024-12-26T10:00:00Z"
+      }
+    },
+    {
+      "page": "API",
+      "test": "Documentation",
+      "passed": true,
+      "error": null,
+      "details": {
+        "swagger_ui": "accessible"
+      }
+    },
+    {
+      "page": "Homepage",
+      "test": "Hero Section",
+      "passed": false,
+      "error": "Missing expected UI enhancements",
+      "details": {
+        "gradient_background": true,
+        "animations": false,
+        "modern_styling": false,
+        "responsive_design": false
+      }
+    }
+  ]
+}

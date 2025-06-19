@@ -1,0 +1,170 @@
+{
+  "summary": {
+    "total_tests": 15,
+    "successful_tests": 2,
+    "failed_tests": 13,
+    "success_rate": "13.3%",
+    "test_duration": 19.834290742874146,
+    "timestamp": "2025-06-12T15:07:08.247680"
+  },
+  "results": [
+    {
+      "test": "Health Check",
+      "success": false,
+      "details": {
+        "success": false,
+        "status": 0,
+        "data": null,
+        "error": "Cannot connect to host localhost:8000 ssl:default [The remote computer refused the network connection]"
+      },
+      "duration": 2.356995105743408,
+      "timestamp": "2025-06-12T15:06:26.962198"
+    },
+    {
+      "test": "Root Endpoint",
+      "success": false,
+      "details": {
+        "success": false,
+        "status": 0,
+        "data": null,
+        "error": "Cannot connect to host localhost:8000 ssl:default [The remote computer refused the network connection]"
+      },
+      "duration": 2.308908462524414,
+      "timestamp": "2025-06-12T15:06:29.286106"
+    },
+    {
+      "test": "API Documentation Access",
+      "success": true,
+      "details": {
+        "status": 0
+      },
+      "duration": 2.311946153640747,
+      "timestamp": "2025-06-12T15:06:31.616100"
+    },
+    {
+      "test": "Client Registration",
+      "success": false,
+      "details": {
+        "success": false,
+        "status": 0,
+        "data": null,
+        "error": "Cannot connect to host localhost:8000 ssl:default [The remote computer refused the network connection]"
+      },
+      "duration": 2.2846486568450928,
+      "timestamp": "2025-06-12T15:06:33.931748"
+    },
+    {
+      "test": "Client Login",
+      "success": false,
+      "details": {
+        "success": false,
+        "status": 0,
+        "data": null,
+        "error": "Cannot connect to host localhost:8000 ssl:default [The remote computer refused the network connection]"
+      },
+      "duration": 2.282548427581787,
+      "timestamp": "2025-06-12T15:06:36.232437"
+    },
+    {
+      "test": "Manufacturer Registration",
+      "success": false,
+      "details": {
+        "success": false,
+        "status": 0,
+        "data": null,
+        "error": "Cannot connect to host localhost:8000 ssl:default [The remote computer refused the network connection]"
+      },
+      "duration": 2.3031909465789795,
+      "timestamp": "2025-06-12T15:06:38.552632"
+    },
+    {
+      "test": "Manufacturer Login",
+      "success": false,
+      "details": {
+        "success": false,
+        "status": 0,
+        "data": null,
+        "error": "Cannot connect to host localhost:8000 ssl:default [The remote computer refused the network connection]"
+      },
+      "duration": 2.312851667404175,
+      "timestamp": "2025-06-12T15:06:40.881486"
+    },
+    {
+      "test": "Admin Login",
+      "success": false,
+      "details": {
+        "success": false,
+        "status": 0,
+        "data": null,
+        "error": "Cannot connect to host localhost:8000 ssl:default [The remote computer refused the network connection]"
+      },
+      "duration": 2.305115222930908,
+      "timestamp": "2025-06-12T15:06:43.219631"
+    },
+    {
+      "test": "Client Workflow",
+      "success": false,
+      "details": "No client token available",
+      "duration": 0,
+      "timestamp": "2025-06-12T15:06:43.250443"
+    },
+    {
+      "test": "Manufacturer Workflow",
+      "success": false,
+      "details": "No manufacturer token available",
+      "duration": 0,
+      "timestamp": "2025-06-12T15:06:43.280445"
+    },
+    {
+      "test": "Admin Workflow",
+      "success": false,
+      "details": "No admin token available",
+      "duration": 0,
+      "timestamp": "2025-06-12T15:06:43.309445"
+    },
+    {
+      "test": "Email System Test",
+      "success": false,
+      "details": "No admin token available",
+      "duration": 0,
+      "timestamp": "2025-06-12T15:06:43.338445"
+    },
+    {
+      "test": "Rate Limiting Test",
+      "success": false,
+      "details": {
+        "successful_requests": 0,
+        "total_requests": 10
+      },
+      "duration": 0,
+      "timestamp": "2025-06-12T15:07:06.390754"
+    },
+    {
+      "test": "Security Headers Check",
+      "success": false,
+      "details": {
+        "success": false,
+        "status": 404,
+        "data": {
+          "detail": "Not Found"
+        },
+        "error": {
+          "detail": "Not Found"
+        }
+      },
+      "duration": 1.3680860996246338,
+      "timestamp": "2025-06-12T15:07:07.774839"
+    },
+    {
+      "test": "Concurrent Requests Test",
+      "success": true,
+      "details": {
+        "successful": 20,
+        "total": 20,
+        "duration": 0.4258139133453369
+      },
+      "duration": 0,
+      "timestamp": "2025-06-12T15:07:08.232681"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "timestamp": "2025-06-18T17:42:58.183403",
+  "duration_seconds": 3.9301552772521973,
+  "results": {
+    "total_tests": 6,
+    "passed_tests": 0,
+    "failed_tests": 6,
+    "errors": [],
+    "detailed_results": {
+      "User Registration": "FAILED",
+      "User Authentication": "FAILED",
+      "Order Creation": "FAILED",
+      "Quote Submission": "FAILED",
+      "Quote Acceptance": "FAILED",
+      "Payment Processing": "FAILED"
+    }
+  },
+  "test_users": [
+    {
+      "email": "client_1750261374@example.com",
+      "role": "client"
+    },
+    {
+      "email": "manufacturer_1750261374@example.com",
+      "role": "manufacturer"
+    }
+  ],
+  "test_orders": []
+}

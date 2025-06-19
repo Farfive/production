@@ -1,0 +1,220 @@
+{
+  "test_summary": {
+    "total_tests": 11,
+    "passed_tests": 5,
+    "success_rate": 45.45454545454545,
+    "execution_date": "2025-06-08T20:52:42.009295"
+  },
+  "scenarios": {
+    "Client Journey": {
+      "total": 1,
+      "passed": 0,
+      "steps": [
+        {
+          "scenario": "Client Journey",
+          "step": "Client Registration",
+          "success": false,
+          "details": "Error: None",
+          "response_time": 0.11719799041748047,
+          "timestamp": "2025-06-08T20:52:32.559674"
+        }
+      ]
+    },
+    "Manufacturer Journey": {
+      "total": 1,
+      "passed": 0,
+      "steps": [
+        {
+          "scenario": "Manufacturer Journey",
+          "step": "Manufacturer Registration",
+          "success": false,
+          "details": "Error: None",
+          "response_time": 0.013998270034790039,
+          "timestamp": "2025-06-08T20:52:32.575672"
+        }
+      ]
+    },
+    "Advanced Features": {
+      "total": 5,
+      "passed": 4,
+      "steps": [
+        {
+          "scenario": "Advanced Features",
+          "step": "Cache Performance Monitoring",
+          "success": true,
+          "details": "Cache metrics retrieved successfully",
+          "response_time": 4.065189838409424,
+          "timestamp": "2025-06-08T20:52:36.641865"
+        },
+        {
+          "scenario": "Advanced Features",
+          "step": "Performance Summary",
+          "success": true,
+          "details": "24-hour performance summary retrieved",
+          "response_time": 0.020544767379760742,
+          "timestamp": "2025-06-08T20:52:36.663410"
+        },
+        {
+          "scenario": "Advanced Features",
+          "step": "GDPR Email Unsubscribe",
+          "success": true,
+          "details": "Unsubscribe endpoint functional (Status: 200)",
+          "response_time": 0.010999441146850586,
+          "timestamp": "2025-06-08T20:52:36.675410"
+        },
+        {
+          "scenario": "Advanced Features",
+          "step": "System Health Check",
+          "success": true,
+          "details": "All system components healthy",
+          "response_time": 5.086344003677368,
+          "timestamp": "2025-06-08T20:52:41.764749"
+        },
+        {
+          "scenario": "Advanced Features",
+          "step": "Custom Metrics Tracking",
+          "success": false,
+          "details": "Error: None",
+          "response_time": 0.008006095886230469,
+          "timestamp": "2025-06-08T20:52:41.773752"
+        }
+      ]
+    },
+    "Security Testing": {
+      "total": 3,
+      "passed": 0,
+      "steps": [
+        {
+          "scenario": "Security Testing",
+          "step": "Invalid Credentials Rejection",
+          "success": false,
+          "details": "Unexpected response: None",
+          "response_time": 0.012996912002563477,
+          "timestamp": "2025-06-08T20:52:41.788748"
+        },
+        {
+          "scenario": "Security Testing",
+          "step": "Unauthorized Access Prevention",
+          "success": false,
+          "details": "Unexpected response: None",
+          "response_time": 0.008366823196411133,
+          "timestamp": "2025-06-08T20:52:41.798124"
+        },
+        {
+          "scenario": "Security Testing",
+          "step": "404 Error Handling",
+          "success": false,
+          "details": "Unexpected response: None",
+          "response_time": 0.006003618240356445,
+          "timestamp": "2025-06-08T20:52:41.805128"
+        }
+      ]
+    },
+    "Load Testing": {
+      "total": 1,
+      "passed": 1,
+      "steps": [
+        {
+          "scenario": "Load Testing",
+          "step": "Basic Load Test",
+          "success": true,
+          "details": "Success: 100.0%, Avg response: 0.006s, RPS: 155.3",
+          "response_time": 0.19317054748535156,
+          "timestamp": "2025-06-08T20:52:42.000294"
+        }
+      ]
+    }
+  },
+  "detailed_results": [
+    {
+      "scenario": "Client Journey",
+      "step": "Client Registration",
+      "success": false,
+      "details": "Error: None",
+      "response_time": 0.11719799041748047,
+      "timestamp": "2025-06-08T20:52:32.559674"
+    },
+    {
+      "scenario": "Manufacturer Journey",
+      "step": "Manufacturer Registration",
+      "success": false,
+      "details": "Error: None",
+      "response_time": 0.013998270034790039,
+      "timestamp": "2025-06-08T20:52:32.575672"
+    },
+    {
+      "scenario": "Advanced Features",
+      "step": "Cache Performance Monitoring",
+      "success": true,
+      "details": "Cache metrics retrieved successfully",
+      "response_time": 4.065189838409424,
+      "timestamp": "2025-06-08T20:52:36.641865"
+    },
+    {
+      "scenario": "Advanced Features",
+      "step": "Performance Summary",
+      "success": true,
+      "details": "24-hour performance summary retrieved",
+      "response_time": 0.020544767379760742,
+      "timestamp": "2025-06-08T20:52:36.663410"
+    },
+    {
+      "scenario": "Advanced Features",
+      "step": "GDPR Email Unsubscribe",
+      "success": true,
+      "details": "Unsubscribe endpoint functional (Status: 200)",
+      "response_time": 0.010999441146850586,
+      "timestamp": "2025-06-08T20:52:36.675410"
+    },
+    {
+      "scenario": "Advanced Features",
+      "step": "System Health Check",
+      "success": true,
+      "details": "All system components healthy",
+      "response_time": 5.086344003677368,
+      "timestamp": "2025-06-08T20:52:41.764749"
+    },
+    {
+      "scenario": "Advanced Features",
+      "step": "Custom Metrics Tracking",
+      "success": false,
+      "details": "Error: None",
+      "response_time": 0.008006095886230469,
+      "timestamp": "2025-06-08T20:52:41.773752"
+    },
+    {
+      "scenario": "Security Testing",
+      "step": "Invalid Credentials Rejection",
+      "success": false,
+      "details": "Unexpected response: None",
+      "response_time": 0.012996912002563477,
+      "timestamp": "2025-06-08T20:52:41.788748"
+    },
+    {
+      "scenario": "Security Testing",
+      "step": "Unauthorized Access Prevention",
+      "success": false,
+      "details": "Unexpected response: None",
+      "response_time": 0.008366823196411133,
+      "timestamp": "2025-06-08T20:52:41.798124"
+    },
+    {
+      "scenario": "Security Testing",
+      "step": "404 Error Handling",
+      "success": false,
+      "details": "Unexpected response: None",
+      "response_time": 0.006003618240356445,
+      "timestamp": "2025-06-08T20:52:41.805128"
+    },
+    {
+      "scenario": "Load Testing",
+      "step": "Basic Load Test",
+      "success": true,
+      "details": "Success: 100.0%, Avg response: 0.006s, RPS: 155.3",
+      "response_time": 0.19317054748535156,
+      "timestamp": "2025-06-08T20:52:42.000294"
+    }
+  ],
+  "users_created": {},
+  "orders_created": []
+}

@@ -1,0 +1,118 @@
+{
+  "name": "manufacturing-platform-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@headlessui/react": "^1.7.17",
+    "@heroicons/react": "^2.0.18",
+    "@hookform/resolvers": "^5.1.1",
+    "@mui/icons-material": "^5.14.19",
+    "@mui/material": "^5.14.20",
+    "@playwright/test": "^1.53.0",
+    "@sentry/react": "^7.84.0",
+    "@sentry/tracing": "^7.84.0",
+    "@stripe/react-stripe-js": "^3.7.0",
+    "@stripe/stripe-js": "^2.4.0",
+    "@tanstack/react-query": "^5.8.4",
+    "@tanstack/react-query-devtools": "^5.8.4",
+    "axios": "^1.6.2",
+    "chart.js": "^4.4.0",
+    "chartjs-adapter-date-fns": "^3.0.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.0.0",
+    "date-fns": "^2.30.0",
+    "firebase": "^10.14.1",
+    "framer-motion": "^10.16.5",
+    "lucide-react": "^0.294.0",
+    "msw": "^2.10.2",
+    "msw-storybook-addon": "^2.0.5",
+    "react": "^18.2.0",
+    "react-beautiful-dnd": "^13.1.1",
+    "react-chartjs-2": "^5.2.0",
+    "react-dom": "^18.2.0",
+    "react-dropzone": "^14.3.8",
+    "react-error-boundary": "^4.0.11",
+    "react-hook-form": "^7.57.0",
+    "react-hot-toast": "^2.4.1",
+    "react-intersection-observer": "^9.16.0",
+    "react-router-dom": "^6.8.1",
+    "react-scripts": "5.0.1",
+    "recharts": "^2.15.3",
+    "socket.io-client": "^4.8.1",
+    "tailwind-merge": "^3.3.0",
+    "typescript": "^4.9.5",
+    "web-vitals": "^3.5.0",
+    "yup": "^1.6.1"
+  },
+  "devDependencies": {
+    "@jest/types": "^30.0.0-beta.3",
+    "@tailwindcss/forms": "^0.5.10",
+    "@tailwindcss/typography": "^0.5.16",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^14.4.3",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.18.68",
+    "@types/react": "^18.3.23",
+    "@types/react-beautiful-dnd": "^13.1.2",
+    "@types/react-dom": "^18.3.7",
+    "ajv": "^8.0.0",
+    "autoprefixer": "^10.4.14",
+    "jest": "^27.5.1",
+    "jest-axe": "^10.0.0",
+    "postcss": "^8.4.24",
+    "source-map-explorer": "^2.5.3",
+    "tailwindcss": "^3.3.0",
+    "webpack-bundle-analyzer": "^4.10.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "test:coverage": "react-scripts test --coverage --watchAll=false",
+    "eject": "react-scripts eject",
+    "lint": "eslint src --ext .ts,.tsx",
+    "lint:fix": "eslint src --ext .ts,.tsx --fix",
+    "type-check": "tsc --noEmit",
+    "analyze": "npm run build && npx webpack-bundle-analyzer build/static/js/*.js",
+    "analyze:source-map": "npm run build && npx source-map-explorer 'build/static/js/*.js'"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx}",
+      "!src/**/*.d.ts",
+      "!src/index.tsx",
+      "!src/reportWebVitals.ts",
+      "!src/**/*.stories.{ts,tsx}"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 80,
+        "functions": 80,
+        "lines": 80,
+        "statements": 80
+      }
+    },
+    "testEnvironment": "jsdom"
+  }
+}

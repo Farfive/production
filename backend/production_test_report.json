@@ -1,0 +1,392 @@
+{
+  "summary": {
+    "total_tests": 15,
+    "successful_tests": 5,
+    "failed_tests": 10,
+    "success_rate": "33.3%",
+    "test_duration": 1.3262016773223877,
+    "timestamp": "2025-06-15T00:01:37.541141"
+  },
+  "results": [
+    {
+      "test": "Health Check",
+      "success": true,
+      "details": {
+        "success": true,
+        "status": 200,
+        "data": {
+          "status": "healthy",
+          "service": "Manufacturing Platform API",
+          "version": "1.0.0",
+          "environment": "development",
+          "debug": true,
+          "timestamp": "2024-12-26T10:00:00Z"
+        },
+        "error": null
+      },
+      "duration": 0.5265300273895264,
+      "timestamp": "2025-06-15T00:01:34.036062"
+    },
+    {
+      "test": "Root Endpoint",
+      "success": true,
+      "details": {
+        "success": true,
+        "status": 200,
+        "data": {
+          "message": "Welcome to Manufacturing Platform API",
+          "version": "1.0.0",
+          "docs_url": "/docs",
+          "health_check": "/health"
+        },
+        "error": null
+      },
+      "duration": 0.019998550415039062,
+      "timestamp": "2025-06-15T00:01:34.066061"
+    },
+    {
+      "test": "API Documentation Access",
+      "success": true,
+      "details": {
+        "status": 200
+      },
+      "duration": 0.04899477958679199,
+      "timestamp": "2025-06-15T00:01:34.252059"
+    },
+    {
+      "test": "Client Registration",
+      "success": false,
+      "details": {
+        "success": false,
+        "status": 422,
+        "data": {
+          "error": true,
+          "message": "Validation failed",
+          "status_code": 422,
+          "error_code": "VALIDATION_ERROR",
+          "details": {
+            "errors": [
+              {
+                "field": "body -> first_name",
+                "message": "Field required",
+                "type": "missing"
+              },
+              {
+                "field": "body -> last_name",
+                "message": "Field required",
+                "type": "missing"
+              },
+              {
+                "field": "body -> data_processing_consent",
+                "message": "Field required",
+                "type": "missing"
+              }
+            ]
+          }
+        },
+        "error": {
+          "error": true,
+          "message": "Validation failed",
+          "status_code": 422,
+          "error_code": "VALIDATION_ERROR",
+          "details": {
+            "errors": [
+              {
+                "field": "body -> first_name",
+                "message": "Field required",
+                "type": "missing"
+              },
+              {
+                "field": "body -> last_name",
+                "message": "Field required",
+                "type": "missing"
+              },
+              {
+                "field": "body -> data_processing_consent",
+                "message": "Field required",
+                "type": "missing"
+              }
+            ]
+          }
+        }
+      },
+      "duration": 0.5539979934692383,
+      "timestamp": "2025-06-15T00:01:34.828061"
+    },
+    {
+      "test": "Client Login",
+      "success": false,
+      "details": {
+        "success": false,
+        "status": 422,
+        "data": {
+          "error": true,
+          "message": "Validation failed",
+          "status_code": 422,
+          "error_code": "VALIDATION_ERROR",
+          "details": {
+            "errors": [
+              {
+                "field": "body -> username",
+                "message": "Field required",
+                "type": "missing"
+              },
+              {
+                "field": "body -> password",
+                "message": "Field required",
+                "type": "missing"
+              }
+            ]
+          }
+        },
+        "error": {
+          "error": true,
+          "message": "Validation failed",
+          "status_code": 422,
+          "error_code": "VALIDATION_ERROR",
+          "details": {
+            "errors": [
+              {
+                "field": "body -> username",
+                "message": "Field required",
+                "type": "missing"
+              },
+              {
+                "field": "body -> password",
+                "message": "Field required",
+                "type": "missing"
+              }
+            ]
+          }
+        }
+      },
+      "duration": 0.045000553131103516,
+      "timestamp": "2025-06-15T00:01:34.886061"
+    },
+    {
+      "test": "Manufacturer Registration",
+      "success": false,
+      "details": {
+        "success": false,
+        "status": 422,
+        "data": {
+          "error": true,
+          "message": "Validation failed",
+          "status_code": 422,
+          "error_code": "VALIDATION_ERROR",
+          "details": {
+            "errors": [
+              {
+                "field": "body -> first_name",
+                "message": "Field required",
+                "type": "missing"
+              },
+              {
+                "field": "body -> last_name",
+                "message": "Field required",
+                "type": "missing"
+              },
+              {
+                "field": "body -> data_processing_consent",
+                "message": "Field required",
+                "type": "missing"
+              }
+            ]
+          }
+        },
+        "error": {
+          "error": true,
+          "message": "Validation failed",
+          "status_code": 422,
+          "error_code": "VALIDATION_ERROR",
+          "details": {
+            "errors": [
+              {
+                "field": "body -> first_name",
+                "message": "Field required",
+                "type": "missing"
+              },
+              {
+                "field": "body -> last_name",
+                "message": "Field required",
+                "type": "missing"
+              },
+              {
+                "field": "body -> data_processing_consent",
+                "message": "Field required",
+                "type": "missing"
+              }
+            ]
+          }
+        }
+      },
+      "duration": 0.03200030326843262,
+      "timestamp": "2025-06-15T00:01:34.931061"
+    },
+    {
+      "test": "Manufacturer Login",
+      "success": false,
+      "details": {
+        "success": false,
+        "status": 422,
+        "data": {
+          "error": true,
+          "message": "Validation failed",
+          "status_code": 422,
+          "error_code": "VALIDATION_ERROR",
+          "details": {
+            "errors": [
+              {
+                "field": "body -> username",
+                "message": "Field required",
+                "type": "missing"
+              },
+              {
+                "field": "body -> password",
+                "message": "Field required",
+                "type": "missing"
+              }
+            ]
+          }
+        },
+        "error": {
+          "error": true,
+          "message": "Validation failed",
+          "status_code": 422,
+          "error_code": "VALIDATION_ERROR",
+          "details": {
+            "errors": [
+              {
+                "field": "body -> username",
+                "message": "Field required",
+                "type": "missing"
+              },
+              {
+                "field": "body -> password",
+                "message": "Field required",
+                "type": "missing"
+              }
+            ]
+          }
+        }
+      },
+      "duration": 0.021999597549438477,
+      "timestamp": "2025-06-15T00:01:34.966061"
+    },
+    {
+      "test": "Admin Login",
+      "success": false,
+      "details": {
+        "success": false,
+        "status": 422,
+        "data": {
+          "error": true,
+          "message": "Validation failed",
+          "status_code": 422,
+          "error_code": "VALIDATION_ERROR",
+          "details": {
+            "errors": [
+              {
+                "field": "body -> username",
+                "message": "Field required",
+                "type": "missing"
+              },
+              {
+                "field": "body -> password",
+                "message": "Field required",
+                "type": "missing"
+              }
+            ]
+          }
+        },
+        "error": {
+          "error": true,
+          "message": "Validation failed",
+          "status_code": 422,
+          "error_code": "VALIDATION_ERROR",
+          "details": {
+            "errors": [
+              {
+                "field": "body -> username",
+                "message": "Field required",
+                "type": "missing"
+              },
+              {
+                "field": "body -> password",
+                "message": "Field required",
+                "type": "missing"
+              }
+            ]
+          }
+        }
+      },
+      "duration": 0.02500176429748535,
+      "timestamp": "2025-06-15T00:01:35.014063"
+    },
+    {
+      "test": "Client Workflow",
+      "success": false,
+      "details": "No client token available",
+      "duration": 0,
+      "timestamp": "2025-06-15T00:01:35.036059"
+    },
+    {
+      "test": "Manufacturer Workflow",
+      "success": false,
+      "details": "No manufacturer token available",
+      "duration": 0,
+      "timestamp": "2025-06-15T00:01:35.057061"
+    },
+    {
+      "test": "Admin Workflow",
+      "success": false,
+      "details": "No admin token available",
+      "duration": 0,
+      "timestamp": "2025-06-15T00:01:35.296058"
+    },
+    {
+      "test": "Email System Test",
+      "success": false,
+      "details": "No admin token available",
+      "duration": 0,
+      "timestamp": "2025-06-15T00:01:36.010338"
+    },
+    {
+      "test": "Rate Limiting Test",
+      "success": true,
+      "details": {
+        "successful_requests": 10,
+        "total_requests": 10
+      },
+      "duration": 0,
+      "timestamp": "2025-06-15T00:01:36.922680"
+    },
+    {
+      "test": "Security Headers Check",
+      "success": false,
+      "details": {
+        "success": false,
+        "status": 404,
+        "data": {
+          "detail": "Not Found"
+        },
+        "error": {
+          "detail": "Not Found"
+        }
+      },
+      "duration": 0.05267810821533203,
+      "timestamp": "2025-06-15T00:01:36.986360"
+    },
+    {
+      "test": "Concurrent Requests Test",
+      "success": true,
+      "details": {
+        "successful": 20,
+        "total": 20,
+        "duration": 0.46686601638793945
+      },
+      "duration": 0,
+      "timestamp": "2025-06-15T00:01:37.531139"
+    }
+  ]
+}

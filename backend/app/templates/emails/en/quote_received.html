@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Quote Received - {{ platform_name }}</title>
+    <style>
+        /* Reset and base styles */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #2d3748;
+            background-color: #f7fafc;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .content {
+            padding: 40px 30px;
+        }
+        
+        .quote-card {
+            background-color: #f8f9fa;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+        
+        .quote-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .manufacturer-info {
+            flex: 1;
+        }
+        
+        .manufacturer-name {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 5px;
+        }
+        
+        .price-highlight {
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: 700;
+            margin: 20px 0;
+        }
+        
+        .quote-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .detail-item {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .detail-label {
+            font-weight: 600;
+            color: #4a5568;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        
+        .detail-value {
+            color: #2d3748;
+            font-weight: 500;
+        }
+        
+        .action-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+            text-decoration: none;
+            padding: 16px 32px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            margin: 20px 0;
+            transition: transform 0.2s ease;
+        }
+        
+        .action-button:hover {
+            transform: translateY(-2px);
+        }
+        
+        .urgency-note {
+            background-color: #fef3c7;
+            border: 1px solid #f59e0b;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .urgency-note h3 {
+            color: #92400e;
+            margin-bottom: 10px;
+        }
+        
+        .footer {
+            background-color: #f8f9fa;
+            padding: 30px;
+            text-align: center;
+            font-size: 14px;
+            color: #718096;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                margin: 0;
+                box-shadow: none;
+            }
+            
+            .header, .content, .footer {
+                padding: 20px 15px;
+            }
+            
+            .quote-details {
+                grid-template-columns: 1fr;
+            }
+            
+            .quote-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>💰 New Quote Received!</h1>
+            <p>A manufacturer has submitted a quote for your order</p>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="content">
+            <p style="font-size: 18px; margin-bottom: 30px;">
+                <strong>Hello {{ client_name }},</strong>
+            </p>
+            
+            <p>Great news! You've received a new quote for your manufacturing order "<strong>{{ order.title }}</strong>". Here are the details:</p>
+            
+            <!-- Quote Card -->
+            <div class="quote-card">
+                <div class="quote-header">
+                    <div class="manufacturer-info">
+                        <div class="manufacturer-name">{{ manufacturer.business_name }}</div>
+                        <div style="color: #718096;">
+                            {% if manufacturer.location %}{{ manufacturer.location }}{% endif %}
+                            {% if manufacturer.rating %} • ⭐ {{ manufacturer.rating }}/5{% endif %}
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="price-highlight">
+                    {{ quote.price|currency('PLN') }}
+                </div>
+                
+                <div class="quote-details">
+                    <div class="detail-item">
+                        <div class="detail-label">Lead Time</div>
+                        <div class="detail-value">{{ quote.lead_time_days }} days</div>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <div class="detail-label">Delivery Date</div>
+                        <div class="detail-value">
+                            {% if quote.estimated_delivery %}
+                                {{ quote.estimated_delivery|datetime('%B %d, %Y') }}
+                            {% else %}
+                                To be confirmed
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    {% if quote.warranty_months %}
+                    <div class="detail-item">
+                        <div class="detail-label">Warranty</div>
+                        <div class="detail-value">{{ quote.warranty_months }} months</div>
+                    </div>
+                    {% endif %}
+                    
+                    {% if quote.payment_terms %}
+                    <div class="detail-item">
+                        <div class="detail-label">Payment Terms</div>
+                        <div class="detail-value">{{ quote.payment_terms }}</div>
+                    </div>
+                    {% endif %}
+                </div>
+                
+                {% if quote.notes %}
+                <div style="background-color: white; padding: 20px; border-radius: 8px; margin-top: 20px;">
+                    <div class="detail-label">Additional Notes</div>
+                    <div style="color: #2d3748; margin-top: 10px;">{{ quote.notes }}</div>
+                </div>
+                {% endif %}
+            </div>
+            
+            <div style="text-align: center; margin: 30px 0;">
+                <a href="{{ review_link }}" class="action-button">
+                    Review Quote Details
+                </a>
+            </div>
+            
+            <!-- Urgency Note -->
+            <div class="urgency-note">
+                <h3>⏰ Response Deadline</h3>
+                <p style="color: #92400e; font-size: 14px;">
+                    Please review and respond to this quote within {{ response_deadline }}. This helps maintain good relationships with our manufacturer partners.
+                </p>
+            </div>
+            
+            <div style="background-color: #dbeafe; border: 1px solid #3b82f6; border-radius: 8px; padding: 20px; margin: 20px 0;">
+                <h3 style="color: #1e40af; margin-bottom: 15px;">🎯 Next Steps</h3>
+                <ul style="color: #1e40af; padding-left: 20px;">
+                    <li>Review the quote details and manufacturer profile</li>
+                    <li>Compare with other quotes (if available)</li>
+                    <li>Ask questions or request modifications</li>
+                    <li>Accept the quote to begin production</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p><strong>{{ platform_name }}</strong></p>
+            <p>{{ company_address }}</p>
+            <p style="margin-top: 15px;">
+                Questions? Contact us at <a href="mailto:{{ support_email }}">{{ support_email }}</a>
+            </p>
+            <p style="margin-top: 15px;">
+                <a href="{{ unsubscribe_url }}">Unsubscribe</a>
+            </p>
+            <p style="margin-top: 10px; font-size: 12px;">
+                © {{ current_year }} {{ platform_name }}. All rights reserved.
+            </p>
+        </div>
+    </div>
+</body>
+</html> 

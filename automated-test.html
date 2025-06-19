@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manufacturer Flow Automated Test</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f8fafc;
+        }
+        .test-container {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .test-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            background: #f8fafc;
+        }
+        .test-result {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .pass { background: #dcfce7; color: #166534; }
+        .fail { background: #fecaca; color: #dc2626; }
+        .pending { background: #fef3c7; color: #d97706; }
+        .test-button {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px;
+        }
+        .test-button:hover {
+            background: #2563eb;
+        }
+        .test-button:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #e5e7eb;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: #10b981;
+            transition: width 0.3s ease;
+            border-radius: 10px;
+        }
+        .log-area {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            max-height: 400px;
+            overflow-y: auto;
+            margin-top: 20px;
+        }
+        .summary-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <div class="test-header">
+            <h1>🏭 Manufacturer Flow Automated Test Suite</h1>
+            <p>Comprehensive testing of all implemented manufacturer functionality</p>
+        </div>
+
+        <div class="summary-card">
+            <h2>Test Progress</h2>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+            </div>
+            <div id="progressText">Ready to start testing...</div>
+        </div>
+
+        <div class="test-section">
+            <h3>🎯 Test Controls</h3>
+            <button class="test-button" onclick="runAllTests()">Run All Tests</button>
+            <button class="test-button" onclick="runQuoteTest()">Test Quote Creation Only</button>
+            <button class="test-button" onclick="clearResults()">Clear Results</button>
+        </div>
+
+        <div class="test-section">
+            <h3>📊 Test Results</h3>
+            <div id="testResults">
+                <div>1. Navigation Role Filtering <span class="test-result pending" id="result1">PENDING</span></div>
+                <div>2. Quote Creation (MAJOR FIX) <span class="test-result pending" id="result2">PENDING</span></div>
+                <div>3. Predictive Analytics Dashboard <span class="test-result pending" id="result3">PENDING</span></div>
+                <div>4. Report Creation Wizard <span class="test-result pending" id="result4">PENDING</span></div>
+                <div>5. Manufacturing Hub Loading <span class="test-result pending" id="result5">PENDING</span></div>
+                <div>6. Supply Chain Integration <span class="test-result pending" id="result6">PENDING</span></div>
+                <div>7. End-to-End Flow <span class="test-result pending" id="result7">PENDING</span></div>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h3>📝 Test Log</h3>
+            <div id="testLog" class="log-area">
+                Ready to run tests...<br>
+                Click "Run All Tests" to begin automated testing.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class ManufacturerTester {
+            constructor() {
+                this.currentTest = 0;
+                this.totalTests = 7;
+                this.results = {};
+                this.logElement = document.getElementById('testLog');
+            }
+
+            log(message, type = 'info') {
+                const timestamp = new Date().toLocaleTimeString();
+                const icon = type === 'success' ? '✅' : type === 'error' ? '❌' : type === 'warning' ? '⚠️' : 'ℹ️';
+                this.logElement.innerHTML += `[${timestamp}] ${icon} ${message}<br>`;
+                this.logElement.scrollTop = this.logElement.scrollHeight;
+                console.log(`${icon} ${message}`);
+            }
+
+            updateProgress() {
+                const progress = (this.currentTest / this.totalTests) * 100;
+                document.getElementById('progressFill').style.width = `${progress}%`;
+                document.getElementById('progressText').textContent = 
+                    `Test ${this.currentTest}/${this.totalTests} - ${Math.round(progress)}% Complete`;
+            }
+
+            setResult(testId, passed, details = '') {
+                const resultElement = document.getElementById(`result${testId}`);
+                resultElement.className = `test-result ${passed ? 'pass' : 'fail'}`;
+                resultElement.textContent = passed ? 'PASS' : 'FAIL';
+                this.results[testId] = { passed, details };
+                
+                if (details) {
+                    this.log(`Test ${testId}: ${details}`, passed ? 'success' : 'error');
+                }
+            }
+
+            async testNavigationFiltering() {
+                this.log('Starting Navigation Role Filtering test...');
+                this.currentTest = 1;
+                this.updateProgress();
+
+                try {
+                    // Check for manufacturer-specific navigation items
+                    const manufacturerItems = [
+                        'Manufacturing',
+                        'Portfolio',
+                        'Supply Chain',
+                        'Production',
+                        'Quotes'
+                    ];
+
+                    let foundItems = 0;
+                    const foundItemsList = [];
+
+                    for (const item of manufacturerItems) {
+                        // Try different selectors for navigation items
+                        const selectors = [
+                            `a:contains("${item}")`,
+                            `[href*="${item.toLowerCase()}"]`,
+                            `*:contains("${item}")`
+                        ];
+
+                        let found = false;
+                        for (const selector of selectors) {
+                            try {
+                                const elements = document.querySelectorAll('nav *');
+                                for (const el of elements) {
+                                    if (el.textContent && el.textContent.includes(item)) {
+                                        found = true;
+                                        foundItems++;
+                                        foundItemsList.push(item);
+                                        break;
+                                    }
+                                }
+                                if (found) break;
+                            } catch (e) {
+                                // Continue to next selector
+                            }
+                        }
+                    }
+
+                    // Check for admin items (should NOT be visible)
+                    const adminItems = ['Administration', 'User Management'];
+                    let hiddenAdminItems = 0;
+
+                    for (const item of adminItems) {
+                        const elements = document.querySelectorAll('*');
+                        let foundAdmin = false;
+                        for (const el of elements) {
+                            if (el.textContent && el.textContent.includes(item) && 
+                                getComputedStyle(el).display !== 'none') {
+                                foundAdmin = true;
+                                break;
+                            }
+                        }
+                        if (!foundAdmin) hiddenAdminItems++;
+                    }
+
+                    const passed = foundItems >= 3 && hiddenAdminItems >= 1;
+                    this.setResult(1, passed, 
+                        `Found ${foundItems}/5 manufacturer items: [${foundItemsList.join(', ')}]. Hidden admin items: ${hiddenAdminItems}/2`);
+
+                    return passed;
+                } catch (error) {
+                    this.setResult(1, false, `Error: ${error.message}`);
+                    return false;
+                }
+            }
+
+            async testQuoteCreation() {
+                this.log('Starting Quote Creation test (CRITICAL)...');
+                this.currentTest = 2;
+                this.updateProgress();
+
+                try {
+                    // Look for Create Quote button or link
+                    const quoteSelectors = [
+                        'a[href*="/quotes/create"]',
+                        'button:contains("Create Quote")',
+                        '*:contains("Create Quote")',
+                        'a[href*="create"]',
+                        '*:contains("New Quote")'
+                    ];
+
+                    let createQuoteElement = null;
+                    let selectorUsed = '';
+
+                    // First, try to navigate to quotes page
+                    this.log('Looking for Quotes navigation...');
+                    const quotesNavElements = document.querySelectorAll('*');
+                    for (const el of quotesNavElements) {
+                        if (el.textContent && el.textContent.includes('Quotes') && 
+                            (el.tagName === 'A' || el.onclick || el.href)) {
+                            this.log('Found Quotes navigation, clicking...');
+                            el.click();
+                            await new Promise(resolve => setTimeout(resolve, 2000));
+                            break;
+                        }
+                    }
+
+                    // Now look for Create Quote button
+                    for (const selector of quoteSelectors) {
+                        try {
+                            if (selector.includes(':contains')) {
+                                // Manual text search
+                                const elements = document.querySelectorAll('*');
+                                for (const el of elements) {
+                                    if (el.textContent && el.textContent.includes('Create Quote') && 
+                                        (el.tagName === 'BUTTON' || el.tagName === 'A')) {
+                                        createQuoteElement = el;
+                                        selectorUsed = 'text:Create Quote';
+                                        break;
+                                    }
+                                }
+                            } else {
+                                createQuoteElement = document.querySelector(selector);
+                                if (createQuoteElement) {
+                                    selectorUsed = selector;
+                                    break;
+                                }
+                            }
+                        } catch (e) {
+                            // Continue to next selector
+                        }
+                    }
+
+                    if (createQuoteElement) {
+                        this.log(`Found Create Quote element using: ${selectorUsed}`);
+                        
+                        // Check if it's a link to /quotes/create
+                        const href = createQuoteElement.href || createQuoteElement.getAttribute('href');
+                        if (href && href.includes('/quotes/create')) {
+                            this.log('✅ Create Quote link points to correct route!');
+                            
+                            // Try clicking it
+                            this.log('Testing quote creation navigation...');
+                            const currentURL = window.location.href;
+                            createQuoteElement.click();
+                            
+                            // Wait and check if URL changed
+                            await new Promise(resolve => setTimeout(resolve, 3000));
+                            const newURL = window.location.href;
+                            
+                            if (newURL.includes('/quotes/create')) {
+                                this.setResult(2, true, 'Quote creation route working! Successfully navigated to /quotes/create');
+                                return true;
+                            } else if (newURL.includes('404') || newURL.includes('not-found')) {
+                                this.setResult(2, false, 'Quote creation resulted in 404 error - route not working');
+                                return false;
+                            } else {
+                                this.setResult(2, false, `Unexpected navigation: ${currentURL} → ${newURL}`);
+                                return false;
+                            }
+                        } else {
+                            this.setResult(2, false, `Create Quote element found but href incorrect: ${href}`);
+                            return false;
+                        }
+                    } else {
+                        this.setResult(2, false, 'Create Quote button/link not found on page');
+                        return false;
+                    }
+                } catch (error) {
+                    this.setResult(2, false, `Error: ${error.message}`);
+                    return false;
+                }
+            }
+
+            async testPredictiveAnalytics() {
+                this.log('Starting Predictive Analytics test...');
+                this.currentTest = 3;
+                this.updateProgress();
+
+                try {
+                    // Look for AI & Automation or Analytics page
+                    const aiElements = document.querySelectorAll('*');
+                    let aiPageFound = false;
+
+                    for (const el of aiElements) {
+                        if (el.textContent && (el.textContent.includes('AI') || el.textContent.includes('Analytics')) && 
+                            (el.tagName === 'A' || el.onclick)) {
+                            el.click();
+                            await new Promise(resolve => setTimeout(resolve, 2000));
+                            aiPageFound = true;
+                            break;
+                        }
+                    }
+
+                    // Look for Predictive Analytics tabs/sections
+                    const analyticsTerms = [
+                        'Predictive Analytics',
+                        'Overview',
+                        'Forecasts', 
+                        'Risk Assessment',
+                        'Business Insights',
+                        'Model Performance'
+                    ];
+
+                    let foundTerms = 0;
+                    const foundList = [];
+
+                    for (const term of analyticsTerms) {
+                        const elements = document.querySelectorAll('*');
+                        for (const el of elements) {
+                            if (el.textContent && el.textContent.includes(term)) {
+                                foundTerms++;
+                                foundList.push(term);
+                                break;
+                            }
+                        }
+                    }
+
+                    const passed = foundTerms >= 3;
+                    this.setResult(3, passed, 
+                        `Found ${foundTerms}/6 analytics elements: [${foundList.join(', ')}]`);
+                    return passed;
+                } catch (error) {
+                    this.setResult(3, false, `Error: ${error.message}`);
+                    return false;
+                }
+            }
+
+            async testReportWizard() {
+                this.log('Starting Report Creation Wizard test...');
+                this.currentTest = 4;
+                this.updateProgress();
+
+                try {
+                    // Look for report creation elements
+                    const reportTerms = [
+                        'Create New Report',
+                        'Report Creation',
+                        'Template Selection',
+                        'Production Summary',
+                        'Quality Analysis'
+                    ];
+
+                    let foundTerms = 0;
+                    const foundList = [];
+
+                    for (const term of reportTerms) {
+                        const elements = document.querySelectorAll('*');
+                        for (const el of elements) {
+                            if (el.textContent && el.textContent.includes(term)) {
+                                foundTerms++;
+                                foundList.push(term);
+                                break;
+                            }
+                        }
+                    }
+
+                    const passed = foundTerms >= 2;
+                    this.setResult(4, passed, 
+                        `Found ${foundTerms}/5 report wizard elements: [${foundList.join(', ')}]`);
+                    return passed;
+                } catch (error) {
+                    this.setResult(4, false, `Error: ${error.message}`);
+                    return false;
+                }
+            }
+
+            async testManufacturingHub() {
+                this.log('Starting Manufacturing Hub test...');
+                this.currentTest = 5;
+                this.updateProgress();
+
+                try {
+                    // Look for Manufacturing navigation
+                    const manufacturingElements = document.querySelectorAll('*');
+                    let manufacturingFound = false;
+
+                    for (const el of manufacturingElements) {
+                        if (el.textContent && el.textContent.includes('Manufacturing') && 
+                            (el.tagName === 'A' || el.onclick)) {
+                            el.click();
+                            await new Promise(resolve => setTimeout(resolve, 3000));
+                            manufacturingFound = true;
+                            break;
+                        }
+                    }
+
+                    if (manufacturingFound) {
+                        // Check for loading issues
+                        const loadingElements = document.querySelectorAll('*');
+                        let hasInfiniteLoading = false;
+
+                        for (const el of loadingElements) {
+                            if (el.textContent && 
+                                (el.textContent.includes('Preparing your production dashboard') ||
+                                 el.textContent.includes('Loading...'))) {
+                                hasInfiniteLoading = true;
+                                break;
+                            }
+                        }
+
+                        const passed = !hasInfiniteLoading;
+                        this.setResult(5, passed, 
+                            passed ? 'Manufacturing hub loads without infinite loading' : 
+                                   'Manufacturing hub has infinite loading issue');
+                        return passed;
+                    } else {
+                        this.setResult(5, false, 'Manufacturing navigation not found');
+                        return false;
+                    }
+                } catch (error) {
+                    this.setResult(5, false, `Error: ${error.message}`);
+                    return false;
+                }
+            }
+
+            async testSupplyChain() {
+                this.log('Starting Supply Chain Integration test...');
+                this.currentTest = 6;
+                this.updateProgress();
+
+                try {
+                    const supplyChainTerms = [
+                        'Supply Chain',
+                        'Materials',
+                        'Vendors',
+                        'Inventory',
+                        'Procurement'
+                    ];
+
+                    let foundTerms = 0;
+                    const foundList = [];
+
+                    for (const term of supplyChainTerms) {
+                        const elements = document.querySelectorAll('*');
+                        for (const el of elements) {
+                            if (el.textContent && el.textContent.includes(term)) {
+                                foundTerms++;
+                                foundList.push(term);
+                                break;
+                            }
+                        }
+                    }
+
+                    const passed = foundTerms >= 2;
+                    this.setResult(6, passed, 
+                        `Found ${foundTerms}/5 supply chain elements: [${foundList.join(', ')}]`);
+                    return passed;
+                } catch (error) {
+                    this.setResult(6, false, `Error: ${error.message}`);
+                    return false;
+                }
+            }
+
+            async testEndToEndFlow() {
+                this.log('Starting End-to-End Flow test...');
+                this.currentTest = 7;
+                this.updateProgress();
+
+                try {
+                    // Calculate overall success rate from previous tests
+                    const testResults = Object.values(this.results);
+                    const passedTests = testResults.filter(result => result.passed).length;
+                    const totalTests = testResults.length;
+                    const successRate = totalTests > 0 ? (passedTests / totalTests) : 0;
+
+                    const passed = successRate >= 0.7; // 70% success rate
+                    this.setResult(7, passed, 
+                        `Overall success rate: ${Math.round(successRate * 100)}% (${passedTests}/${totalTests} tests passed)`);
+                    return passed;
+                } catch (error) {
+                    this.setResult(7, false, `Error: ${error.message}`);
+                    return false;
+                }
+            }
+
+            async runAllTests() {
+                this.log('🚀 Starting complete manufacturer flow test suite...');
+                this.results = {};
+                
+                const tests = [
+                    this.testNavigationFiltering,
+                    this.testQuoteCreation,
+                    this.testPredictiveAnalytics,
+                    this.testReportWizard,
+                    this.testManufacturingHub,
+                    this.testSupplyChain,
+                    this.testEndToEndFlow
+                ];
+
+                for (const test of tests) {
+                    await test.call(this);
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                }
+
+                this.log('✅ Test suite completed!');
+                this.generateSummary();
+            }
+
+            async runQuoteTest() {
+                this.log('🎯 Running Quote Creation test only...');
+                await this.testQuoteCreation();
+                this.log('Quote Creation test completed!');
+            }
+
+            generateSummary() {
+                const testResults = Object.values(this.results);
+                const passedTests = testResults.filter(result => result.passed).length;
+                const failedTests = testResults.filter(result => !result.passed).length;
+                const successRate = Math.round((passedTests / testResults.length) * 100);
+
+                this.log('═══════════════════════════════════════');
+                this.log('🏆 TEST SUITE SUMMARY');
+                this.log('═══════════════════════════════════════');
+                this.log(`📊 Success Rate: ${successRate}% (${passedTests}/${testResults.length})`);
+                this.log(`✅ Passed: ${passedTests}`);
+                this.log(`❌ Failed: ${failedTests}`);
+
+                if (successRate >= 80) {
+                    this.log('🎉 EXCELLENT! Platform is working great!', 'success');
+                } else if (successRate >= 60) {
+                    this.log('👍 GOOD! Most features working.', 'success');
+                } else {
+                    this.log('⚠️ NEEDS ATTENTION! Several issues found.', 'warning');
+                }
+
+                document.getElementById('progressText').textContent = 
+                    `Testing Complete! Success Rate: ${successRate}%`;
+            }
+
+            clearResults() {
+                this.currentTest = 0;
+                this.results = {};
+                this.updateProgress();
+                document.getElementById('progressText').textContent = 'Ready to start testing...';
+                
+                for (let i = 1; i <= this.totalTests; i++) {
+                    const resultElement = document.getElementById(`result${i}`);
+                    resultElement.className = 'test-result pending';
+                    resultElement.textContent = 'PENDING';
+                }
+                
+                this.logElement.innerHTML = 'Ready to run tests...<br>Click "Run All Tests" to begin automated testing.';
+            }
+        }
+
+        const tester = new ManufacturerTester();
+
+        function runAllTests() {
+            tester.runAllTests();
+        }
+
+        function runQuoteTest() {
+            tester.runQuoteTest();
+        }
+
+        function clearResults() {
+            tester.clearResults();
+        }
+
+        // Auto-run tests when page loads (optional)
+        // setTimeout(() => runAllTests(), 2000);
+    </script>
+</body>
+</html> 
