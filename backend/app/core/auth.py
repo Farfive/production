@@ -3,7 +3,7 @@ Authentication and Authorization Module
 Basic authentication functions for the manufacturing platform
 """
 
-from fastapi import Depends, HTTPException, status
+from fastapi import Depends, HTTPException, status, WebSocket, WebSocketException
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import Optional
@@ -106,6 +106,43 @@ async def get_current_user(
             detail="Invalid authentication credentials",
             headers={"WWW-Authenticate": "Bearer"},
         )
+
+async def get_current_user_websocket(websocket: WebSocket, token: Optional[str] = None) -> User:
+    """
+    Get current user for WebSocket connections
+    Validates authentication for WebSocket endpoints
+    """
+    try:
+        if not token:
+            # Try to get token from query parameters
+            token = websocket.query_params.get("token")
+        
+        if not token:
+            raise WebSocketException(code=status.WS_1008_POLICY_VIOLATION, reason="Authentication required")
+        
+        # Verify token
+        token_data = verify_token(token)
+        if not token_data:
+            raise WebSocketException(code=status.WS_1008_POLICY_VIOLATION, reason="Invalid token")
+        
+        # For development, return mock user
+        # In production, this would query the database with the token data
+        mock_user = User(
+            id=token_data.get("user_id", 1),
+            email=token_data.get("email", "user@platform.com"),
+            is_admin=False,
+            is_active=True,
+            first_name="WebSocket",
+            last_name="User"
+        )
+        
+        return mock_user
+        
+    except WebSocketException:
+        raise
+    except Exception as e:
+        logger.error(f"WebSocket authentication failed: {e}")
+        raise WebSocketException(code=status.WS_1008_POLICY_VIOLATION, reason="Authentication failed")
 
 def create_access_token(data: dict) -> str:
     """
